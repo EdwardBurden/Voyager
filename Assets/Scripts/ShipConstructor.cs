@@ -9,12 +9,12 @@ public class ShipConstructor
 
 	public GameObject shipParent;
 	public ShipControlComponent shipControlComponent;
-	private List<ShipComponent> connectedComponents;
+	public List<ShipComponent> connectedComponents;
 
 	public ShipConstructor(ShipControlComponent shipControl)
 	{
 		shipControlComponent = shipControl;
-		ContrustShip();
+		//ContrustShip();
 	}
 
 	public void ContrustShip()
