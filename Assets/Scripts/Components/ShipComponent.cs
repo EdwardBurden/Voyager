@@ -4,11 +4,18 @@ using UnityEngine;
 
 public abstract class ShipComponent : MonoBehaviour
 {
-    public ShipControlComponent shipControl;
-	protected Rigidbody shipRigidbody;
+	[HideInInspector]
+	public ControlSC shipControl;
+	[HideInInspector]
+	public Rigidbody shipRigidbody;
 	protected Collider shipCollider;
 
-    [ContextMenu("Remove")]
+	protected void Awake()
+	{
+		shipRigidbody = GetComponent<Rigidbody>();
+	}
+
+	[ContextMenu("Remove")]
     public void RemoveFromControl()
     {
         shipControl.RemoveComponent(this);

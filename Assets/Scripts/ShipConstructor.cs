@@ -7,20 +7,17 @@ public class ShipConstructor
 {
 	private int radius = 2;
 
-	public GameObject shipParent;
-	public ShipControlComponent shipControlComponent;
+	public ControlSC control;
 	public List<ShipComponent> connectedComponents;
 
-	public ShipConstructor(ShipControlComponent shipControl)
+	public ShipConstructor(ControlSC shipControl)
 	{
-		shipControlComponent = shipControl;
-		//ContrustShip();
+		control = shipControl;
 	}
 
 	public void ContrustShip()
 	{
-		shipParent = CreateShipParent();
-		connectedComponents = FindShipComponents(shipControlComponent.transform.position);
+		connectedComponents = FindShipComponents(control.transform.position);
 		foreach (ShipComponent ship in connectedComponents)
 		{
 			AttachComponentToParent(ship);
@@ -31,13 +28,8 @@ public class ShipConstructor
 
 	private void AttachComponentToParent(ShipComponent shipComponent)
 	{
-		shipComponent.shipControl = shipControlComponent;
-		shipComponent.transform.parent = shipParent.transform;
-		Rigidbody rigidbody = shipComponent.GetComponent<Rigidbody>();
-		if (rigidbody)
-		{
-			GameObject.Destroy(rigidbody);
-		}
+		shipComponent.shipControl = control;
+		shipComponent.GetComponent<FixedJoint>().connectedBody = control.shipRigidbody;
 	}
 
 	private GameObject CreateShipParent()
@@ -50,12 +42,7 @@ public class ShipConstructor
 
 	private void SetupControl()
 	{
-		shipControlComponent.transform.parent = shipParent.transform;
-		Rigidbody controlRigidbody = shipControlComponent.GetComponent<Rigidbody>();
-		if (controlRigidbody)
-		{
-			GameObject.Destroy(controlRigidbody);
-		}
+		connectedComponents.Add(control);
 	}
 
 
@@ -65,11 +52,11 @@ public class ShipConstructor
 		{
 			foundComponents = new List<ShipComponent>();
 		}
-		Collider[] foundColliders = Physics.OverlapSphere(position, radius, shipControlComponent.componentLayer);
+		Collider[] foundColliders = Physics.OverlapSphere(position, radius, control.componentLayer);
 		foreach (Collider collider in foundColliders)
 		{
 			ShipComponent shipComponent = collider.gameObject.GetComponent<ShipComponent>();
-			if (shipComponent != null && !foundComponents.Contains(shipComponent) && shipComponent != shipControlComponent)
+			if (shipComponent != null && !foundComponents.Contains(shipComponent) && shipComponent != control)
 			{
 				foundComponents.Add(shipComponent);
 				FindShipComponents(shipComponent.transform.position, foundComponents);

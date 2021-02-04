@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DebugWindow : MonoBehaviour
@@ -8,7 +9,9 @@ public class DebugWindow : MonoBehaviour
 
 	public string saveFile = "default";
 	public string saveLocation = "Saves";
-	public ShipControlComponent control;
+	public ControlSC control;
+
+	public Transform spawnPoint;
 
 	private void Awake()
 	{
@@ -21,16 +24,30 @@ public class DebugWindow : MonoBehaviour
 	}
 	public void Load()
 	{
-		//get class form json 
-		ShipExportInfo shipExportInfo = new ShipExportInfo();//get class form json 
-		control = ShipExporter.ConstructFromFile(shipExportInfo);
+		string path = Path.Combine(Application.persistentDataPath, saveLocation);
+		string filePath = Path.Combine(path, saveFile);
+		if (!Directory.Exists(path))
+		{
+			throw new System.Exception("Path Does not exist");
+		}
 
+		if (!File.Exists(filePath))
+		{
+			throw new System.Exception("File Does not exist");
+		}
+		string jsoncontents = File.ReadAllText(filePath);
+		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
+		control = ShipExporter.ConstructFromFile(shipExportInfo , spawnPoint);
 	}
 
 	public void Save()
 	{
 		ShipExportInfo shipExportInfo = ShipExporter.ExportToFile(control);
-		//save file to default location
+		string path = Path.Combine(Application.persistentDataPath, saveLocation);
+		string filePath = Path.Combine(path, saveFile);
+		Directory.CreateDirectory(path);
+		string jsoncontents = JsonUtility.ToJson(shipExportInfo);
+		File.WriteAllText(filePath, jsoncontents);
 	}
 
 }

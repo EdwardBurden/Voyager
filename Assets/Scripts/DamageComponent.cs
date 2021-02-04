@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageComponent :ShipComponent
+public class DamageComponent
 {
-	public ShipComponentDamageStates[] damageStates;
+	//todo make into interface
+	/*public ShipComponentDamageStates[] damageStates;
 	private int damageStateIndex;
 
 	public float explosiveForce = 10;
@@ -16,6 +17,7 @@ public class DamageComponent :ShipComponent
 
 	private void Awake()
 	{
+		base.Awake();
 		componentHealth = maxComponentHealth;
 		damageStateIndex = 0;
 		shipRigidbody = GetComponent<Rigidbody>();
@@ -79,4 +81,5 @@ public class DamageComponent :ShipComponent
 		}
 
 	}
+	*/
 }
