@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipControlComponent : ShipComponent
+public class ControlSC : ShipComponent
 {
 	public LayerMask componentLayer;
 	ShipConstructor shipConstructor;
-	private void Awake()
+	protected void Awake()
 	{
 		shipConstructor = new ShipConstructor(this);
 	}

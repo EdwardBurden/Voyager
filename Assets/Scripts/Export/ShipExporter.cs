@@ -1,16 +1,31 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class ShipExporter : MonoBehaviour
+public class ShipExporter
 {
-	internal static ShipControlComponent ConstructFromFile(ShipExportInfo shipExportInfo)
+	private static string PATH = "Prefabs";
+	internal static ControlSC ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
 	{
-		throw new NotImplementedException();
+		ControlSC control = null;
+		foreach (ComponentExportInfo info in shipExportInfo.components)
+		{
+			Type type = ComponentMapping.GetTypeFromInt(info.componentId);
+			string filepath = PATH + "/" + type.Name;
+			ShipComponent loadedComponent = Resources.Load<ShipComponent>(filepath) as ShipComponent;
+
+			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, info.position + shipExportTransform.position, Quaternion.Euler(info.eulerAngles + shipExportTransform.eulerAngles), null);
+			if (shipComponent is ControlSC controlSC)
+			{
+				control = controlSC;
+			}
+		}
+		return control;
 	}
 
-	internal static ShipExportInfo ExportToFile(ShipControlComponent control)
+	internal static ShipExportInfo ExportToFile(ControlSC control)
 	{
 		ShipExportInfo shipExport = new ShipExportInfo();
 		foreach (ShipComponent shipComponent in control.GetAllComponents())

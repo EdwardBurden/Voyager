@@ -8,9 +8,9 @@ public class ComponentMapping
 {
 	private static Dictionary<int, Type> mapping = new Dictionary<int, Type>()
 	{
-		{ 0 , typeof(ShipControlComponent) },
-		{ 1 , typeof(ShipComponentHallway) },
-		{ 2 , typeof(DamageComponent) }
+		{ 0 , typeof(ControlSC) },
+		{ 1 , typeof(HallwaySC) },
+		{ 2 , typeof(PlatingSC) }
 	};
 
 	public static int GetIntFromType(Type type)

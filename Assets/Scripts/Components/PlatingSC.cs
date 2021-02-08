@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageComponent :ShipComponent
+public class PlatingSC : ShipComponent, IDamageable
 {
 	public ShipComponentDamageStates[] damageStates;
 	private int damageStateIndex;
@@ -18,16 +18,8 @@ public class DamageComponent :ShipComponent
 	{
 		componentHealth = maxComponentHealth;
 		damageStateIndex = 0;
-		shipRigidbody = GetComponent<Rigidbody>();
-		shipCollider = GetComponent<Collider>();
 	}
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.T))
-		{
-			DamageShipComponent(Random.Range(0, 20));
-		}
-	}
+
 	public void DamageShipComponent(int dmg)
 	{
 		componentHealth -= dmg;
@@ -38,20 +30,14 @@ public class DamageComponent :ShipComponent
 		}
 	}
 
-	private void DestroyComponent()
+	public void DestroyComponent()
 	{
-		//TODO replace with call to remove from control
+		shipControl.RemoveComponent(this);
 
-
-		this.transform.SetParent(null);
-		shipRigidbody.isKinematic = false;
-		shipCollider.enabled = true;
 		float x = Random.Range(-1.0f, 1.0f) * explosiveForce;
 		float y = Random.Range(-1.0f, 1.0f) * explosiveForce;
 		float z = Random.Range(-1.0f, 1.0f) * explosiveForce;
 		shipRigidbody.AddForce(new Vector3(x, y, z), ForceMode.Impulse);
-
-
 		Vector3 explosionPos = transform.position;
 		Collider[] colliders = Physics.OverlapSphere(explosionPos, explosiveRadius);
 		foreach (Collider hit in colliders)
@@ -61,11 +47,11 @@ public class DamageComponent :ShipComponent
 			if (rb != null)
 				rb.AddExplosionForce(explosiveForce, explosionPos, explosiveRadius, 3.0F);
 		}
-
-		Destroy(this);
+		
+	//	Destroy(this);
 	}
 
-	private void UpdateDamageState()
+	public void UpdateDamageState()
 	{
 		int index = 0;
 		while (index < damageStates.Length - 1 && healthPercentage < damageStates[index].healthThreshold)
