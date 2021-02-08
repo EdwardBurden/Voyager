@@ -9,7 +9,6 @@ public class ControlSC : ShipComponent
 	ShipConstructor shipConstructor;
 	protected void Awake()
 	{
-		base.Awake();
 		shipConstructor = new ShipConstructor(this);
 	}
 

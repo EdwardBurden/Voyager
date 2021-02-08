@@ -38,6 +38,7 @@ public class DebugWindow : MonoBehaviour
 		string jsoncontents = File.ReadAllText(filePath);
 		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
 		control = ShipExporter.ConstructFromFile(shipExportInfo , spawnPoint);
+		control.ConstructShip();
 	}
 
 	public void Save()
