@@ -13,7 +13,17 @@ public class ShipExporter
 		foreach (ComponentExportInfo info in shipExportInfo.components)
 		{
 			Type type = ComponentMapping.GetTypeFromInt(info.componentId);
-			string filepath = PATH + "/" + type.Name;
+			string filepath = PATH;
+			if (!string.IsNullOrWhiteSpace(info.folder))
+			{
+				filepath += ("/" + info.folder);
+			}
+			filepath += "/" + type.Name;
+			if (info.versionId > 0)
+			{
+				filepath += (" " + info.versionId);
+			}
+
 			ShipComponent loadedComponent = Resources.Load<ShipComponent>(filepath) as ShipComponent;
 
 			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, info.position + shipExportTransform.position, Quaternion.Euler(info.eulerAngles + shipExportTransform.eulerAngles), null);
@@ -30,7 +40,12 @@ public class ShipExporter
 		ShipExportInfo shipExport = new ShipExportInfo();
 		foreach (ShipComponent shipComponent in control.GetAllComponents())
 		{
-			ComponentExportInfo componentExport = new ComponentExportInfo(shipComponent.transform.localPosition, shipComponent.transform.localEulerAngles, ComponentMapping.GetIntFromType(shipComponent.GetType()));
+			ComponentExportInfo componentExport = new ComponentExportInfo(
+				shipComponent.transform.localPosition,
+				shipComponent.transform.localEulerAngles,
+				ComponentMapping.GetIntFromType(shipComponent.GetType()),
+				shipComponent.visualId,
+				shipComponent.folderRoot);
 			shipExport.components.Add(componentExport);
 		}
 		return shipExport;

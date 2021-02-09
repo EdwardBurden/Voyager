@@ -9,7 +9,12 @@ public abstract class ShipComponent : MonoBehaviour
 	[HideInInspector]
 	public Rigidbody shipRigidbody => GetComponent<Rigidbody>();
 	[HideInInspector]
-	public Collider shipCollider => GetComponent<Collider>();
+	public Collider shipCollider => GetComponentInChildren<Collider>();
+
+	public Renderer shipRenderer => GetComponentInChildren<Renderer>();
+
+	public int visualId;
+	public string folderRoot;
 
 
 	[ContextMenu("Remove")]
@@ -20,7 +25,6 @@ public abstract class ShipComponent : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		
 	}
 
 	public void ChangeLayerAfterWait()

@@ -21,7 +21,7 @@ public class ShipParent : MonoBehaviour
 	{
 		foreach (GameObject contact in collision.contacts.Select(x => x.thisCollider.gameObject).Distinct())
 		{
-			IDamageable damageable = contact.GetComponent<IDamageable>();
+			IDamageable damageable = contact.GetComponentInParent<IDamageable>();
 			if (damageable != null)
 			{
 				damageable.DamageShipComponent(50);

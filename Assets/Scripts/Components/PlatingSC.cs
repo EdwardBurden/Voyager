@@ -61,7 +61,7 @@ public class PlatingSC : ShipComponent, IDamageable
 		if (damageStateIndex != index)
 		{
 			damageStateIndex = index;
-			GetComponent<Renderer>().material = damageStates[damageStateIndex].material;
+			shipRenderer.material = damageStates[damageStateIndex].material;
 		}
 
 	}

@@ -18,7 +18,10 @@ public class ShipConstructor
 
 	public void ContrustShip()
 	{
-		shipParent = CreateShipParent();
+		if (shipParent == null)
+		{
+			shipParent = CreateShipParent();
+		}
 		connectedComponents = FindShipComponents(control.transform.position);
 		foreach (ShipComponent ship in connectedComponents)
 		{
@@ -32,12 +35,7 @@ public class ShipConstructor
 	{
 		shipComponent.shipControl = control;
 		shipComponent.transform.parent = shipParent.transform;
-		shipComponent.gameObject.layer = 0;
-		Rigidbody rigidbody = shipComponent.GetComponent<Rigidbody>();
-		if (rigidbody)
-		{
-			GameObject.Destroy(rigidbody);
-		}
+		SetLayerRecursively(shipComponent.gameObject, 0);
 	}
 
 	private GameObject CreateShipParent()
@@ -49,14 +47,20 @@ public class ShipConstructor
 		return gameObject;
 	}
 
+	public static void SetLayerRecursively(GameObject obj, int layer) //to do move to helper
+	{
+		obj.layer = layer;
+
+		foreach (Transform child in obj.transform)
+		{
+			SetLayerRecursively(child.gameObject, layer);
+		}
+	}
+
 	private void SetupControl()
 	{
 		control.transform.parent = shipParent.transform;
-		Rigidbody controlRigidbody = control.GetComponent<Rigidbody>();
-		if (controlRigidbody)
-		{
-			GameObject.Destroy(controlRigidbody);
-		}
+		SetLayerRecursively(control.gameObject, 0);
 		connectedComponents.Add(control);
 	}
 
@@ -75,7 +79,7 @@ public class ShipConstructor
 		Collider[] foundColliders = Physics.OverlapSphere(position, radius, control.componentLayer);
 		foreach (Collider collider in foundColliders)
 		{
-			ShipComponent shipComponent = collider.gameObject.GetComponent<ShipComponent>();
+			ShipComponent shipComponent = collider.gameObject.GetComponentInParent<ShipComponent>();
 			if (shipComponent != null && !foundComponents.Contains(shipComponent) && shipComponent != control && shipComponent.shipControl == null && !(shipComponent is ControlSC))
 			{
 				foundComponents.Add(shipComponent);
@@ -100,6 +104,6 @@ public class ShipConstructor
 		shipComponent.shipRigidbody.isKinematic = false;
 		shipComponent.shipCollider.enabled = true;
 		shipComponent.ChangeLayerAfterWait();
-		shipComponent.gameObject.layer = 9;
+		SetLayerRecursively(shipComponent.gameObject, 9);
 	}
 }
