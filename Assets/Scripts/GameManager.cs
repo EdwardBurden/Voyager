@@ -10,4 +10,5 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 	{
 		//ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
 	}
+
 }

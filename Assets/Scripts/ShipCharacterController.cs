@@ -18,13 +18,19 @@ public class ShipCharacterController : MonoBehaviour
 
 	public void SwitchToBuild(CallbackContext value)
 	{
-		shipInput.SwitchCurrentActionMap("Build");
+		if (value.started)
+		{
+			shipInput.SwitchCurrentActionMap("Build");
+		}
 		//Gamemaneger switch
 	}
 
 	public void SwitchToFlight(CallbackContext value)
 	{
-		shipInput.SwitchCurrentActionMap("Flight");
+		if (value.started)
+		{
+			shipInput.SwitchCurrentActionMap("Flight");
+		}
 		//Gamemaneger switch
 	}
 
@@ -33,6 +39,8 @@ public class ShipCharacterController : MonoBehaviour
 
 
 	}
+
+	
 
 
 	private void OnCollisionEnter(Collision collision)
