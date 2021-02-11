@@ -6,15 +6,20 @@ using UnityEngine;
 public class ControlSC : ShipComponent
 {
 	public LayerMask componentLayer;
-	ShipConstructor shipConstructor;
+	[HideInInspector]
+	public ShipConstructor shipConstructor;
+	[HideInInspector]
+
+	public ShipCharacterController shipController;
 	protected void Awake()
 	{
 		shipConstructor = new ShipConstructor(this);
 	}
 
-	public void ConstructShip()
+	public ShipCharacterController ConstructShip()
 	{
 		shipConstructor.ContrustShip();
+		return shipController;
 
 	}
 

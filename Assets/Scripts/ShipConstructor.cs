@@ -7,7 +7,6 @@ public class ShipConstructor
 {
 	private int radius = 2;
 
-	public GameObject shipParent;
 	public ControlSC control;
 	public List<ShipComponent> connectedComponents;
 
@@ -18,9 +17,9 @@ public class ShipConstructor
 
 	public void ContrustShip()
 	{
-		if (shipParent == null)
+		if (control.shipController == null)
 		{
-			shipParent = CreateShipParent();
+			control.shipController = CreateShipParent();
 		}
 		connectedComponents = FindShipComponents(control.transform.position);
 		foreach (ShipComponent ship in connectedComponents)
@@ -34,17 +33,16 @@ public class ShipConstructor
 	private void AttachComponentToParent(ShipComponent shipComponent)
 	{
 		shipComponent.shipControl = control;
-		shipComponent.transform.parent = shipParent.transform;
+		shipComponent.transform.parent = control.shipController.transform;
 		SetLayerRecursively(shipComponent.gameObject, 0);
 	}
 
-	private GameObject CreateShipParent()
+	private ShipCharacterController CreateShipParent()
 	{
-		GameObject gameObject = new GameObject();
+		GameObject gameObject = GameObject.Instantiate(GameManager.instance.shipCharctercontrollerPrefab, control.transform.position, control.transform.rotation, null);
 		gameObject.name = "Test";
 		gameObject.AddComponent<Rigidbody>();
-		gameObject.AddComponent<ShipParent>();
-		return gameObject;
+		return gameObject.GetComponent<ShipCharacterController>();
 	}
 
 	public static void SetLayerRecursively(GameObject obj, int layer) //to do move to helper
@@ -59,7 +57,7 @@ public class ShipConstructor
 
 	private void SetupControl()
 	{
-		control.transform.parent = shipParent.transform;
+		control.transform.parent = control.shipController.transform;
 		SetLayerRecursively(control.gameObject, 0);
 		connectedComponents.Add(control);
 	}
