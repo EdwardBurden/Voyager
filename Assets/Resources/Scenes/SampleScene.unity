@@ -1105,17 +1105,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6581719683688264565, guid: 654a03760bea1e64592269a2093a351b, type: 3}
-      propertyPath: m_DefaultActionMap
-      value: fbda01a2-aa40-4519-92fe-892b43746b0a
-      objectReference: {fileID: 0}
-    - target: {fileID: 6581719683688264565, guid: 654a03760bea1e64592269a2093a351b, type: 3}
-      propertyPath: m_NotificationBehavior
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9184801635016778796, guid: 654a03760bea1e64592269a2093a351b, type: 3}
       propertyPath: m_Name
       value: ShipCharacterController
+      objectReference: {fileID: 0}
+    - target: {fileID: 9184801635016778796, guid: 654a03760bea1e64592269a2093a351b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 654a03760bea1e64592269a2093a351b, type: 3}

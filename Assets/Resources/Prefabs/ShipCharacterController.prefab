@@ -87,38 +87,6 @@ MonoBehaviour:
     m_ActionId: 358e42e8-71ca-4c98-b2eb-74605e4f37f4
     m_ActionName: Build/New action
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 510609389598532354}
-        m_TargetAssemblyTypeName: ShipCharacterController, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_ActionId: 450958c5-76d9-4ceb-b8b6-afcce73ef172
-    m_ActionName: Flight/Attack[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 510609389598532354}
-        m_TargetAssemblyTypeName: ShipCharacterController, Assembly-CSharp
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_ActionId: 39141ba0-e060-4843-9c85-0da4502da38e
-    m_ActionName: Flight/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 50f7d3fd-545a-4d6a-b375-b7c5af9f80cc
     m_ActionName: Menu/New action
@@ -138,6 +106,38 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: a1804c2f-9116-4946-9fc5-e4c97ca62634
     m_ActionName: Flight/Flight[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510609389598532354}
+        m_TargetAssemblyTypeName: ShipCharacterController, Assembly-CSharp
+        m_MethodName: Accelerate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 5794ef30-cfc0-4ee8-8c8b-b9b3ea14f49a
+    m_ActionName: Flight/Accelerate[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 510609389598532354}
+        m_TargetAssemblyTypeName: ShipCharacterController, Assembly-CSharp
+        m_MethodName: Reverse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 90dd6bb0-e24f-4937-9d38-c7104b58e4d1
+    m_ActionName: Flight/Reverse[/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Flight

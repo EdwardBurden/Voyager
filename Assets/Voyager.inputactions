@@ -33,25 +33,25 @@
             "id": "f725c211-0831-4f99-845b-dd7c11f92f90",
             "actions": [
                 {
-                    "name": "Attack",
+                    "name": "Build",
                     "type": "Button",
-                    "id": "450958c5-76d9-4ceb-b8b6-afcce73ef172",
+                    "id": "a1804c2f-9116-4946-9fc5-e4c97ca62634",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Movement",
-                    "type": "Value",
-                    "id": "39141ba0-e060-4843-9c85-0da4502da38e",
-                    "expectedControlType": "Vector2",
+                    "name": "Accelerate",
+                    "type": "Button",
+                    "id": "5794ef30-cfc0-4ee8-8c8b-b9b3ea14f49a",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Build",
+                    "name": "Reverse",
                     "type": "Button",
-                    "id": "a1804c2f-9116-4946-9fc5-e4c97ca62634",
+                    "id": "90dd6bb0-e24f-4937-9d38-c7104b58e4d1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -60,78 +60,56 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "41364ff2-5ac5-4d24-9833-10ad9767da18",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "WASD Keys",
-                    "id": "c1a62c7a-d05f-41f8-b50e-4018a0a4d8d9",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "db0b5cc1-0420-433d-8b63-6c5e5e83970c",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "18858955-e786-429b-9f11-9bf3a38a9370",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "2674925b-0353-485d-a58f-73bc7790c30a",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "9d3c7013-3f26-467f-9002-e80874cc8b2f",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
                     "id": "0b769275-960c-423e-ad6e-1d1240da7572",
                     "path": "<Keyboard>/b",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Build",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75a30c2b-f2eb-43ff-8341-185cff7788af",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c5846055-9e27-41c1-8f9c-5f292944d749",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Accelerate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b936c30d-9883-45e6-a18f-b91278d53610",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "657c0792-9919-4f15-9f9a-a74842a92b30",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reverse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
