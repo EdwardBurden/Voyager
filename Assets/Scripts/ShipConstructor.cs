@@ -41,7 +41,6 @@ public class ShipConstructor
 	{
 		GameObject gameObject = GameObject.Instantiate(GameManager.instance.shipCharctercontrollerPrefab, control.transform.position, control.transform.rotation, null);
 		gameObject.name = "Test";
-		gameObject.AddComponent<Rigidbody>();
 		return gameObject.GetComponent<ShipCharacterController>();
 	}
 
@@ -97,7 +96,10 @@ public class ShipConstructor
 	internal void RemoveComponent(ShipComponent shipComponent)
 	{
 		connectedComponents.Remove(shipComponent);
-		shipComponent.gameObject.AddComponent<Rigidbody>();
+		if (shipComponent.gameObject.GetComponent<Rigidbody>() == null)
+		{
+			shipComponent.gameObject.AddComponent<Rigidbody>();
+		}
 		shipComponent.transform.parent = null;
 		shipComponent.shipRigidbody.isKinematic = false;
 		shipComponent.shipCollider.enabled = true;

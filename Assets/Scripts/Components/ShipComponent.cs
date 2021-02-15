@@ -34,7 +34,7 @@ public abstract class ShipComponent : MonoBehaviour
 
 	IEnumerator WaitAndChangeLayer()
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.2f);
 		gameObject.layer = 0;
 	}
 }

@@ -15,7 +15,7 @@ public interface IDamageable
 		private float healthPercentage => componentHealth / maxComponentHealth;
 	*/
 
-	void DamageShipComponent(int dmg);
+	void DamageShipComponent(float dmg);
 
 	void DestroyComponent();
 

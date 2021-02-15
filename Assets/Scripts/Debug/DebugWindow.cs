@@ -15,6 +15,11 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 	{
 		control.ConstructShip();
 	}
+
+	public void Exit()
+	{
+		Application.Quit();
+	}
 	public void Load() //todo move out to somewhere else
 	{
 		string path = Path.Combine(Application.persistentDataPath, saveLocation);

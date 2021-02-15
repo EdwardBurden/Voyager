@@ -68,6 +68,14 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""1388fa7b-6548-419b-8c4f-77643ed01218"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -85,7 +93,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""75a30c2b-f2eb-43ff-8341-185cff7788af"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -107,7 +115,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b936c30d-9883-45e6-a18f-b91278d53610"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -125,6 +133,72 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""action"": ""Reverse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ec90cd1-c551-4834-a996-b468ddd8c0bd"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""81bda21e-bdd0-4441-b2a2-07944f1a793e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3a61e2db-b37a-4eb3-a2bc-eaa35ecfa687"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0de6f5ac-9af9-4e6f-8963-34d6d227ab42"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""f7b3ccb1-9b64-4e16-8fda-25a2da87a860"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6879ae47-8121-4e96-a530-de6cae7ca235"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -227,6 +301,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Flight_Build = m_Flight.FindAction("Build", throwIfNotFound: true);
         m_Flight_Accelerate = m_Flight.FindAction("Accelerate", throwIfNotFound: true);
         m_Flight_Reverse = m_Flight.FindAction("Reverse", throwIfNotFound: true);
+        m_Flight_Rotate = m_Flight.FindAction("Rotate", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -315,6 +390,7 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputAction m_Flight_Build;
     private readonly InputAction m_Flight_Accelerate;
     private readonly InputAction m_Flight_Reverse;
+    private readonly InputAction m_Flight_Rotate;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
@@ -322,6 +398,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         public InputAction @Build => m_Wrapper.m_Flight_Build;
         public InputAction @Accelerate => m_Wrapper.m_Flight_Accelerate;
         public InputAction @Reverse => m_Wrapper.m_Flight_Reverse;
+        public InputAction @Rotate => m_Wrapper.m_Flight_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -340,6 +417,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Reverse.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnReverse;
                 @Reverse.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnReverse;
                 @Reverse.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnReverse;
+                @Rotate.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_FlightActionsCallbackInterface = instance;
             if (instance != null)
@@ -353,6 +433,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Reverse.started += instance.OnReverse;
                 @Reverse.performed += instance.OnReverse;
                 @Reverse.canceled += instance.OnReverse;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -444,6 +527,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnAccelerate(InputAction.CallbackContext context);
         void OnReverse(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

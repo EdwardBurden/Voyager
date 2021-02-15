@@ -20,7 +20,7 @@ public class PlatingSC : ShipComponent, IDamageable
 		damageStateIndex = 0;
 	}
 
-	public void DamageShipComponent(int dmg)
+	public void DamageShipComponent(float dmg)
 	{
 		componentHealth -= dmg;
 		UpdateDamageState();
@@ -33,7 +33,7 @@ public class PlatingSC : ShipComponent, IDamageable
 	public void DestroyComponent()
 	{
 		shipControl.RemoveComponent(this);
-
+		Debug.Log(name);
 		float x = Random.Range(-1.0f, 1.0f) * explosiveForce;
 		float y = Random.Range(-1.0f, 1.0f) * explosiveForce;
 		float z = Random.Range(-1.0f, 1.0f) * explosiveForce;
@@ -47,8 +47,6 @@ public class PlatingSC : ShipComponent, IDamageable
 			if (rb != null)
 				rb.AddExplosionForce(explosiveForce, explosionPos, explosiveRadius, 3.0F);
 		}
-		
-	//	Destroy(this);
 	}
 
 	public void UpdateDamageState()
