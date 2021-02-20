@@ -9,7 +9,12 @@ public abstract class ShipComponent : MonoBehaviour
 	[HideInInspector]
 	public Rigidbody shipRigidbody => GetComponent<Rigidbody>();
 	[HideInInspector]
-	public Collider shipCollider => GetComponent<Collider>();
+	public Collider shipCollider => GetComponentInChildren<Collider>();
+
+	public Renderer shipRenderer => GetComponentInChildren<Renderer>();
+
+	public int visualId;
+	public string folderRoot;
 
 
 	[ContextMenu("Remove")]
@@ -20,7 +25,6 @@ public abstract class ShipComponent : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		
 	}
 
 	public void ChangeLayerAfterWait()
@@ -30,7 +34,7 @@ public abstract class ShipComponent : MonoBehaviour
 
 	IEnumerator WaitAndChangeLayer()
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.2f);
 		gameObject.layer = 0;
 	}
 }

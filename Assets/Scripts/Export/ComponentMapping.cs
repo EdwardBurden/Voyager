@@ -10,7 +10,8 @@ public class ComponentMapping
 	{
 		{ 0 , typeof(ControlSC) },
 		{ 1 , typeof(HallwaySC) },
-		{ 2 , typeof(PlatingSC) }
+		{ 2 , typeof(PlatingSC) },
+		{ 3 , typeof(LaserSC) }
 	};
 
 	public static int GetIntFromType(Type type)

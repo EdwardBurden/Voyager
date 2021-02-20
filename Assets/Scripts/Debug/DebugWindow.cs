@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class DebugWindow : MonoBehaviour
+public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 {
-	public static DebugWindow instance;
-
 	public string saveFile = "default";
 	public string saveLocation = "Saves";
 	public ControlSC control;
 
 	public Transform spawnPoint;
 
-	private void Awake()
-	{
-		instance = this;
-	}
-
 	public void ConstructShip()
 	{
 		control.ConstructShip();
 	}
-	public void Load()
+
+	public void Exit()
+	{
+		Application.Quit();
+	}
+	public void Load() //todo move out to somewhere else
 	{
 		string path = Path.Combine(Application.persistentDataPath, saveLocation);
 		string filePath = Path.Combine(path, saveFile);
@@ -37,11 +35,11 @@ public class DebugWindow : MonoBehaviour
 		}
 		string jsoncontents = File.ReadAllText(filePath);
 		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
-		control = ShipExporter.ConstructFromFile(shipExportInfo , spawnPoint);
+		control = ShipExporter.ConstructFromFile(shipExportInfo, spawnPoint);
 		control.ConstructShip();
 	}
 
-	public void Save()
+	public void Save() //todo move out to somewhere else
 	{
 		ShipExportInfo shipExportInfo = ShipExporter.ExportToFile(control);
 		string path = Path.Combine(Application.persistentDataPath, saveLocation);
@@ -49,6 +47,16 @@ public class DebugWindow : MonoBehaviour
 		Directory.CreateDirectory(path);
 		string jsoncontents = JsonUtility.ToJson(shipExportInfo);
 		File.WriteAllText(filePath, jsoncontents);
+	}
+
+	public void BuildMode()
+	{
+		ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
+	}
+
+	public void FlightMode()
+	{
+		ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
 	}
 
 }
