@@ -21,7 +21,7 @@ public class ShipConstructor
 		{
 			control.shipController = CreateShipParent();
 		}
-		connectedComponents = FindShipComponents(control.transform.position);
+		connectedComponents = FindShipComponents(control.transform.position , connectedComponents);
 		foreach (ShipComponent ship in connectedComponents)
 		{
 			AttachComponentToParent(ship);

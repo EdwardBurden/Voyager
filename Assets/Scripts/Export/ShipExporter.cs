@@ -41,7 +41,7 @@ public class ShipExporter
 		foreach (ShipComponent shipComponent in control.GetAllComponents())
 		{
 			ComponentExportInfo componentExport = new ComponentExportInfo(
-				shipComponent.transform.localPosition,
+		new Vector3(Mathf.RoundToInt(shipComponent.transform.localPosition.x), Mathf.RoundToInt(shipComponent.transform.localPosition.y), Mathf.RoundToInt(shipComponent.transform.localPosition.z)),
 				shipComponent.transform.localEulerAngles,
 				ComponentMapping.GetIntFromType(shipComponent.GetType()),
 				shipComponent.visualId,

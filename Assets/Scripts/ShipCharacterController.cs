@@ -59,6 +59,19 @@ public class ShipCharacterController : MonoBehaviour
 
 	}
 
+	public void Laser(CallbackContext value)
+	{
+		if (value.started)
+		{
+			//replace with find in control
+			if (!GetComponentInChildren<LaserSC>().active)
+			{
+				GetComponentInChildren<LaserSC>().ActiveWeapon();
+
+			}
+		}
+	}
+
 	private void FixedUpdate()
 	{
 		Fixed_HandleMovement();

@@ -76,6 +76,14 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Laser"",
+                    ""type"": ""Button"",
+                    ""id"": ""731e646a-33c3-4c5b-846c-829001bf3265"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -199,6 +207,17 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbe570f4-3ebc-45fb-bbc9-e171b2b2198a"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Laser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -302,6 +321,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Flight_Accelerate = m_Flight.FindAction("Accelerate", throwIfNotFound: true);
         m_Flight_Reverse = m_Flight.FindAction("Reverse", throwIfNotFound: true);
         m_Flight_Rotate = m_Flight.FindAction("Rotate", throwIfNotFound: true);
+        m_Flight_Laser = m_Flight.FindAction("Laser", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -391,6 +411,7 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputAction m_Flight_Accelerate;
     private readonly InputAction m_Flight_Reverse;
     private readonly InputAction m_Flight_Rotate;
+    private readonly InputAction m_Flight_Laser;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
@@ -399,6 +420,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         public InputAction @Accelerate => m_Wrapper.m_Flight_Accelerate;
         public InputAction @Reverse => m_Wrapper.m_Flight_Reverse;
         public InputAction @Rotate => m_Wrapper.m_Flight_Rotate;
+        public InputAction @Laser => m_Wrapper.m_Flight_Laser;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -420,6 +442,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
+                @Laser.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
+                @Laser.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
+                @Laser.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
             }
             m_Wrapper.m_FlightActionsCallbackInterface = instance;
             if (instance != null)
@@ -436,6 +461,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
+                @Laser.started += instance.OnLaser;
+                @Laser.performed += instance.OnLaser;
+                @Laser.canceled += instance.OnLaser;
             }
         }
     }
@@ -528,6 +556,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         void OnAccelerate(InputAction.CallbackContext context);
         void OnReverse(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnLaser(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
