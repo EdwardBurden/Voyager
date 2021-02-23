@@ -1,0 +1,67 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
+
+public class ShipInputController : MonoBehaviour
+{
+	PlayerInput PlayerInput => GetComponent<PlayerInput>();
+
+	public ShipCharacterController shipController;
+
+	public void SwitchToBuild(CallbackContext value)
+	{
+		if (value.started)
+		{
+			ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
+		}
+	}
+
+	public void SwitchToFlight(CallbackContext value)
+	{
+		if (value.started)
+		{
+			ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
+		}
+	}
+
+	public void Accelerate(CallbackContext value)
+	{
+		if (value.started && PlayerInput.currentControlScheme == "Keyboard&Mouse" && EventSystem.current.IsPointerOverGameObject())
+		{
+			return;
+		}
+
+		shipController.inputAccelerate = (value.started || value.performed);
+	}
+
+	public void Reverse(CallbackContext value)
+	{
+		shipController.inputReverse = (value.started || value.performed);
+	}
+
+	public void Rotate(CallbackContext value)
+	{
+		if (value.performed)
+		{
+			Vector2 axisValue = value.ReadValue<Vector2>();
+			shipController.inputDirection = axisValue;
+		}
+
+	}
+
+	public void Laser(CallbackContext value)
+	{
+		if (value.started)
+		{
+			//replace with find in control
+			if (!GetComponentInChildren<LaserSC>().active)
+			{
+				GetComponentInChildren<LaserSC>().ActiveWeapon();
+
+			}
+		}
+	}
+}

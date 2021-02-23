@@ -7,69 +7,45 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class ShipCharacterController : MonoBehaviour
 {
-	[SerializeField]
-	private PlayerInput shipInput;
-
+	private ShipConstructor constructor;
 	private Rigidbody rigidbody => GetComponent<Rigidbody>();
 
-	private bool inputAccelerate = false;
-	private bool inputReverse = false;
+	public bool inputAccelerate = false;
+	public bool inputReverse = false;
+	public Vector2 inputDirection;
 
-	private Vector2 inputDirection;
-
-	private float maxvelocity;
+	private float hitDamage = 10;
 	private float accelerationPerUpdate = 0.1f;
 
-
-	public void SwitchToBuild(CallbackContext value)
+	public LayerMask componentLayer;
+	public void Init()
 	{
-		if (value.started)
-		{
-			shipInput.SwitchCurrentActionMap("Build");
-			GameManager.SwitchToBuildMode();
-		}
+		this.constructor = new ShipConstructor(this);
 	}
 
-	public void SwitchToFlight(CallbackContext value)
+	public void ConstructShip(List<ShipComponent> components)
 	{
-		if (value.started)
-		{
-			shipInput.SwitchCurrentActionMap("Flight");
-			GameManager.SwitchToFlightMode();
-		}
+		constructor.ContrustShip(components);
 	}
 
-	public void Accelerate(CallbackContext value)
+	public void ConstructShip()
 	{
-		inputAccelerate = (value.started || value.performed);
+		constructor.ContrustShip();
 	}
 
-	public void Reverse(CallbackContext value)
+	public void Addcomponent(ShipComponent shipComponent)
 	{
-		inputReverse = (value.started || value.performed);
+		constructor.AddComponent(shipComponent);
 	}
 
-	public void Rotate(CallbackContext value)
+	internal IEnumerable<ShipComponent> GetAllComponents()
 	{
-		if (value.performed)
-		{
-			Vector2 axisValue = value.ReadValue<Vector2>();
-			inputDirection = axisValue;
-		}
-
+		return constructor.connectedComponents;
 	}
 
-	public void Laser(CallbackContext value)
+	public void RemoveComponent(ShipComponent shipComponent)
 	{
-		if (value.started)
-		{
-			//replace with find in control
-			if (!GetComponentInChildren<LaserSC>().active)
-			{
-				GetComponentInChildren<LaserSC>().ActiveWeapon();
-
-			}
-		}
+		constructor.RemoveComponent(shipComponent);
 	}
 
 	private void FixedUpdate()
@@ -135,14 +111,7 @@ public class ShipCharacterController : MonoBehaviour
 
 		float collisionAngle = Vector3.Angle(collision.relativeVelocity.normalized, normalSum);
 		float angle = Mathf.Deg2Rad * collisionAngle;
-		float damage = 10 * (1 - Mathf.Sin(angle));
-
-		/*IDamageable damageable = collision.collider.GetComponentInParent<IDamageable>(); //dealing damage to other hit
-		if (damageable != null)
-		{
-			damageable.DamageShipComponent(damage);
-		}*/
-		Debug.Log(damage);
+		float damage = hitDamage * (1 - Mathf.Sin(angle));
 		foreach (GameObject contact in collision.contacts.Select(x => x.thisCollider.gameObject).Distinct())
 		{
 			IDamageable damageable = contact.GetComponentInParent<IDamageable>();

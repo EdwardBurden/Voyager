@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserSC : ShipComponent
+public class LaserSC : ShipComponent, IWeapon
 {
 	public ShipComponent target;
-	public Vector2 angle = new Vector2(50, 20);
-	public int range = 5
+
+	public int weaponAngle = 30;
+	public int weaponRange = 5;
+
 	public int damage;
 	public float duration;
 	public bool active;
@@ -23,26 +25,37 @@ public class LaserSC : ShipComponent
 		}
 	}
 
+	public void CanActiveWeapon()
+	{
+		throw new System.NotImplementedException();
+	}
+
 	public bool CanHit()
 	{
-		Vector2 forwardDirection = new Vector2(this.transform.forward.x, this.transform.forward.z);
-		Vector2 targetDirection = new Vector2(target.transform.position.x - this.transform.position.x, target.transform.position.z - this.transform.position.z);
-		float XZAxis = Vector2.Angle(targetDirection, forwardDirection);
-		//to do 
-
-		return  XZAxis < angle.x;
+		float distance = Vector3.Distance(this.transform.position, target.transform.position);
+		float angle = Vector2.Angle(this.transform.forward, target.transform.position - this.transform.position);
+		return angle < weaponAngle && distance < weaponRange;
 	}
 
 	private void OnDrawGizmos()
 	{
 		if (target != null)
 		{
-			Vector2 forwardDirection = new Vector2(this.transform.forward.x + this.transform.position.x, this.transform.forward.z + this.transform.position.z);
-			Gizmos.DrawLine(new Vector3(forwardDirection.x, this.transform.position.y, forwardDirection.y), this.transform.position);
+			Vector3 maxX = Quaternion.AngleAxis(weaponAngle, transform.up) * transform.forward * weaponRange;
+			Vector3 minX = Quaternion.AngleAxis(-weaponAngle, transform.up) * transform.forward * weaponRange;
 
-			Vector2 targetDirection = new Vector2(target.transform.position.x, target.transform.position.z);
-			Gizmos.DrawLine(new Vector3(targetDirection.x, this.transform.position.y, targetDirection.y), this.transform.position);
 
+			Gizmos.color = Color.blue;
+			Gizmos.DrawRay(this.transform.position, maxX.normalized * weaponRange);
+			Gizmos.DrawRay(this.transform.position, minX.normalized * weaponRange);
+
+			Vector3 maxY = Quaternion.AngleAxis(weaponAngle, transform.right) * transform.forward * weaponRange;
+			Vector3 minY = Quaternion.AngleAxis(-weaponAngle, transform.right) * transform.forward * weaponRange;
+
+
+			Gizmos.color = Color.blue;
+			Gizmos.DrawRay(this.transform.position, maxY.normalized * weaponRange);
+			Gizmos.DrawRay(this.transform.position, minY.normalized * weaponRange);
 		}
 	}
 
@@ -60,7 +73,7 @@ public class LaserSC : ShipComponent
 		while (active)
 		{
 			yield return new WaitForSeconds(duration);
-			damageable.DamageShipComponent(damage);
+			//damageable.DamageShipComponent(damage);
 		}
 	}
 
@@ -69,5 +82,4 @@ public class LaserSC : ShipComponent
 		active = false;
 		StopCoroutine(FireLaser());
 	}
-
 }

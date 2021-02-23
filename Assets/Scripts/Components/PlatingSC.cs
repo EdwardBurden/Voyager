@@ -32,9 +32,9 @@ public class PlatingSC : ShipComponent, IDamageable
 
 	public void DestroyComponent()
 	{
-		if (shipControl) //only for testing laser
+		if (characterController) //only for testing laser
 		{
-			shipControl.RemoveComponent(this);
+			characterController.RemoveComponent(this);
 		}
 		Debug.Log(name);
 		float x = Random.Range(-1.0f, 1.0f) * explosiveForce;

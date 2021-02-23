@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ShipComponent : MonoBehaviour
 {
 	[HideInInspector]
-	public ControlSC shipControl; //move to new shipcomponetChil class pr something
+	public ShipCharacterController characterController; //move to new shipcomponetChil class pr something
 	[HideInInspector]
 	public Rigidbody shipRigidbody => GetComponent<Rigidbody>();
 	[HideInInspector]
@@ -20,11 +20,7 @@ public abstract class ShipComponent : MonoBehaviour
 	[ContextMenu("Remove")]
 	public void RemoveFromControl()
 	{
-		shipControl.RemoveComponent(this);
-	}
-
-	private void OnCollisionEnter(Collision collision)
-	{
+		characterController.RemoveComponent(this);
 	}
 
 	public void ChangeLayerAfterWait()

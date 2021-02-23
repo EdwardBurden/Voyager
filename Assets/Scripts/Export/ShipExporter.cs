@@ -7,9 +7,9 @@ using UnityEngine;
 public class ShipExporter
 {
 	private static string PATH = "Prefabs";
-	internal static ControlSC ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
+	internal static List<ShipComponent> ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
 	{
-		ControlSC control = null;
+		List<ShipComponent> components = new List<ShipComponent>();
 		foreach (ComponentExportInfo info in shipExportInfo.components)
 		{
 			Type type = ComponentMapping.GetTypeFromInt(info.componentId);
@@ -26,19 +26,16 @@ public class ShipExporter
 
 			ShipComponent loadedComponent = Resources.Load<ShipComponent>(filepath) as ShipComponent;
 
-			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, info.position + shipExportTransform.position, Quaternion.Euler(info.eulerAngles + shipExportTransform.eulerAngles), null);
-			if (shipComponent is ControlSC controlSC)
-			{
-				control = controlSC;
-			}
+			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, info.position + shipExportTransform.position, Quaternion.Euler(info.eulerAngles + shipExportTransform.eulerAngles), shipExportTransform);
+			components.Add(shipComponent);
 		}
-		return control;
+		return components;
 	}
 
-	internal static ShipExportInfo ExportToFile(ControlSC control)
+	internal static ShipExportInfo ExportToFile(ShipCharacterController shipCharacter)
 	{
 		ShipExportInfo shipExport = new ShipExportInfo();
-		foreach (ShipComponent shipComponent in control.GetAllComponents())
+		foreach (ShipComponent shipComponent in shipCharacter.GetAllComponents())
 		{
 			ComponentExportInfo componentExport = new ComponentExportInfo(
 		new Vector3(Mathf.RoundToInt(shipComponent.transform.localPosition.x), Mathf.RoundToInt(shipComponent.transform.localPosition.y), Mathf.RoundToInt(shipComponent.transform.localPosition.z)),

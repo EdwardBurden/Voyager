@@ -2,23 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-	public GameObject shipCharctercontrollerPrefab;
+	public ShipCharacterController player;
+	public ShipInputController playerInputController;
+
+	public PlayerInput playerInput => playerInputController.GetComponent<PlayerInput>();
 
 	private void Awake()
 	{
 		//ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
 	}
 
-	internal static void SwitchToFlightMode()
-	{
-		ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
-	}
-
-	internal static void SwitchToBuildMode()
-	{
-		ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
-	}
 }

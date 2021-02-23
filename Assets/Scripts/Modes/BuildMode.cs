@@ -4,38 +4,20 @@ using UnityEngine;
 
 public class BuildMode : MonoBehaviour, IMode
 {
+	public string modeMap;
 	private bool _active;
 	public bool isActive { get => _active; set => _active = value; }
 
 	public void BeginMode()
 	{
-		//show ui
-
-		//throw new System.NotImplementedException();
+		if (GameManager.instance.playerInput.currentActionMap.name != modeMap)
+		{
+			GameManager.instance.playerInput.SwitchCurrentActionMap(modeMap);
+		}
 	}
 
 	public void EndMode()
 	{
 		//throw new System.NotImplementedException();
-	}
-
-	private void Update()
-	{
-		if (!_active)
-		{
-			return;
-		}
-	}
-
-	private void DetectMove() //might need another singleton input manager for these
-	{
-
-	}
-
-	private void DetectClick()
-	{
-		//left click to select and place 
-		//right click to center camera look 
-		//WASD/controller left-stick to rotate arround centred block
 	}
 }

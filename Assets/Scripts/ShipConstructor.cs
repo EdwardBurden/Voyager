@@ -7,41 +7,41 @@ public class ShipConstructor
 {
 	private int radius = 2;
 
+	public ShipCharacterController controller;
 	public ControlSC control;
 	public List<ShipComponent> connectedComponents;
 
-	public ShipConstructor(ControlSC shipControl)
-	{
-		control = shipControl;
-	}
 
-	public void ContrustShip()
+	public ShipConstructor(ShipCharacterController characterController)
 	{
-		if (control.shipController == null)
-		{
-			control.shipController = CreateShipParent();
-		}
-		connectedComponents = FindShipComponents(control.transform.position , connectedComponents);
+		controller = characterController;
+
+	}
+	public void ContrustShip(List<ShipComponent> shipComponents)
+	{
+		connectedComponents = shipComponents;
+		FindControl(connectedComponents);
 		foreach (ShipComponent ship in connectedComponents)
 		{
 			AttachComponentToParent(ship);
 		}
+	}
 
-		SetupControl();
+	public void ContrustShip()
+	{
+		connectedComponents = FindShipComponents(control.transform.position, connectedComponents);
+		FindControl(connectedComponents);
+		foreach (ShipComponent ship in connectedComponents)
+		{
+			AttachComponentToParent(ship);
+		}
 	}
 
 	private void AttachComponentToParent(ShipComponent shipComponent)
 	{
-		shipComponent.shipControl = control;
-		shipComponent.transform.parent = control.shipController.transform;
+		shipComponent.characterController = controller;
+		shipComponent.transform.parent = controller.transform;
 		SetLayerRecursively(shipComponent.gameObject, 0);
-	}
-
-	private ShipCharacterController CreateShipParent()
-	{
-		GameObject gameObject = GameObject.Instantiate(GameManager.instance.shipCharctercontrollerPrefab, control.transform.position, control.transform.rotation, null);
-		gameObject.name = "Test";
-		return gameObject.GetComponent<ShipCharacterController>();
 	}
 
 	public static void SetLayerRecursively(GameObject obj, int layer) //to do move to helper
@@ -54,37 +54,28 @@ public class ShipConstructor
 		}
 	}
 
-	private void SetupControl()
-	{
-		control.transform.parent = control.shipController.transform;
-		SetLayerRecursively(control.gameObject, 0);
-		connectedComponents.Add(control);
-	}
-
-	public void RemoveDisconnectedComponents()
-	{
-
-
-	}
-
 	private List<ShipComponent> FindShipComponents(Vector3 position, List<ShipComponent> foundComponents = null)
 	{
 		if (foundComponents == null)
 		{
 			foundComponents = new List<ShipComponent>();
 		}
-		Collider[] foundColliders = Physics.OverlapSphere(position, radius, control.componentLayer);
+		Collider[] foundColliders = Physics.OverlapSphere(position, radius, controller.componentLayer);
 		foreach (Collider collider in foundColliders)
 		{
 			ShipComponent shipComponent = collider.gameObject.GetComponentInParent<ShipComponent>();
-			if (shipComponent != null && !foundComponents.Contains(shipComponent) && shipComponent != control && shipComponent.shipControl == null && !(shipComponent is ControlSC))
+			if (shipComponent != null && !foundComponents.Contains(shipComponent) && shipComponent.characterController == null && !(shipComponent is ControlSC))
 			{
 				foundComponents.Add(shipComponent);
 				FindShipComponents(shipComponent.transform.position, foundComponents);
-
 			}
 		}
 		return foundComponents;
+	}
+
+	private ControlSC FindControl(List<ShipComponent> shipComponents)
+	{
+		return shipComponents.Find(x => x is ControlSC) as ControlSC;
 	}
 
 	public void AddComponent(ShipComponent shipComponent)
