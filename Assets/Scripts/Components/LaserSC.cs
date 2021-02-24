@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LaserSC : ShipComponent, IWeapon
@@ -13,27 +14,15 @@ public class LaserSC : ShipComponent, IWeapon
 	public float duration;
 	public bool active;
 
-
-	private void Update()
+	public bool CanActiveWeapon()
 	{
-		if (active)
+		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).GetAllComponents().FirstOrDefault(x => x is IDamageable) as ShipComponent;
+		if (target == null)
 		{
-			if (!CanHit())
-			{
-				DeactiveWeapon();
-			}
+			return false;
 		}
-	}
-
-	public void CanActiveWeapon()
-	{
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanHit()
-	{
 		float distance = Vector3.Distance(this.transform.position, target.transform.position);
-		float angle = Vector2.Angle(this.transform.forward, target.transform.position - this.transform.position);
+		float angle = Vector3.Angle(this.transform.forward, target.transform.position - this.transform.position);
 		return angle < weaponAngle && distance < weaponRange;
 	}
 
@@ -56,25 +45,33 @@ public class LaserSC : ShipComponent, IWeapon
 			Gizmos.color = Color.blue;
 			Gizmos.DrawRay(this.transform.position, maxY.normalized * weaponRange);
 			Gizmos.DrawRay(this.transform.position, minY.normalized * weaponRange);
+
+			Gizmos.color = Color.green;
+			if (active)
+			{
+				Gizmos.DrawRay(this.transform.position, target.transform.position - this.transform.position);
+			}
 		}
 	}
 
 	public void ActiveWeapon()
 	{
+
 		active = true;
+		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).GetAllComponents().FirstOrDefault(x => x is IDamageable) as ShipComponent;
 		StartCoroutine(FireLaser());
 
 	}
 
-
 	private IEnumerator FireLaser()
 	{
 		IDamageable damageable = target.GetComponent<IDamageable>();
-		while (active)
+		while (active && CanActiveWeapon())
 		{
 			yield return new WaitForSeconds(duration);
-			//damageable.DamageShipComponent(damage);
+			damageable.DamageShipComponent(damage);
 		}
+		DeactiveWeapon();
 	}
 
 	public void DeactiveWeapon()

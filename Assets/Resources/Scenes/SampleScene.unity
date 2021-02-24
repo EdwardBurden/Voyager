@@ -1420,6 +1420,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1357027628 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2880370593289632310, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
+  m_PrefabInstance: {fileID: 3079474586803296940}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a1287038860384a9dc832dae121994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1411333434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,11 +1492,11 @@ RectTransform:
   m_Father: {fileID: 1700900939}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1604765700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,7 +1771,7 @@ MonoBehaviour:
   saveFile: default
   saveLocation: Saves
   shipCharacter: {fileID: 0}
-  shipinput: {fileID: 3079474586803296941}
+  shipinput: {fileID: 1357027628}
   spawnPoint: {fileID: 1411333435}
   prefabController: {fileID: 510609389598532354, guid: 654a03760bea1e64592269a2093a351b, type: 3}
 --- !u!1 &1812523611
@@ -2068,7 +2079,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: flight Mode
+  m_Text: Flight Mode
 --- !u!222 &1869470458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2175,11 +2186,11 @@ RectTransform:
   m_Father: {fileID: 1700900939}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 516.3, y: 309.6}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 68.34546, y: 41.826416}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &2038315813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2575,15 +2586,15 @@ PrefabInstance:
     - target: {fileID: 388100979386518589, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3079474586803296941}
+      objectReference: {fileID: 0}
     - target: {fileID: 388100979386518589, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3079474586803296941}
+      objectReference: {fileID: 0}
     - target: {fileID: 388100979386518589, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3079474586803296941}
+      objectReference: {fileID: 0}
     - target: {fileID: 388100979386518589, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2623,7 +2634,7 @@ PrefabInstance:
     - target: {fileID: 3079474586717845896, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: playerInputController
       value: 
-      objectReference: {fileID: 3079474586803296941}
+      objectReference: {fileID: 1357027628}
     - target: {fileID: 3079474586717845897, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.4435053
@@ -2678,14 +2689,3 @@ PrefabInstance:
       objectReference: {fileID: 1422976484}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
---- !u!114 &3079474586803296941 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 396461981570470931, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-  m_PrefabInstance: {fileID: 3079474586803296940}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a1287038860384a9dc832dae121994, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -38,12 +38,12 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 		}
 		string jsoncontents = File.ReadAllText(filePath);
 		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
-		ShipCharacterController ship = Instantiate(prefabController, null);
-		ship.Init();
-		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, ship.transform);
-		ship.ConstructShip(components);
-		GameManager.instance.player = ship;
-		shipinput.shipController = ship;
+		shipCharacter = Instantiate(prefabController, null);
+		shipCharacter.Init();
+		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
+		shipCharacter.ConstructShip(components);
+		GameManager.instance.player = shipCharacter;
+		shipinput.shipController = shipCharacter;
 	}
 
 	public void Save() //todo move out to somewhere else

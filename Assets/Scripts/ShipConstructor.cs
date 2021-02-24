@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShipConstructor
@@ -8,7 +9,7 @@ public class ShipConstructor
 	private int radius = 2;
 
 	public ShipCharacterController controller;
-	public ControlSC control;
+	public ControlSC control => connectedComponents.FirstOrDefault(x => x is ControlSC) as ControlSC;
 	public List<ShipComponent> connectedComponents;
 
 
@@ -19,6 +20,10 @@ public class ShipConstructor
 	}
 	public void ContrustShip(List<ShipComponent> shipComponents)
 	{
+		if (connectedComponents != null)
+		{
+			connectedComponents.RemoveAll(x => x == null);
+		}
 		connectedComponents = shipComponents;
 		FindControl(connectedComponents);
 		foreach (ShipComponent ship in connectedComponents)
@@ -29,6 +34,10 @@ public class ShipConstructor
 
 	public void ContrustShip()
 	{
+		if (connectedComponents != null)
+		{
+			connectedComponents.RemoveAll(x => x == null);
+		}
 		connectedComponents = FindShipComponents(control.transform.position, connectedComponents);
 		FindControl(connectedComponents);
 		foreach (ShipComponent ship in connectedComponents)

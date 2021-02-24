@@ -236,11 +236,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209d1b589d7bd4459d006f1513b1137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipControl: {fileID: 0}
+  characterController: {fileID: 0}
   visualId: 0
   folderRoot: Weapons
   target: {fileID: 0}
-  angle: {x: 50, y: 20}
+  weaponAngle: 50
+  weaponRange: 10
   damage: 5
-  duration: 5
+  duration: 1
   active: 0

@@ -56,10 +56,10 @@ public class ShipInputController : MonoBehaviour
 	{
 		if (value.started)
 		{
-			//replace with find in control
-			if (!GetComponentInChildren<LaserSC>().active)
+			LaserSC laserSC = shipController.GetComponentInChildren<LaserSC>();
+			if (!laserSC.active && laserSC.CanActiveWeapon())
 			{
-				GetComponentInChildren<LaserSC>().ActiveWeapon();
+				shipController.GetComponentInChildren<LaserSC>().ActiveWeapon();
 
 			}
 		}

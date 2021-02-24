@@ -6,5 +6,7 @@ public interface IWeapon
 {
 	void ActiveWeapon();
 
-	void CanActiveWeapon();
+	void DeactiveWeapon();
+
+	bool CanActiveWeapon();
 }
