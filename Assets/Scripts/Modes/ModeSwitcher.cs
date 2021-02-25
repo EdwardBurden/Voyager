@@ -21,7 +21,6 @@ public class ModeSwitcher : SingletonMonoBehaviour<ModeSwitcher>
 			{ typeof(FlightMode) , flightMode },
 			{ typeof(BuildMode) , buildMode }
 		};
-		ChangeMode(typeof(BuildMode)); //temp
 	}
 
 	public void ChangeMode(Type type)

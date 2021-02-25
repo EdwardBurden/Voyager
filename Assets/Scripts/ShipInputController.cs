@@ -13,6 +13,10 @@ public class ShipInputController : MonoBehaviour
 
 	public void SwitchToBuild(CallbackContext value)
 	{
+		if (shipController == null)
+		{
+			return;
+		}
 		if (value.started)
 		{
 			ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
@@ -21,6 +25,10 @@ public class ShipInputController : MonoBehaviour
 
 	public void SwitchToFlight(CallbackContext value)
 	{
+		if (shipController == null)
+		{
+			return;
+		}
 		if (value.started)
 		{
 			ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
@@ -29,7 +37,7 @@ public class ShipInputController : MonoBehaviour
 
 	public void Accelerate(CallbackContext value)
 	{
-		if (value.started && PlayerInput.currentControlScheme == "Keyboard&Mouse" && EventSystem.current.IsPointerOverGameObject())
+		if (shipController == null)
 		{
 			return;
 		}
@@ -39,11 +47,21 @@ public class ShipInputController : MonoBehaviour
 
 	public void Reverse(CallbackContext value)
 	{
+		if (shipController == null)
+		{
+			return;
+		}
+
 		shipController.inputReverse = (value.started || value.performed);
 	}
 
 	public void Rotate(CallbackContext value)
 	{
+		if (shipController == null)
+		{
+			return;
+		}
+
 		if (value.performed)
 		{
 			Vector2 axisValue = value.ReadValue<Vector2>();
@@ -54,6 +72,11 @@ public class ShipInputController : MonoBehaviour
 
 	public void Laser(CallbackContext value)
 	{
+		if (shipController == null)
+		{
+			return;
+		}
+
 		if (value.started)
 		{
 			LaserSC laserSC = shipController.GetComponentInChildren<LaserSC>();

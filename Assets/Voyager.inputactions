@@ -2,33 +2,6 @@
     "name": "Voyager",
     "maps": [
         {
-            "name": "Build",
-            "id": "fbda01a2-aa40-4519-92fe-892b43746b0a",
-            "actions": [
-                {
-                    "name": "Flight",
-                    "type": "Button",
-                    "id": "358e42e8-71ca-4c98-b2eb-74605e4f37f4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "5157fb8f-6f7c-40ef-9523-2ed67a290456",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Flight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "Flight",
             "id": "f725c211-0831-4f99-845b-dd7c11f92f90",
             "actions": [
@@ -203,6 +176,44 @@
                     "processors": "",
                     "groups": "",
                     "action": "Laser",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aea2396b-d30f-4683-8d96-e668e08a7c28",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Laser",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Build",
+            "id": "fbda01a2-aa40-4519-92fe-892b43746b0a",
+            "actions": [
+                {
+                    "name": "Flight",
+                    "type": "Button",
+                    "id": "358e42e8-71ca-4c98-b2eb-74605e4f37f4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5157fb8f-6f7c-40ef-9523-2ed67a290456",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -15,33 +15,6 @@ public class @Voyager : IInputActionCollection, IDisposable
     ""name"": ""Voyager"",
     ""maps"": [
         {
-            ""name"": ""Build"",
-            ""id"": ""fbda01a2-aa40-4519-92fe-892b43746b0a"",
-            ""actions"": [
-                {
-                    ""name"": ""Flight"",
-                    ""type"": ""Button"",
-                    ""id"": ""358e42e8-71ca-4c98-b2eb-74605e4f37f4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""5157fb8f-6f7c-40ef-9523-2ed67a290456"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
             ""name"": ""Flight"",
             ""id"": ""f725c211-0831-4f99-845b-dd7c11f92f90"",
             ""actions"": [
@@ -218,6 +191,44 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""action"": ""Laser"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aea2396b-d30f-4683-8d96-e668e08a7c28"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Laser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Build"",
+            ""id"": ""fbda01a2-aa40-4519-92fe-892b43746b0a"",
+            ""actions"": [
+                {
+                    ""name"": ""Flight"",
+                    ""type"": ""Button"",
+                    ""id"": ""358e42e8-71ca-4c98-b2eb-74605e4f37f4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5157fb8f-6f7c-40ef-9523-2ed67a290456"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -312,9 +323,6 @@ public class @Voyager : IInputActionCollection, IDisposable
         }
     ]
 }");
-        // Build
-        m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
-        m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
         // Flight
         m_Flight = asset.FindActionMap("Flight", throwIfNotFound: true);
         m_Flight_Build = m_Flight.FindAction("Build", throwIfNotFound: true);
@@ -322,6 +330,9 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Flight_Reverse = m_Flight.FindAction("Reverse", throwIfNotFound: true);
         m_Flight_Rotate = m_Flight.FindAction("Rotate", throwIfNotFound: true);
         m_Flight_Laser = m_Flight.FindAction("Laser", throwIfNotFound: true);
+        // Build
+        m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
+        m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -370,39 +381,6 @@ public class @Voyager : IInputActionCollection, IDisposable
     {
         asset.Disable();
     }
-
-    // Build
-    private readonly InputActionMap m_Build;
-    private IBuildActions m_BuildActionsCallbackInterface;
-    private readonly InputAction m_Build_Flight;
-    public struct BuildActions
-    {
-        private @Voyager m_Wrapper;
-        public BuildActions(@Voyager wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Flight => m_Wrapper.m_Build_Flight;
-        public InputActionMap Get() { return m_Wrapper.m_Build; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(BuildActions set) { return set.Get(); }
-        public void SetCallbacks(IBuildActions instance)
-        {
-            if (m_Wrapper.m_BuildActionsCallbackInterface != null)
-            {
-                @Flight.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
-                @Flight.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
-                @Flight.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
-            }
-            m_Wrapper.m_BuildActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Flight.started += instance.OnFlight;
-                @Flight.performed += instance.OnFlight;
-                @Flight.canceled += instance.OnFlight;
-            }
-        }
-    }
-    public BuildActions @Build => new BuildActions(this);
 
     // Flight
     private readonly InputActionMap m_Flight;
@@ -468,6 +446,39 @@ public class @Voyager : IInputActionCollection, IDisposable
         }
     }
     public FlightActions @Flight => new FlightActions(this);
+
+    // Build
+    private readonly InputActionMap m_Build;
+    private IBuildActions m_BuildActionsCallbackInterface;
+    private readonly InputAction m_Build_Flight;
+    public struct BuildActions
+    {
+        private @Voyager m_Wrapper;
+        public BuildActions(@Voyager wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Flight => m_Wrapper.m_Build_Flight;
+        public InputActionMap Get() { return m_Wrapper.m_Build; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuildActions set) { return set.Get(); }
+        public void SetCallbacks(IBuildActions instance)
+        {
+            if (m_Wrapper.m_BuildActionsCallbackInterface != null)
+            {
+                @Flight.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
+                @Flight.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
+                @Flight.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
+            }
+            m_Wrapper.m_BuildActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Flight.started += instance.OnFlight;
+                @Flight.performed += instance.OnFlight;
+                @Flight.canceled += instance.OnFlight;
+            }
+        }
+    }
+    public BuildActions @Build => new BuildActions(this);
 
     // Menu
     private readonly InputActionMap m_Menu;
@@ -546,10 +557,6 @@ public class @Voyager : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_XRSchemeIndex];
         }
     }
-    public interface IBuildActions
-    {
-        void OnFlight(InputAction.CallbackContext context);
-    }
     public interface IFlightActions
     {
         void OnBuild(InputAction.CallbackContext context);
@@ -557,6 +564,10 @@ public class @Voyager : IInputActionCollection, IDisposable
         void OnReverse(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnLaser(InputAction.CallbackContext context);
+    }
+    public interface IBuildActions
+    {
+        void OnFlight(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

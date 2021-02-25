@@ -2631,6 +2631,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ShipInputController, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3079474586717845896, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: playerInputController
       value: 

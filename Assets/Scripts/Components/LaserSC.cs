@@ -14,6 +14,34 @@ public class LaserSC : ShipComponent, IWeapon
 	public float duration;
 	public bool active;
 
+	public GameObject laserHead;
+	public Transform laserSpawn;
+	public LineRenderer lineRenderer;
+
+	public float laserActivationTime;
+
+	private void Awake()
+	{
+		lineRenderer.gameObject.SetActive(false);
+	}
+
+	private void Update()
+	{
+		if (active)
+		{
+			if (!CanActiveWeapon())
+			{
+				DeactiveWeapon();
+				//move damage ghere
+			}
+			else
+			{
+				IDamageable damageable = target.GetComponent<IDamageable>();
+				damageable.DamageShipComponent(damage * Time.deltaTime);
+			}
+		}
+	}
+
 	public bool CanActiveWeapon()
 	{
 		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).GetAllComponents().FirstOrDefault(x => x is IDamageable) as ShipComponent;
@@ -56,27 +84,45 @@ public class LaserSC : ShipComponent, IWeapon
 
 	public void ActiveWeapon()
 	{
-
-		active = true;
+		active = true; //move to end of extend laser
 		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).GetAllComponents().FirstOrDefault(x => x is IDamageable) as ShipComponent;
-		StartCoroutine(FireLaser());
-
+		lineRenderer.gameObject.SetActive(true);
+		//StartCoroutine(FireLaser());
+		StartCoroutine(MoveLaserHead());
+		StartCoroutine(ExtendLaserTrace());
 	}
 
-	private IEnumerator FireLaser()
+	private IEnumerator MoveLaserHead()
 	{
-		IDamageable damageable = target.GetComponent<IDamageable>();
-		while (active && CanActiveWeapon())
+		while (true)
 		{
-			yield return new WaitForSeconds(duration);
-			damageable.DamageShipComponent(damage);
+			laserHead.transform.LookAt(target.transform.position, transform.up);
+			lineRenderer.SetPosition(0, laserSpawn.position);
+			lineRenderer.SetPosition(1, target.transform.position);
+			yield return null;
 		}
-		DeactiveWeapon();
+	}
+
+	private IEnumerator ExtendLaserTrace()
+	{
+		float timer = 0;
+		while (timer < laserActivationTime)
+		{
+			float range = timer / laserActivationTime;
+			float distance = Vector3.Distance(target.transform.position, laserSpawn.position);
+			lineRenderer.SetPosition(0, laserSpawn.position);
+			lineRenderer.SetPosition(1, laserSpawn.position + ((target.transform.position - laserSpawn.position) * range));
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		active = true;
 	}
 
 	public void DeactiveWeapon()
 	{
 		active = false;
-		StopCoroutine(FireLaser());
+		laserHead.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
+		StopAllCoroutines();
+		lineRenderer.gameObject.SetActive(false);
 	}
 }

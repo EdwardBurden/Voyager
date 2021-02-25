@@ -11,9 +11,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 	public PlayerInput playerInput => playerInputController.GetComponent<PlayerInput>();
 
-	private void Awake()
+	private void Start()
 	{
-		//ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
+		ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
 	}
 
 }
