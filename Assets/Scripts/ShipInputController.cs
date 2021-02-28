@@ -1,22 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using static UnityEngine.InputSystem.InputAction;
 
-public class ShipInputController : MonoBehaviour
+public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 {
+	public InputSystemUIInputModule inputSystemUI;
 	PlayerInput PlayerInput => GetComponent<PlayerInput>();
 
-	public ShipCharacterController shipController;
+	public ShipCharacterController shipController; // add way to switch when selecting ships
+
+
+
 
 	public void SwitchToBuild(CallbackContext value)
 	{
-		if (shipController == null)
-		{
-			return;
-		}
 		if (value.started)
 		{
 			ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
@@ -25,49 +27,59 @@ public class ShipInputController : MonoBehaviour
 
 	public void SwitchToFlight(CallbackContext value)
 	{
-		if (shipController == null)
-		{
-			return;
-		}
 		if (value.started)
 		{
 			ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
 		}
 	}
 
-	public void Accelerate(CallbackContext value)
+	public void IncreaseShipSpeed()
 	{
-		if (shipController == null)
-		{
-			return;
-		}
-
-		shipController.inputAccelerate = (value.started || value.performed);
+		shipController.IncreaseSpeed();
 	}
 
-	public void Reverse(CallbackContext value)
+	internal void RotateLeft()
 	{
-		if (shipController == null)
-		{
-			return;
-		}
-
-		shipController.inputReverse = (value.started || value.performed);
+		shipController.Rotate(-15);
 	}
 
-	public void Rotate(CallbackContext value)
+	internal void RotateRight()
+	{
+		shipController.Rotate(15);
+	}
+
+	public void DecreaseShipSpeed() 
+	{
+		shipController.DecreaseSpeed();
+	}
+
+	public void RestShip()
+	{
+		shipController.Rest();
+	}
+
+	public void SpeedUp(CallbackContext value)
 	{
 		if (shipController == null)
 		{
 			return;
 		}
-
-		if (value.performed)
+		if (value.started)
 		{
-			Vector2 axisValue = value.ReadValue<Vector2>();
-			shipController.inputDirection = axisValue;
+			IncreaseShipSpeed();
 		}
+	}
 
+	public void SlowDown(CallbackContext value)
+	{
+		if (shipController == null)
+		{
+			return;
+		}
+		if (value.started)
+		{
+			DecreaseShipSpeed();
+		}
 	}
 
 	public void Laser(CallbackContext value)

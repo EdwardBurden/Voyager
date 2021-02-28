@@ -27,7 +27,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Accelerate"",
+                    ""name"": ""SpeedUp"",
                     ""type"": ""Button"",
                     ""id"": ""5794ef30-cfc0-4ee8-8c8b-b9b3ea14f49a"",
                     ""expectedControlType"": ""Button"",
@@ -35,18 +35,10 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Reverse"",
+                    ""name"": ""SlowDown"",
                     ""type"": ""Button"",
                     ""id"": ""90dd6bb0-e24f-4937-9d38-c7104b58e4d1"",
                     ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Rotate"",
-                    ""type"": ""Value"",
-                    ""id"": ""1388fa7b-6548-419b-8c4f-77643ed01218"",
-                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -73,116 +65,6 @@ public class @Voyager : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""75a30c2b-f2eb-43ff-8341-185cff7788af"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Accelerate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c5846055-9e27-41c1-8f9c-5f292944d749"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Accelerate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b936c30d-9883-45e6-a18f-b91278d53610"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reverse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""657c0792-9919-4f15-9f9a-a74842a92b30"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reverse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3ec90cd1-c551-4834-a996-b468ddd8c0bd"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""81bda21e-bdd0-4441-b2a2-07944f1a793e"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""3a61e2db-b37a-4eb3-a2bc-eaa35ecfa687"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""0de6f5ac-9af9-4e6f-8963-34d6d227ab42"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""f7b3ccb1-9b64-4e16-8fda-25a2da87a860"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""6879ae47-8121-4e96-a530-de6cae7ca235"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fbe570f4-3ebc-45fb-bbc9-e171b2b2198a"",
                     ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
@@ -200,6 +82,28 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Laser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e43904d-65f7-458f-9880-6d0591429ca9"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpeedUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5e6723d-d662-4047-b24a-39ea59242e99"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlowDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -326,9 +230,8 @@ public class @Voyager : IInputActionCollection, IDisposable
         // Flight
         m_Flight = asset.FindActionMap("Flight", throwIfNotFound: true);
         m_Flight_Build = m_Flight.FindAction("Build", throwIfNotFound: true);
-        m_Flight_Accelerate = m_Flight.FindAction("Accelerate", throwIfNotFound: true);
-        m_Flight_Reverse = m_Flight.FindAction("Reverse", throwIfNotFound: true);
-        m_Flight_Rotate = m_Flight.FindAction("Rotate", throwIfNotFound: true);
+        m_Flight_SpeedUp = m_Flight.FindAction("SpeedUp", throwIfNotFound: true);
+        m_Flight_SlowDown = m_Flight.FindAction("SlowDown", throwIfNotFound: true);
         m_Flight_Laser = m_Flight.FindAction("Laser", throwIfNotFound: true);
         // Build
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
@@ -386,18 +289,16 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Flight;
     private IFlightActions m_FlightActionsCallbackInterface;
     private readonly InputAction m_Flight_Build;
-    private readonly InputAction m_Flight_Accelerate;
-    private readonly InputAction m_Flight_Reverse;
-    private readonly InputAction m_Flight_Rotate;
+    private readonly InputAction m_Flight_SpeedUp;
+    private readonly InputAction m_Flight_SlowDown;
     private readonly InputAction m_Flight_Laser;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
         public FlightActions(@Voyager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Build => m_Wrapper.m_Flight_Build;
-        public InputAction @Accelerate => m_Wrapper.m_Flight_Accelerate;
-        public InputAction @Reverse => m_Wrapper.m_Flight_Reverse;
-        public InputAction @Rotate => m_Wrapper.m_Flight_Rotate;
+        public InputAction @SpeedUp => m_Wrapper.m_Flight_SpeedUp;
+        public InputAction @SlowDown => m_Wrapper.m_Flight_SlowDown;
         public InputAction @Laser => m_Wrapper.m_Flight_Laser;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
@@ -411,15 +312,12 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Build.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnBuild;
                 @Build.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnBuild;
                 @Build.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnBuild;
-                @Accelerate.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnAccelerate;
-                @Accelerate.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnAccelerate;
-                @Accelerate.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnAccelerate;
-                @Reverse.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnReverse;
-                @Reverse.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnReverse;
-                @Reverse.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnReverse;
-                @Rotate.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
-                @Rotate.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
-                @Rotate.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnRotate;
+                @SpeedUp.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSpeedUp;
+                @SpeedUp.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSpeedUp;
+                @SpeedUp.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSpeedUp;
+                @SlowDown.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
+                @SlowDown.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
+                @SlowDown.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
                 @Laser.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
                 @Laser.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
                 @Laser.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
@@ -430,15 +328,12 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Build.started += instance.OnBuild;
                 @Build.performed += instance.OnBuild;
                 @Build.canceled += instance.OnBuild;
-                @Accelerate.started += instance.OnAccelerate;
-                @Accelerate.performed += instance.OnAccelerate;
-                @Accelerate.canceled += instance.OnAccelerate;
-                @Reverse.started += instance.OnReverse;
-                @Reverse.performed += instance.OnReverse;
-                @Reverse.canceled += instance.OnReverse;
-                @Rotate.started += instance.OnRotate;
-                @Rotate.performed += instance.OnRotate;
-                @Rotate.canceled += instance.OnRotate;
+                @SpeedUp.started += instance.OnSpeedUp;
+                @SpeedUp.performed += instance.OnSpeedUp;
+                @SpeedUp.canceled += instance.OnSpeedUp;
+                @SlowDown.started += instance.OnSlowDown;
+                @SlowDown.performed += instance.OnSlowDown;
+                @SlowDown.canceled += instance.OnSlowDown;
                 @Laser.started += instance.OnLaser;
                 @Laser.performed += instance.OnLaser;
                 @Laser.canceled += instance.OnLaser;
@@ -560,9 +455,8 @@ public class @Voyager : IInputActionCollection, IDisposable
     public interface IFlightActions
     {
         void OnBuild(InputAction.CallbackContext context);
-        void OnAccelerate(InputAction.CallbackContext context);
-        void OnReverse(InputAction.CallbackContext context);
-        void OnRotate(InputAction.CallbackContext context);
+        void OnSpeedUp(InputAction.CallbackContext context);
+        void OnSlowDown(InputAction.CallbackContext context);
         void OnLaser(InputAction.CallbackContext context);
     }
     public interface IBuildActions

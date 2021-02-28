@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +17,10 @@ public class ShipCharacterController : MonoBehaviour
 	public Vector2 inputDirection;
 
 	private float hitDamage = 10;
+	public float[] speeds = new float[] { 0, 1, 2, 3 };
+	public float reverseSpeed; //do later
+	public int speedIndex = 0;
+
 	private float accelerationPerUpdate = 0.1f;
 
 	public LayerMask componentLayer;
@@ -31,6 +37,13 @@ public class ShipCharacterController : MonoBehaviour
 	public void ConstructShip()
 	{
 		constructor.ContrustShip();
+	}
+
+	public void Rotate(int rotationAmount)
+	{
+		Vector3 eulerAngles = this.rigidbody.rotation.eulerAngles;
+		Quaternion angles = Quaternion.Euler(eulerAngles.x, eulerAngles.y + rotationAmount, eulerAngles.z);
+		rigidbody.MoveRotation(angles);
 	}
 
 	public void Addcomponent(ShipComponent shipComponent)
@@ -50,8 +63,9 @@ public class ShipCharacterController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		Fixed_HandleMovement();
-		Fixed_HandleRotation();
+		//Fixed_HandleMovement();
+		//	Fixed_HandleRotation();
+		rigidbody.velocity = transform.forward * speeds[speedIndex];
 	}
 
 	private void Fixed_HandleMovement()
@@ -83,9 +97,35 @@ public class ShipCharacterController : MonoBehaviour
 		rigidbody.rotation = (Quaternion.LookRotation(direction).normalized);
 	}
 
+	public void IncreaseSpeed()
+	{
+		if (speedIndex >= speeds.Length - 1)
+		{
+			return;
+		}
+		speedIndex++;
+	}
+
+	public void DecreaseSpeed()
+	{
+		if (speedIndex <= 0)
+		{
+			return;
+		}
+		speedIndex--;
+	}
+
+	public void Rest()
+	{
+		speedIndex = 0;
+	}
+
 	private void Fixed_Accelerate()
 	{
-		rigidbody.velocity += transform.forward * accelerationPerUpdate;
+		if (rigidbody.velocity.magnitude <= speeds[speedIndex])
+		{
+			rigidbody.velocity += transform.forward * accelerationPerUpdate;
+		}
 	}
 
 	private void Fixed_Rest()
@@ -98,7 +138,6 @@ public class ShipCharacterController : MonoBehaviour
 	{
 		rigidbody.velocity += -transform.forward * accelerationPerUpdate;
 	}
-
 
 	private void OnCollisionEnter(Collision collision)
 	{

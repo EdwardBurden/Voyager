@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FlightMode : MonoBehaviour, IMode
+public class FlightMode : BaseMode, IMode
 {
 	public string modeMap;
 	private bool _active;
-	public GameObject flightUI;
 	public bool isActive { get => _active; set => _active = value; }
 	public void BeginMode()
 	{
@@ -16,11 +15,13 @@ public class FlightMode : MonoBehaviour, IMode
 		{
 			GameManager.instance.playerInput.SwitchCurrentActionMap(modeMap);
 		}
-		flightUI.gameObject.SetActive(true);
+		modeUI.SetActive(true);
+		modeCamera.gameObject.SetActive(true);
 	}
 
 	public void EndMode()
 	{
-		flightUI.gameObject.SetActive(false);
+		modeUI.SetActive(false);
+		modeCamera.gameObject.SetActive(false);
 	}
 }

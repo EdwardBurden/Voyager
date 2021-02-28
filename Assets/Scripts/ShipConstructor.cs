@@ -44,6 +44,7 @@ public class ShipConstructor
 		{
 			AttachComponentToParent(ship);
 		}
+		
 	}
 
 	private void AttachComponentToParent(ShipComponent shipComponent)
