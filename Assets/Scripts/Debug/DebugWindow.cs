@@ -7,7 +7,7 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 {
 	public string saveFile = "default";
 	public string saveLocation = "Saves";
-	public ShipCharacterController  shipCharacter;
+	public ShipCharacterController shipCharacter;
 	public ShipInputController shipinput;
 
 	public Transform spawnPoint;
@@ -38,7 +38,7 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 		}
 		string jsoncontents = File.ReadAllText(filePath);
 		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
-		shipCharacter = Instantiate(prefabController, null);
+		shipCharacter = Instantiate(prefabController, spawnPoint.transform.position, spawnPoint.transform.rotation, null);
 		shipCharacter.Init();
 		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
 		shipCharacter.ConstructShip(components);

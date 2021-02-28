@@ -47,11 +47,19 @@ public class ShipConstructor
 		
 	}
 
+	internal void UpdateLayers(int layer)
+	{
+		foreach (ShipComponent component in connectedComponents)
+		{
+			SetLayerRecursively(component.gameObject , layer);
+		}
+	}
+
 	private void AttachComponentToParent(ShipComponent shipComponent)
 	{
 		shipComponent.characterController = controller;
 		shipComponent.transform.parent = controller.transform;
-		SetLayerRecursively(shipComponent.gameObject, 0);
+		SetLayerRecursively(shipComponent.gameObject, controller.defaultlayer);
 	}
 
 	public static void SetLayerRecursively(GameObject obj, int layer) //to do move to helper
@@ -70,7 +78,7 @@ public class ShipConstructor
 		{
 			foundComponents = new List<ShipComponent>();
 		}
-		Collider[] foundColliders = Physics.OverlapSphere(position, radius, controller.componentLayer);
+		Collider[] foundColliders = Physics.OverlapSphere(position, radius, controller.constructionLayer);
 		foreach (Collider collider in foundColliders)
 		{
 			ShipComponent shipComponent = collider.gameObject.GetComponentInParent<ShipComponent>();
@@ -105,6 +113,6 @@ public class ShipConstructor
 		shipComponent.shipRigidbody.isKinematic = false;
 		shipComponent.shipCollider.enabled = true;
 		shipComponent.ChangeLayerAfterWait();
-		SetLayerRecursively(shipComponent.gameObject, 9);
+		SetLayerRecursively(shipComponent.gameObject, controller.destructionLayer);
 	}
 }

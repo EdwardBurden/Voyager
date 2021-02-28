@@ -44,14 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7837bef36a5447d40a7cc3070148dc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPrefab: {fileID: 7759606187532958556, guid: a2bccfe28b0c0dd46adb7c04ed5adebe, type: 3}
-  camera: {fileID: 0}
   inputAccelerate: 0
   inputReverse: 0
   inputDirection: {x: 0, y: 0}
-  componentLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  speeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  reverseSpeed: 0
+  speedIndex: 0
+  constructionLayer: 8
+  destructionLayer: 9
+  defaultlayer: 0
 --- !u!54 &1128489117
 Rigidbody:
   m_ObjectHideFlags: 0

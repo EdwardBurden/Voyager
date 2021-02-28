@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ShipExporter
 {
-	private static string PATH = "Prefabs";
+	public static string PATH = "Prefabs/ShipComponents";
 	internal static List<ShipComponent> ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
 	{
 		List<ShipComponent> components = new List<ShipComponent>();

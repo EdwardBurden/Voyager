@@ -23,7 +23,9 @@ public class ShipCharacterController : MonoBehaviour
 
 	private float accelerationPerUpdate = 0.1f;
 
-	public LayerMask componentLayer;
+	public int constructionLayer;
+	public int destructionLayer;
+	public int defaultlayer;
 
 	internal void SetComponentsToBuild()
 	{
@@ -31,6 +33,7 @@ public class ShipCharacterController : MonoBehaviour
 		{
 			shipComponent.OnBuild();
 		}
+		constructor.UpdateLayers(constructionLayer);
 	}
 
 	internal void SetComponentsToFlight()
@@ -39,6 +42,7 @@ public class ShipCharacterController : MonoBehaviour
 		{
 			shipComponent.OnFlight();
 		}
+		constructor.UpdateLayers(defaultlayer);
 	}
 
 	public void Init()
@@ -83,11 +87,15 @@ public class ShipCharacterController : MonoBehaviour
 		//Fixed_HandleMovement();
 		//	Fixed_HandleRotation();
 		rigidbody.velocity = transform.forward * speeds[speedIndex];
+		if (speedIndex == 0)
+		{
+			Fixed_Rest();
+		}
 	}
 
 	private void Fixed_HandleMovement()
 	{
-		if (inputAccelerate)
+		/*if (inputAccelerate)
 		{
 			Fixed_Accelerate();
 		}
@@ -106,6 +114,7 @@ public class ShipCharacterController : MonoBehaviour
 				rigidbody.velocity = Vector3.zero;
 			}
 		}
+		*/
 	}
 
 	private void Fixed_HandleRotation()
@@ -149,6 +158,7 @@ public class ShipCharacterController : MonoBehaviour
 	{
 		rigidbody.velocity += (Vector3.zero - (rigidbody.velocity * accelerationPerUpdate));
 		rigidbody.angularVelocity += (Vector3.zero - (rigidbody.angularVelocity * accelerationPerUpdate));
+		//return to normal rotation in upy downy
 	}
 
 	private void Fixed_Reverse()

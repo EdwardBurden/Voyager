@@ -9,15 +9,14 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 {
-	public InputSystemUIInputModule inputSystemUI;
-	PlayerInput PlayerInput => GetComponent<PlayerInput>();
-
 	public ShipCharacterController selectedShip; // add way to switch when selecting ships
+	public ShipComponent selectedBuildComponent; //maybe have different input controller for build mode
 
-	public bool isShipSelected => selectedShip != null;
-
-	//when ship selected
+	/*CLEAN*/
+	public InputSystemUIInputModule inputSystemUI;
 	public event Action ShipSelected;
+	PlayerInput PlayerInput => GetComponent<PlayerInput>();
+	public bool isShipSelected => selectedShip != null;
 
 	public void TESTSELECTION()
 	{

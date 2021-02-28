@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class ShipComponent : MonoBehaviour
 {
+	public int xSize;
+	public int zSize;
+
 	public GameObject interior;
 	public GameObject exterior;
 
@@ -29,6 +32,7 @@ public abstract class ShipComponent : MonoBehaviour
 
 			exterior.SetActive(false);
 		}
+		
 	}
 
 	public void OnFlight()
