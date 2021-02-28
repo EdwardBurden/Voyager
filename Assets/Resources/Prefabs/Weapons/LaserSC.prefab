@@ -428,6 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209d1b589d7bd4459d006f1513b1137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interior: {fileID: 0}
+  exterior: {fileID: 7033441006466200516}
   characterController: {fileID: 0}
   visualId: 0
   folderRoot: Weapons

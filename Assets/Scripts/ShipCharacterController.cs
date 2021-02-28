@@ -24,6 +24,23 @@ public class ShipCharacterController : MonoBehaviour
 	private float accelerationPerUpdate = 0.1f;
 
 	public LayerMask componentLayer;
+
+	internal void SetComponentsToBuild()
+	{
+		foreach (ShipComponent shipComponent in constructor.connectedComponents)
+		{
+			shipComponent.OnBuild();
+		}
+	}
+
+	internal void SetComponentsToFlight()
+	{
+		foreach (ShipComponent shipComponent in constructor.connectedComponents)
+		{
+			shipComponent.OnFlight();
+		}
+	}
+
 	public void Init()
 	{
 		this.constructor = new ShipConstructor(this);

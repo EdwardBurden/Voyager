@@ -12,10 +12,17 @@ public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 	public InputSystemUIInputModule inputSystemUI;
 	PlayerInput PlayerInput => GetComponent<PlayerInput>();
 
-	public ShipCharacterController shipController; // add way to switch when selecting ships
+	public ShipCharacterController selectedShip; // add way to switch when selecting ships
 
+	public bool isShipSelected => selectedShip != null;
 
+	//when ship selected
+	public event Action ShipSelected;
 
+	public void TESTSELECTION()
+	{
+		ShipSelected?.Invoke();
+	}
 
 	public void SwitchToBuild(CallbackContext value)
 	{
@@ -35,67 +42,78 @@ public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 
 	public void IncreaseShipSpeed()
 	{
-		shipController.IncreaseSpeed();
+		if (isShipSelected)
+		{
+			selectedShip.IncreaseSpeed();
+		}
 	}
 
 	internal void RotateLeft()
 	{
-		shipController.Rotate(-15);
+		if (isShipSelected)
+		{
+			selectedShip.Rotate(-15);
+		}
 	}
 
 	internal void RotateRight()
 	{
-		shipController.Rotate(15);
+		if (isShipSelected)
+		{
+			selectedShip.Rotate(15);
+		}
 	}
 
-	public void DecreaseShipSpeed() 
+	public void DecreaseShipSpeed()
 	{
-		shipController.DecreaseSpeed();
+		if (isShipSelected)
+		{
+			selectedShip.DecreaseSpeed();
+		}
 	}
 
 	public void RestShip()
 	{
-		shipController.Rest();
+		if (isShipSelected)
+		{
+			selectedShip.Rest();
+		}
 	}
 
 	public void SpeedUp(CallbackContext value)
 	{
-		if (shipController == null)
+		if (isShipSelected)
 		{
-			return;
-		}
-		if (value.started)
-		{
-			IncreaseShipSpeed();
+			if (value.started)
+			{
+				IncreaseShipSpeed();
+			}
 		}
 	}
 
 	public void SlowDown(CallbackContext value)
 	{
-		if (shipController == null)
+		if (isShipSelected)
 		{
-			return;
-		}
-		if (value.started)
-		{
-			DecreaseShipSpeed();
+			if (value.started)
+			{
+				DecreaseShipSpeed();
+			}
 		}
 	}
 
 	public void Laser(CallbackContext value)
 	{
-		if (shipController == null)
+		if (isShipSelected)
 		{
-			return;
-		}
-
-		if (value.started)
-		{
-			LaserSC laserSC = shipController.GetComponentInChildren<LaserSC>();
-			if (!laserSC.active && laserSC.CanActiveWeapon())
+			if (value.started)
 			{
-				shipController.GetComponentInChildren<LaserSC>().ActiveWeapon();
+				LaserSC laserSC = selectedShip.GetComponentInChildren<LaserSC>();
+				if (!laserSC.active && laserSC.CanActiveWeapon())
+				{
+					selectedShip.GetComponentInChildren<LaserSC>().ActiveWeapon();
 
+				}
 			}
 		}
 	}

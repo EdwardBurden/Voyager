@@ -43,7 +43,7 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
 		shipCharacter.ConstructShip(components);
 		GameManager.instance.player = shipCharacter;
-		shipinput.shipController = shipCharacter;
+		shipinput.selectedShip = shipCharacter;
 	}
 
 	public void Save() //todo move out to somewhere else

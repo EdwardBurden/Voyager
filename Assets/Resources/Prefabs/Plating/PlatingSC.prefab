@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815f940c5502e894cad56fca65753716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipControl: {fileID: 0}
+  interior: {fileID: 0}
+  exterior: {fileID: 1823144582122075894}
+  characterController: {fileID: 0}
   visualId: 0
   folderRoot: Plating
   damageStates:
@@ -72,7 +74,7 @@ GameObject:
   - component: {fileID: 5477405845209238412}
   - component: {fileID: 2658793882885786825}
   m_Layer: 8
-  m_Name: GameObject
+  m_Name: Exterior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

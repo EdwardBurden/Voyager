@@ -14,11 +14,15 @@ public class BuildMode : BaseMode, IMode
 		{
 			GameManager.instance.playerInput.SwitchCurrentActionMap(modeMap);
 		}
-		modeCamera.LookAt = GameManager.instance.player.transform;
-		modeCamera.Follow = GameManager.instance.player.transform;
 		modeUI.SetActive(true);
 		modeCamera.gameObject.SetActive(true);
 		ShipInputController.instance.RestShip();
+		if (GameManager.instance.player)
+		{
+			modeCamera.LookAt = GameManager.instance.player.transform;
+			modeCamera.Follow = GameManager.instance.player.transform;
+			GameManager.instance.player.SetComponentsToBuild();
+		}
 	}
 
 	public void EndMode()

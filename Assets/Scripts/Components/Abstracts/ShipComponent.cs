@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class ShipComponent : MonoBehaviour
 {
+	public GameObject interior;
+	public GameObject exterior;
+
 	[HideInInspector]
 	public ShipCharacterController characterController; //move to new shipcomponetChil class pr something
 	[HideInInspector]
@@ -13,8 +16,30 @@ public abstract class ShipComponent : MonoBehaviour
 
 	public Renderer shipRenderer => GetComponentInChildren<Renderer>();
 
+
+
 	public int visualId;
 	public string folderRoot;
+
+	public void OnBuild()
+	{
+		if (interior != null)
+		{
+			interior.SetActive(true);
+
+			exterior.SetActive(false);
+		}
+	}
+
+	public void OnFlight()
+	{
+		if (interior != null)
+		{
+			interior.SetActive(false);
+
+			exterior.SetActive(true);
+		}
+	}
 
 
 	[ContextMenu("Remove")]

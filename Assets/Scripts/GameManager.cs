@@ -13,7 +13,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 
 	private void Start()
 	{
-		ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
+		ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
 	}
 
 }

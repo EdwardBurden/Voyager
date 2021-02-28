@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815f940c5502e894cad56fca65753716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipControl: {fileID: 0}
+  interior: {fileID: 0}
+  exterior: {fileID: 216922681279501506}
+  characterController: {fileID: 0}
   visualId: 3
   folderRoot: Plating
   damageStates:

@@ -10,13 +10,16 @@ public class FlightMode : BaseMode, IMode
 	public bool isActive { get => _active; set => _active = value; }
 	public void BeginMode()
 	{
-
 		if (GameManager.instance.playerInput.currentActionMap.name != modeMap)
 		{
 			GameManager.instance.playerInput.SwitchCurrentActionMap(modeMap);
 		}
 		modeUI.SetActive(true);
 		modeCamera.gameObject.SetActive(true);
+		if (GameManager.instance.player)
+		{
+			GameManager.instance.player.SetComponentsToFlight();
+		}
 	}
 
 	public void EndMode()
