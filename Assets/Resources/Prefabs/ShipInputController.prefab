@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90a1287038860384a9dc832dae121994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipController: {fileID: 0}
+  selectedShip: {fileID: 0}
+  selectedBuildComponent: {fileID: 0}
+  inputSystemUI: {fileID: 0}
 --- !u!114 &7570711211799796779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +112,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7634404453512168453}
         m_TargetAssemblyTypeName: ShipInputController, Assembly-CSharp
-        m_MethodName: Accelerate
+        m_MethodName: SpeedUp
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -126,7 +128,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7634404453512168453}
         m_TargetAssemblyTypeName: ShipInputController, Assembly-CSharp
-        m_MethodName: Reverse
+        m_MethodName: SlowDown
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -138,22 +140,6 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 90dd6bb0-e24f-4937-9d38-c7104b58e4d1
     m_ActionName: Flight/Reverse[/Keyboard/s]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7634404453512168453}
-        m_TargetAssemblyTypeName: ShipInputController, Assembly-CSharp
-        m_MethodName: Rotate
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_ActionId: 1388fa7b-6548-419b-8c4f-77643ed01218
-    m_ActionName: Flight/Rotate[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7634404453512168453}
@@ -170,6 +156,54 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 731e646a-33c3-4c5b-846c-829001bf3265
     m_ActionName: Flight/Laser[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7634404453512168453}
+        m_TargetAssemblyTypeName: ShipInputController, Assembly-CSharp
+        m_MethodName: TurnLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 24f01dc8-cd25-467a-9ec5-cba93f0eb4b5
+    m_ActionName: Flight/TurnLeft[/Keyboard/leftArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7634404453512168453}
+        m_TargetAssemblyTypeName: ShipInputController, Assembly-CSharp
+        m_MethodName: TurnRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 1f1bbd3b-2d3b-4dcf-b404-8f15194d167c
+    m_ActionName: Flight/TurnRight[/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de8dad47-8227-4d6f-9a20-b374438eb98e
+    m_ActionName: Flight/Camera_ZoomOut[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c7fa758-5f68-4052-9440-ab4ba76e01ad
+    m_ActionName: Flight/Camera_ZoomAxis[/Mouse/scroll/y]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d984c89-bd7f-4b86-b103-5865b5f8f39a
+    m_ActionName: Flight/Camera_ZoomIn[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3e229eb7-86d5-4182-9ece-a4624723254c
+    m_ActionName: Flight/Camera_Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Flight

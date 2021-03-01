@@ -37,12 +37,12 @@ public class FlightModeUI : MonoBehaviour
 
 	public void TurnRight()
 	{
-		ShipInputController.instance.RotateRight();
+		ShipInputController.instance.TurnShipRight();
 	}
 
 	public void Turnleft()
 	{
-		ShipInputController.instance.RotateLeft();
+		ShipInputController.instance.TurnShipLeft();
 	}
 
 

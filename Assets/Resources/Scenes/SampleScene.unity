@@ -1411,7 +1411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.35355338, y: 0.35355338, z: -0.1464466, w: 0.8535535}
-  m_LocalPosition: {x: -50, y: 20, z: -50}
+  m_LocalPosition: {x: -20, y: 20, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3672,38 +3672,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SlowDown
-      objectReference: {fileID: 0}
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SpeedUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_NotificationBehavior
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Laser
-      objectReference: {fileID: 0}
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
-      value: 731e646a-33c3-4c5b-846c-829001bf3265
-      objectReference: {fileID: 0}
-    - target: {fileID: 2817962616279163416, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
-      value: Flight/Laser[/Keyboard/l]
-      objectReference: {fileID: 0}
-    - target: {fileID: 2880370593289632310, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
-      propertyPath: inputSystemUI
-      value: 
-      objectReference: {fileID: 1246448566}
     - target: {fileID: 3079474586717845897, guid: 5a684f3d4ef3ba348b8df5821819ce41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.4435053
@@ -3932,6 +3900,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6920937530882358371, guid: dc272eac97ffd6e4fb8a13f9535d96e9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920937530882358371, guid: dc272eac97ffd6e4fb8a13f9535d96e9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 6920937531690991260, guid: dc272eac97ffd6e4fb8a13f9535d96e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

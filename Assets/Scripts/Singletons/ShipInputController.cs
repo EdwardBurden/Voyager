@@ -9,7 +9,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 {
-	public ShipCharacterController selectedShip; // add way to switch when selecting ships
+	public ShipCharacterController selectedShip; // add way to switch when selecting ships //diffenet input classes both active under this gameobject in fuuture
 	public ShipComponent selectedBuildComponent; //maybe have different input controller for build mode
 
 	/*CLEAN*/
@@ -18,11 +18,53 @@ public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 	PlayerInput PlayerInput => GetComponent<PlayerInput>();
 	public bool isShipSelected => selectedShip != null;
 
-	public void TESTSELECTION()
+	//Internals
+	internal void TESTSELECTION()
 	{
 		ShipSelected?.Invoke();
 	}
 
+	internal void IncreaseShipSpeed()
+	{
+		if (isShipSelected)
+		{
+			selectedShip.IncreaseSpeed();
+		}
+	}
+
+	internal void TurnShipLeft()
+	{
+		if (isShipSelected)
+		{
+			selectedShip.Rotate(-15);
+		}
+	}
+
+	internal void TurnShipRight()
+	{
+		if (isShipSelected)
+		{
+			selectedShip.Rotate(15);
+		}
+	}
+
+	internal void DecreaseShipSpeed()
+	{
+		if (isShipSelected)
+		{
+			selectedShip.DecreaseSpeed();
+		}
+	}
+
+	internal void RestShip()
+	{
+		if (isShipSelected)
+		{
+			selectedShip.Rest();
+		}
+	}
+
+	//Inputs
 	public void SwitchToBuild(CallbackContext value)
 	{
 		if (value.started)
@@ -36,46 +78,6 @@ public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 		if (value.started)
 		{
 			ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
-		}
-	}
-
-	public void IncreaseShipSpeed()
-	{
-		if (isShipSelected)
-		{
-			selectedShip.IncreaseSpeed();
-		}
-	}
-
-	internal void RotateLeft()
-	{
-		if (isShipSelected)
-		{
-			selectedShip.Rotate(-15);
-		}
-	}
-
-	internal void RotateRight()
-	{
-		if (isShipSelected)
-		{
-			selectedShip.Rotate(15);
-		}
-	}
-
-	public void DecreaseShipSpeed()
-	{
-		if (isShipSelected)
-		{
-			selectedShip.DecreaseSpeed();
-		}
-	}
-
-	public void RestShip()
-	{
-		if (isShipSelected)
-		{
-			selectedShip.Rest();
 		}
 	}
 
@@ -97,6 +99,27 @@ public class ShipInputController : SingletonMonoBehaviour<ShipInputController>
 			if (value.started)
 			{
 				DecreaseShipSpeed();
+			}
+		}
+	}
+
+	public void TurnLeft(CallbackContext value)
+	{
+		if (isShipSelected)
+		{
+			if (value.started)
+			{
+				TurnShipLeft();
+			}
+		}
+	}
+	public void TurnRight(CallbackContext value)
+	{
+		if (isShipSelected)
+		{
+			if (value.started)
+			{
+				TurnShipRight();
 			}
 		}
 	}

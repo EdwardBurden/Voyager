@@ -30,10 +30,58 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TurnLeft",
+                    "type": "Button",
+                    "id": "24f01dc8-cd25-467a-9ec5-cba93f0eb4b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TurnRight",
+                    "type": "Button",
+                    "id": "1f1bbd3b-2d3b-4dcf-b404-8f15194d167c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Laser",
                     "type": "Button",
                     "id": "731e646a-33c3-4c5b-846c-829001bf3265",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_ZoomOut",
+                    "type": "Button",
+                    "id": "de8dad47-8227-4d6f-9a20-b374438eb98e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_ZoomAxis",
+                    "type": "PassThrough",
+                    "id": "5c7fa758-5f68-4052-9440-ab4ba76e01ad",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_ZoomIn",
+                    "type": "Button",
+                    "id": "0d984c89-bd7f-4b86-b103-5865b5f8f39a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_Move",
+                    "type": "PassThrough",
+                    "id": "3e229eb7-86d5-4182-9ece-a4624723254c",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 }
@@ -63,17 +111,6 @@
                 },
                 {
                     "name": "",
-                    "id": "aea2396b-d30f-4683-8d96-e668e08a7c28",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Laser",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1e43904d-65f7-458f-9880-6d0591429ca9",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
@@ -91,6 +128,116 @@
                     "processors": "",
                     "groups": "",
                     "action": "SlowDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "664434f8-8a85-4096-ac97-b41c8bcf3b67",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_ZoomOut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cf0f56e3-5efd-42a8-a4df-714819dc4e6b",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_ZoomAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21c59a08-df1c-48aa-9852-0186f4c9fdf9",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_ZoomIn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "95c9609d-2fe6-49e0-af62-62f35695ad87",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "0f80a6a1-69df-456a-8c45-e92486162acc",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "d8584549-5ae3-4696-b4b8-c36ed00266f8",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "04fbe72c-bbcb-4edc-97d7-b78b8df9dc14",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "81897615-be3e-49cc-98a2-ac4928716908",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "742aec8c-d5a3-4f19-83e2-41325f84e6ae",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa94da13-0605-40c4-918d-3c15cd643d48",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

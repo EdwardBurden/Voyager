@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeUI: {fileID: 0}
   modeCamera: {fileID: 0}
+  previewObject: {fileID: 0}
   modeMap: Build
 --- !u!1 &3079474587460391206
 GameObject:
@@ -165,10 +166,6 @@ PrefabInstance:
     - target: {fileID: 5562120356020456306, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_Name
       value: ShipInputController
-      objectReference: {fileID: 0}
-    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
-      propertyPath: m_DefaultControlScheme
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7758751253783414735, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_LocalPosition.x

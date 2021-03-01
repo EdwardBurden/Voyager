@@ -64,7 +64,7 @@ public class ShipCharacterController : MonoBehaviour
 	{
 		Vector3 eulerAngles = this.rigidbody.rotation.eulerAngles;
 		Quaternion angles = Quaternion.Euler(eulerAngles.x, eulerAngles.y + rotationAmount, eulerAngles.z);
-		rigidbody.MoveRotation(angles);
+		rigidbody.rotation =angles;
 	}
 
 	public void Addcomponent(ShipComponent shipComponent)
@@ -86,11 +86,9 @@ public class ShipCharacterController : MonoBehaviour
 	{
 		//Fixed_HandleMovement();
 		//	Fixed_HandleRotation();
-		rigidbody.velocity = transform.forward * speeds[speedIndex];
-		if (speedIndex == 0)
-		{
-			Fixed_Rest();
-		}
+
+		rigidbody.velocity = new Vector3(transform.forward.x, 0, transform.forward.z) * speeds[speedIndex];
+		//rigidbody.angularVelocity = Vector3.zero;
 	}
 
 	private void Fixed_HandleMovement()
@@ -156,7 +154,7 @@ public class ShipCharacterController : MonoBehaviour
 
 	private void Fixed_Rest()
 	{
-		rigidbody.velocity += (Vector3.zero - (rigidbody.velocity * accelerationPerUpdate));
+		//rigidbody.velocity += (Vector3.zero - (rigidbody.velocity * accelerationPerUpdate));
 		rigidbody.angularVelocity += (Vector3.zero - (rigidbody.angularVelocity * accelerationPerUpdate));
 		//return to normal rotation in upy downy
 	}

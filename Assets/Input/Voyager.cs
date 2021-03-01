@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Voyager.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Input/Voyager.inputactions'
 
 using System;
 using System.Collections;
@@ -43,10 +43,58 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""TurnLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""24f01dc8-cd25-467a-9ec5-cba93f0eb4b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TurnRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f1bbd3b-2d3b-4dcf-b404-8f15194d167c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Laser"",
                     ""type"": ""Button"",
                     ""id"": ""731e646a-33c3-4c5b-846c-829001bf3265"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_ZoomOut"",
+                    ""type"": ""Button"",
+                    ""id"": ""de8dad47-8227-4d6f-9a20-b374438eb98e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_ZoomAxis"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5c7fa758-5f68-4052-9440-ab4ba76e01ad"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_ZoomIn"",
+                    ""type"": ""Button"",
+                    ""id"": ""0d984c89-bd7f-4b86-b103-5865b5f8f39a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_Move"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3e229eb7-86d5-4182-9ece-a4624723254c"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -76,17 +124,6 @@ public class @Voyager : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""aea2396b-d30f-4683-8d96-e668e08a7c28"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Laser"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1e43904d-65f7-458f-9880-6d0591429ca9"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
@@ -104,6 +141,116 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SlowDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""664434f8-8a85-4096-ac97-b41c8bcf3b67"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_ZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf0f56e3-5efd-42a8-a4df-714819dc4e6b"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_ZoomAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21c59a08-df1c-48aa-9852-0186f4c9fdf9"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_ZoomIn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""95c9609d-2fe6-49e0-af62-62f35695ad87"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0f80a6a1-69df-456a-8c45-e92486162acc"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d8584549-5ae3-4696-b4b8-c36ed00266f8"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""04fbe72c-bbcb-4edc-97d7-b78b8df9dc14"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""81897615-be3e-49cc-98a2-ac4928716908"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""742aec8c-d5a3-4f19-83e2-41325f84e6ae"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa94da13-0605-40c4-918d-3c15cd643d48"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -232,7 +379,13 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Flight_Build = m_Flight.FindAction("Build", throwIfNotFound: true);
         m_Flight_SpeedUp = m_Flight.FindAction("SpeedUp", throwIfNotFound: true);
         m_Flight_SlowDown = m_Flight.FindAction("SlowDown", throwIfNotFound: true);
+        m_Flight_TurnLeft = m_Flight.FindAction("TurnLeft", throwIfNotFound: true);
+        m_Flight_TurnRight = m_Flight.FindAction("TurnRight", throwIfNotFound: true);
         m_Flight_Laser = m_Flight.FindAction("Laser", throwIfNotFound: true);
+        m_Flight_Camera_ZoomOut = m_Flight.FindAction("Camera_ZoomOut", throwIfNotFound: true);
+        m_Flight_Camera_ZoomAxis = m_Flight.FindAction("Camera_ZoomAxis", throwIfNotFound: true);
+        m_Flight_Camera_ZoomIn = m_Flight.FindAction("Camera_ZoomIn", throwIfNotFound: true);
+        m_Flight_Camera_Move = m_Flight.FindAction("Camera_Move", throwIfNotFound: true);
         // Build
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
         m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
@@ -291,7 +444,13 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputAction m_Flight_Build;
     private readonly InputAction m_Flight_SpeedUp;
     private readonly InputAction m_Flight_SlowDown;
+    private readonly InputAction m_Flight_TurnLeft;
+    private readonly InputAction m_Flight_TurnRight;
     private readonly InputAction m_Flight_Laser;
+    private readonly InputAction m_Flight_Camera_ZoomOut;
+    private readonly InputAction m_Flight_Camera_ZoomAxis;
+    private readonly InputAction m_Flight_Camera_ZoomIn;
+    private readonly InputAction m_Flight_Camera_Move;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
@@ -299,7 +458,13 @@ public class @Voyager : IInputActionCollection, IDisposable
         public InputAction @Build => m_Wrapper.m_Flight_Build;
         public InputAction @SpeedUp => m_Wrapper.m_Flight_SpeedUp;
         public InputAction @SlowDown => m_Wrapper.m_Flight_SlowDown;
+        public InputAction @TurnLeft => m_Wrapper.m_Flight_TurnLeft;
+        public InputAction @TurnRight => m_Wrapper.m_Flight_TurnRight;
         public InputAction @Laser => m_Wrapper.m_Flight_Laser;
+        public InputAction @Camera_ZoomOut => m_Wrapper.m_Flight_Camera_ZoomOut;
+        public InputAction @Camera_ZoomAxis => m_Wrapper.m_Flight_Camera_ZoomAxis;
+        public InputAction @Camera_ZoomIn => m_Wrapper.m_Flight_Camera_ZoomIn;
+        public InputAction @Camera_Move => m_Wrapper.m_Flight_Camera_Move;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -318,9 +483,27 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @SlowDown.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
                 @SlowDown.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
                 @SlowDown.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
+                @TurnLeft.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnLeft;
+                @TurnLeft.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnLeft;
+                @TurnLeft.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnLeft;
+                @TurnRight.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnRight;
+                @TurnRight.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnRight;
+                @TurnRight.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnRight;
                 @Laser.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
                 @Laser.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
                 @Laser.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
+                @Camera_ZoomOut.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomOut;
+                @Camera_ZoomOut.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomOut;
+                @Camera_ZoomOut.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomOut;
+                @Camera_ZoomAxis.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomAxis;
+                @Camera_ZoomIn.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomIn;
+                @Camera_ZoomIn.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomIn;
+                @Camera_ZoomIn.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomIn;
+                @Camera_Move.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_Move;
+                @Camera_Move.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_Move;
+                @Camera_Move.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_Move;
             }
             m_Wrapper.m_FlightActionsCallbackInterface = instance;
             if (instance != null)
@@ -334,9 +517,27 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @SlowDown.started += instance.OnSlowDown;
                 @SlowDown.performed += instance.OnSlowDown;
                 @SlowDown.canceled += instance.OnSlowDown;
+                @TurnLeft.started += instance.OnTurnLeft;
+                @TurnLeft.performed += instance.OnTurnLeft;
+                @TurnLeft.canceled += instance.OnTurnLeft;
+                @TurnRight.started += instance.OnTurnRight;
+                @TurnRight.performed += instance.OnTurnRight;
+                @TurnRight.canceled += instance.OnTurnRight;
                 @Laser.started += instance.OnLaser;
                 @Laser.performed += instance.OnLaser;
                 @Laser.canceled += instance.OnLaser;
+                @Camera_ZoomOut.started += instance.OnCamera_ZoomOut;
+                @Camera_ZoomOut.performed += instance.OnCamera_ZoomOut;
+                @Camera_ZoomOut.canceled += instance.OnCamera_ZoomOut;
+                @Camera_ZoomAxis.started += instance.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.performed += instance.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.canceled += instance.OnCamera_ZoomAxis;
+                @Camera_ZoomIn.started += instance.OnCamera_ZoomIn;
+                @Camera_ZoomIn.performed += instance.OnCamera_ZoomIn;
+                @Camera_ZoomIn.canceled += instance.OnCamera_ZoomIn;
+                @Camera_Move.started += instance.OnCamera_Move;
+                @Camera_Move.performed += instance.OnCamera_Move;
+                @Camera_Move.canceled += instance.OnCamera_Move;
             }
         }
     }
@@ -457,7 +658,13 @@ public class @Voyager : IInputActionCollection, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnSpeedUp(InputAction.CallbackContext context);
         void OnSlowDown(InputAction.CallbackContext context);
+        void OnTurnLeft(InputAction.CallbackContext context);
+        void OnTurnRight(InputAction.CallbackContext context);
         void OnLaser(InputAction.CallbackContext context);
+        void OnCamera_ZoomOut(InputAction.CallbackContext context);
+        void OnCamera_ZoomAxis(InputAction.CallbackContext context);
+        void OnCamera_ZoomIn(InputAction.CallbackContext context);
+        void OnCamera_Move(InputAction.CallbackContext context);
     }
     public interface IBuildActions
     {
