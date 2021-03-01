@@ -12,16 +12,18 @@ public class ShipCharacterController : MonoBehaviour
 	private ShipConstructor constructor;
 	private Rigidbody rigidbody => GetComponent<Rigidbody>();
 
-	public bool inputAccelerate = false;
-	public bool inputReverse = false;
-	public Vector2 inputDirection;
+	//Movement
+	private Quaternion targetDirection = Quaternion.identity;
+	private int rotationSpeed = 10;
 
-	private float hitDamage = 10;
-	public float[] speeds = new float[] { 0, 1, 2, 3 };
-	public float reverseSpeed; //do later
-	public int speedIndex = 0;
+	private float[] maxSpeeds = new float[] { -1, 0, 1, 2, 3 };
+	private int maxSpeedIndex = 1;
+	private float speedModifier = 3;
 
 	private float accelerationPerUpdate = 0.1f;
+	private float speedChangeTimer = 0;
+
+	private float hitDamage = 10;
 
 	public int constructionLayer;
 	public int destructionLayer;
@@ -48,6 +50,7 @@ public class ShipCharacterController : MonoBehaviour
 	public void Init()
 	{
 		this.constructor = new ShipConstructor(this);
+		targetDirection = rigidbody.rotation;
 	}
 
 	public void ConstructShip(List<ShipComponent> components)
@@ -58,13 +61,6 @@ public class ShipCharacterController : MonoBehaviour
 	public void ConstructShip()
 	{
 		constructor.ContrustShip();
-	}
-
-	public void Rotate(int rotationAmount)
-	{
-		Vector3 eulerAngles = this.rigidbody.rotation.eulerAngles;
-		Quaternion angles = Quaternion.Euler(eulerAngles.x, eulerAngles.y + rotationAmount, eulerAngles.z);
-		rigidbody.rotation =angles;
 	}
 
 	public void Addcomponent(ShipComponent shipComponent)
@@ -80,88 +76,6 @@ public class ShipCharacterController : MonoBehaviour
 	public void RemoveComponent(ShipComponent shipComponent)
 	{
 		constructor.RemoveComponent(shipComponent);
-	}
-
-	private void FixedUpdate()
-	{
-		//Fixed_HandleMovement();
-		//	Fixed_HandleRotation();
-
-		rigidbody.velocity = new Vector3(transform.forward.x, 0, transform.forward.z) * speeds[speedIndex];
-		//rigidbody.angularVelocity = Vector3.zero;
-	}
-
-	private void Fixed_HandleMovement()
-	{
-		/*if (inputAccelerate)
-		{
-			Fixed_Accelerate();
-		}
-		if (inputReverse)
-		{
-			Fixed_Reverse();
-		}
-		if (!inputAccelerate && !inputReverse)
-		{
-			if (rigidbody.velocity.magnitude > 0.1f)
-			{
-				Fixed_Rest();
-			}
-			else
-			{
-				rigidbody.velocity = Vector3.zero;
-			}
-		}
-		*/
-	}
-
-	private void Fixed_HandleRotation()
-	{
-		Vector3 direction = new Vector3(inputDirection.x, 0, inputDirection.y);
-		rigidbody.rotation = (Quaternion.LookRotation(direction).normalized);
-	}
-
-	public void IncreaseSpeed()
-	{
-		if (speedIndex >= speeds.Length - 1)
-		{
-			return;
-		}
-		speedIndex++;
-	}
-
-	public void DecreaseSpeed()
-	{
-		if (speedIndex <= 0)
-		{
-			return;
-		}
-		speedIndex--;
-	}
-
-	public void Rest()
-	{
-		speedIndex = 0;
-	}
-
-	private void Fixed_Accelerate()
-	{
-		if (rigidbody.velocity.magnitude <= speeds[speedIndex])
-		{
-			rigidbody.velocity += transform.forward * accelerationPerUpdate;
-		}
-	}
-
-	private void Fixed_Rest()
-	{
-		//rigidbody.velocity += (Vector3.zero - (rigidbody.velocity * accelerationPerUpdate));
-		rigidbody.angularVelocity += (Vector3.zero - (rigidbody.angularVelocity * accelerationPerUpdate));
-		//return to normal rotation in upy downy
-	}
-
-	private void Fixed_Reverse()
-	{
-		rigidbody.velocity += -transform.forward * accelerationPerUpdate;
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -187,5 +101,72 @@ public class ShipCharacterController : MonoBehaviour
 
 	}
 
+	public void Rotate(int rotationAmount)
+	{
+		Vector3 eulerAngles = this.rigidbody.rotation.eulerAngles;
+		targetDirection = Quaternion.Euler(0, eulerAngles.y + rotationAmount, 0);
+	}
+
+	public void IncreaseSpeed()
+	{
+		if (maxSpeedIndex >= maxSpeeds.Length - 1)
+		{
+			return;
+		}
+		maxSpeedIndex++;
+		speedChangeTimer = 0;
+	}
+
+	public void DecreaseSpeed()
+	{
+		if (maxSpeedIndex <= 0)
+		{
+			return;
+		}
+		maxSpeedIndex--;
+		speedChangeTimer = 0;
+	}
+
+	public void Rest()
+	{
+		maxSpeedIndex = 1;
+		speedChangeTimer = 0;
+	}
+
+	private void FixedUpdate()
+	{
+		Fixed_HandleMovement();
+		Fixed_Accelerate();
+		Fixed_HandleRotation();
+	}
+
+	private void Fixed_HandleMovement()
+	{
+		if (rigidbody.position.y != 0)
+		{
+			rigidbody.position += (new Vector3(rigidbody.position.x, 0, rigidbody.position.z) - rigidbody.position) * accelerationPerUpdate; //could freeze position
+		}    
+		rigidbody.angularVelocity += (Vector3.zero - (rigidbody.angularVelocity * accelerationPerUpdate));
+	}
+
+	private void Fixed_HandleRotation()
+	{
+		if (targetDirection == rigidbody.rotation)
+		{
+			return;
+		}
+		rigidbody.rotation = Quaternion.Lerp(rigidbody.rotation, targetDirection, Time.deltaTime * rotationSpeed);
+	}
+
+	private void Fixed_Accelerate()
+	{
+		if (maxSpeedIndex == 1 && rigidbody.velocity.magnitude == 0)
+		{
+			return;
+		}
+		speedChangeTimer = Mathf.Min(speedChangeTimer + accelerationPerUpdate, 1);
+		float targetSpeed = maxSpeeds[maxSpeedIndex] * speedModifier;
+		rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, transform.forward * targetSpeed, speedChangeTimer);
+	}
 }
 
