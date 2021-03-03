@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class BuildModeInput : MonoBehaviour
 {
 	public BuildMode buildMode;
-
+	public InputSystemUIInputModule inputSystem;
 	public void Init(BuildMode mode)
 	{
 		buildMode = mode;
@@ -18,6 +19,14 @@ public class BuildModeInput : MonoBehaviour
 		if (value.started)
 		{
 			buildMode.SwitchToFlight();
+		}
+	}
+
+	public void PlaceComponent(CallbackContext value)
+	{
+		if (value.started && !inputSystem.IsPointerOverGameObject(0))
+		{
+			buildMode.PlaceComponent();
 		}
 	}
 }

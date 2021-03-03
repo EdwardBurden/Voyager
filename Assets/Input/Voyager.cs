@@ -267,6 +267,14 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Place"",
+                    ""type"": ""Button"",
+                    ""id"": ""e06a28ed-eeea-4343-ac03-61bb07abf26c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -278,6 +286,17 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Flight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d57600cd-7325-4e7f-a3c8-7b3f3d0c1c56"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -389,6 +408,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         // Build
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
         m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
+        m_Build_Place = m_Build.FindAction("Place", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -547,11 +567,13 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Build;
     private IBuildActions m_BuildActionsCallbackInterface;
     private readonly InputAction m_Build_Flight;
+    private readonly InputAction m_Build_Place;
     public struct BuildActions
     {
         private @Voyager m_Wrapper;
         public BuildActions(@Voyager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Flight => m_Wrapper.m_Build_Flight;
+        public InputAction @Place => m_Wrapper.m_Build_Place;
         public InputActionMap Get() { return m_Wrapper.m_Build; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -564,6 +586,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Flight.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
                 @Flight.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
                 @Flight.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnFlight;
+                @Place.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
+                @Place.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
+                @Place.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
             }
             m_Wrapper.m_BuildActionsCallbackInterface = instance;
             if (instance != null)
@@ -571,6 +596,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Flight.started += instance.OnFlight;
                 @Flight.performed += instance.OnFlight;
                 @Flight.canceled += instance.OnFlight;
+                @Place.started += instance.OnPlace;
+                @Place.performed += instance.OnPlace;
+                @Place.canceled += instance.OnPlace;
             }
         }
     }
@@ -669,6 +697,7 @@ public class @Voyager : IInputActionCollection, IDisposable
     public interface IBuildActions
     {
         void OnFlight(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

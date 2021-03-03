@@ -49,8 +49,7 @@ public class BuildModeUI : MonoBehaviour
 
 	public void SelectComponent(ShipComponent shipComponent)
 	{
-		ShipInputController.instance.selectedBuildComponent = shipComponent;
-
+		buildMode.SwitchSelection(shipComponent);
 	}
 
 }

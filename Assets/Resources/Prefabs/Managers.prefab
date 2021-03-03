@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3079474586717845897}
   - component: {fileID: 3079474586717845896}
   - component: {fileID: 3079474586717845903}
+  - component: {fileID: 1688604855}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -47,8 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7132e27a73dfbb7448570fe7ab0fa649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerInputController: {fileID: 0}
+  playerInput: {fileID: 2817962616279163416}
 --- !u!114 &3079474586717845903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flightMode: {fileID: 3079474587460391200}
   buildMode: {fileID: 3079474587278123471}
+--- !u!114 &1688604855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079474586717845902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f6071c14ac704479735ab8f52b12b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3079474587278123469
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeUI: {fileID: 0}
   modeCamera: {fileID: 0}
-  previewObject: {fileID: 0}
+  modeInput: {fileID: 3079474587278123469}
+  previewPrefab: {fileID: 9217923233256791511, guid: ce8dd07eae3ff7041a26b7a0aebb30dc, type: 3}
+  tempPrefab: {fileID: 510609389598532354, guid: 654a03760bea1e64592269a2093a351b, type: 3}
+  tempSpawnPoint: {fileID: 0}
+  constructionLayer: 8
   modeMap: Build
 --- !u!114 &2427723653478485841
 MonoBehaviour:
@@ -123,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f801e3660f93f92439a2dc18cb24e042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildMode: {fileID: 0}
+  inputSystem: {fileID: 0}
 --- !u!1 &3079474587460391206
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeUI: {fileID: 0}
   modeCamera: {fileID: 0}
+  modeInput: {fileID: 3079474587460391206}
   modeMap: Flight
 --- !u!114 &6051008736113550411
 MonoBehaviour:
@@ -182,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0e59be4f1c06d4bafcbe265774de4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedShip: {fileID: 0}
+  flightMode: {fileID: 3079474587460391200}
 --- !u!1001 &5623865283937746483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,32 +214,96 @@ PrefabInstance:
       value: Input
       objectReference: {fileID: 0}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2427723653478485841}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6051008736113550411}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6051008736113550411}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6051008736113550411}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6051008736113550411}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6051008736113550411}
     - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 6051008736113550411}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlightModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlightModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlightModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlightModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlightModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FlightModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2427723653478485841}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BuildModeInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaceComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: e06a28ed-eeea-4343-ac03-61bb07abf26c
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: Build/Place[/Mouse/leftButton]
       objectReference: {fileID: 0}
     - target: {fileID: 7758751253783414735, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -274,3 +357,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7758751253783414735, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
   m_PrefabInstance: {fileID: 5623865283937746483}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2817962616279163416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+  m_PrefabInstance: {fileID: 5623865283937746483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
