@@ -6,6 +6,5 @@ public interface IMode
 {
 	bool isActive { get; set; }
 	void BeginMode();
-
 	void EndMode();
 }

@@ -7,6 +7,31 @@ using UnityEngine;
 public class ShipExporter
 {
 	public static string PATH = "Prefabs/ShipComponents";
+	public static string saveFile = "default";
+	public static string saveLocation = "Saves";
+	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Transform spawnPoint)
+	{
+		string path = Path.Combine(Application.persistentDataPath, saveLocation);
+		string filePath = Path.Combine(path, saveFile);
+		if (!Directory.Exists(path))
+		{
+			throw new System.Exception("Path Does not exist");
+		}
+
+		if (!File.Exists(filePath))
+		{
+			throw new System.Exception("File Does not exist");
+		}
+		string jsoncontents = File.ReadAllText(filePath);
+		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
+		ShipCharacterController shipCharacter = GameObject.Instantiate(prefabController, spawnPoint.transform.position, spawnPoint.transform.rotation, null);
+		shipCharacter.Init();
+		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
+		shipCharacter.ConstructShip(components);
+		return shipCharacter;
+	}
+
+
 	internal static List<ShipComponent> ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
 	{
 		List<ShipComponent> components = new List<ShipComponent>();

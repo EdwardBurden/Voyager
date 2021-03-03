@@ -4,10 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildModeUI : MonoBehaviour
 {
+	BuildMode buildMode;
 	public BuildShipComponentButtonUI selectionPrefab;
+
+	public Button exportButton;
+	public Button importButton;
+	public Button resetButton;
 
 	public void Awake()
 	{
@@ -17,6 +23,28 @@ public class BuildModeUI : MonoBehaviour
 			BuildShipComponentButtonUI buttonUI = Instantiate(selectionPrefab, this.transform);
 			buttonUI.Init(SelectComponent, gameobject.GetComponent<ShipComponent>());
 		}
+		exportButton.onClick.AddListener(Save);
+		importButton.onClick.AddListener(Load);
+		resetButton.onClick.AddListener(ResetBuild);
+	}
+
+	public void Init(BuildMode mode)
+	{
+		buildMode = mode;
+	}
+	public void Save()
+	{
+		buildMode.SaveShip();
+	}
+
+	public void Load()
+	{
+		buildMode.LoadShip();
+	}
+
+	public void ResetBuild()
+	{
+		buildMode.ResetShip();
 	}
 
 	public void SelectComponent(ShipComponent shipComponent)

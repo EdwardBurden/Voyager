@@ -6,10 +6,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
-	public ShipCharacterController player;
-	public ShipInputController playerInputController;
-
-	public PlayerInput playerInput => playerInputController.GetComponent<PlayerInput>();
+	public PlayerInput playerInput;
 
 	private void Start()
 	{

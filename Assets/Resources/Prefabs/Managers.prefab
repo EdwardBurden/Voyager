@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  playerInputController: {fileID: 2880370593289632310}
+  playerInputController: {fileID: 0}
 --- !u!114 &3079474586717845903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3079474587278123470}
   - component: {fileID: 3079474587278123471}
+  - component: {fileID: 2427723653478485841}
   m_Layer: 0
   m_Name: Build
   m_TagString: Untagged
@@ -110,6 +111,18 @@ MonoBehaviour:
   modeCamera: {fileID: 0}
   previewObject: {fileID: 0}
   modeMap: Build
+--- !u!114 &2427723653478485841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079474587278123469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f801e3660f93f92439a2dc18cb24e042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3079474587460391206
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3079474587460391207}
   - component: {fileID: 3079474587460391200}
+  - component: {fileID: 6051008736113550411}
   m_Layer: 0
   m_Name: Flight
   m_TagString: Untagged
@@ -156,6 +170,19 @@ MonoBehaviour:
   modeUI: {fileID: 0}
   modeCamera: {fileID: 0}
   modeMap: Flight
+--- !u!114 &6051008736113550411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079474587460391206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0e59be4f1c06d4bafcbe265774de4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedShip: {fileID: 0}
 --- !u!1001 &5623865283937746483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,7 +192,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5562120356020456306, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_Name
-      value: ShipInputController
+      value: Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570711211799796779, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7758751253783414735, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -211,21 +266,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7634404453512168453, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
 --- !u!4 &2713247826122521084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7758751253783414735, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
   m_PrefabInstance: {fileID: 5623865283937746483}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2880370593289632310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7634404453512168453, guid: 1d0919bbcc12ae6428a3e9fb358252ea, type: 3}
-  m_PrefabInstance: {fileID: 5623865283937746483}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a1287038860384a9dc832dae121994, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

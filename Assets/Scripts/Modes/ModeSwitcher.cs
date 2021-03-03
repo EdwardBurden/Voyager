@@ -12,7 +12,7 @@ public class ModeSwitcher : SingletonMonoBehaviour<ModeSwitcher>
 
 	private Dictionary<Type, IMode> modes;
 
-	IMode activeMode;
+	public IMode activeMode;
 
 	public void Awake()
 	{

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FlightModeUI : MonoBehaviour
 {
+	FlightMode flightMode;
+
 	public Button increaseSpeedButton;
 	public Button decreaseSpeedButton;
 	public Button restSpeedButton;
@@ -20,29 +22,39 @@ public class FlightModeUI : MonoBehaviour
 		rightButton.onClick.AddListener(TurnRight);
 	}
 
+	public void Init(FlightMode mode)
+	{
+		flightMode = mode;
+	}
+
 	public void InreaseSpeed()
 	{
-		ShipInputController.instance.IncreaseShipSpeed(); //could change to call player directly
+		flightMode.IncreaseShipSpeed(); //could change to call player directly
 	}
 
 	public void DecreaseSpeed()
 	{
-		ShipInputController.instance.DecreaseShipSpeed();
+		flightMode.DecreaseShipSpeed();
 	}
 
 	public void RestSpeed()
 	{
-		ShipInputController.instance.RestShip();
+		flightMode.RestShip();
 	}
 
 	public void TurnRight()
 	{
-		ShipInputController.instance.TurnShipRight();
+		flightMode.TurnShipRight();
 	}
 
 	public void Turnleft()
 	{
-		ShipInputController.instance.TurnShipLeft();
+		flightMode.TurnShipLeft();
+	}
+
+	public void SwitchToBuild()
+	{
+		flightMode.SwitchToBuild();
 	}
 
 

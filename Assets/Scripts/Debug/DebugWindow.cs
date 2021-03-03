@@ -5,18 +5,17 @@ using UnityEngine;
 
 public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 {
+	FlightMode flight;//debug only
 	public string saveFile = "default";
 	public string saveLocation = "Saves";
-	public ShipCharacterController shipCharacter;
-	public ShipInputController shipinput;
 
 	public Transform spawnPoint;
 
 	public ShipCharacterController prefabController;
-
+	/*
 	public void ConstructShip()
 	{
-		shipCharacter.ConstructShip();
+		flight.ConstructShip();
 	}
 
 	public void Exit()
@@ -38,12 +37,11 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 		}
 		string jsoncontents = File.ReadAllText(filePath);
 		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
-		shipCharacter = Instantiate(prefabController, spawnPoint.transform.position, spawnPoint.transform.rotation, null);
+		ShipCharacterController shipCharacter = Instantiate(prefabController, spawnPoint.transform.position, spawnPoint.transform.rotation, null);
 		shipCharacter.Init();
 		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
 		shipCharacter.ConstructShip(components);
-		GameManager.instance.player = shipCharacter;
-		shipinput.selectedShip = shipCharacter;
+		ModeSwitcher.instance.SetSelected(shipCharacter.gameObject);
 	}
 
 	public void Save() //todo move out to somewhere else
@@ -55,7 +53,7 @@ public class DebugWindow : SingletonMonoBehaviour<DebugWindow>
 		string jsoncontents = JsonUtility.ToJson(shipExportInfo);
 		File.WriteAllText(filePath, jsoncontents);
 	}
-
+	*/
 	public void BuildMode()
 	{
 		ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
