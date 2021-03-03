@@ -7,6 +7,8 @@ using static UnityEngine.InputSystem.InputAction;
 public class FlightModeInput : MonoBehaviour
 {
 	public FlightMode flightMode;
+	private bool ZoomInHeld = false;
+	private bool ZoomOutHeld = false;
 
 	public void Init(FlightMode mode)
 	{
@@ -14,6 +16,19 @@ public class FlightModeInput : MonoBehaviour
 	}
 
 	//Inputs
+	private void Update()
+	{
+		if (ZoomInHeld)
+		{
+			flightMode.CameraZoomIn();
+		}
+		if (ZoomOutHeld)
+		{
+			flightMode.CameraZoomout();
+		}
+	}
+
+
 	public void SwitchToBuild(CallbackContext value)
 	{
 		if (value.started)
@@ -61,4 +76,46 @@ public class FlightModeInput : MonoBehaviour
 			flightMode.UseLaser();
 		}
 	}
+
+	public void CameraZoomIn(CallbackContext value)
+	{
+		if (value.started)
+		{
+			ZoomInHeld = true;
+			return;
+		}
+		if (ZoomInHeld == true && value.canceled)
+		{
+			ZoomInHeld = false;
+		}
+	}
+
+	public void CameraZoomOut(CallbackContext value)
+	{
+		if (value.started)
+		{
+			ZoomOutHeld = true;
+			return;
+		}
+		if (ZoomOutHeld == true && value.canceled)
+		{
+			ZoomOutHeld = false;
+		}
+	}
+
+	public void CameraZoomAxis(CallbackContext value)
+	{
+		if (value.performed)
+		{
+			float amount = value.ReadValue<float>();
+			flightMode.CameraZoom(amount);
+		}
+	}
+
+	public void CameraMove()
+	{
+
+
+	}
+
 }

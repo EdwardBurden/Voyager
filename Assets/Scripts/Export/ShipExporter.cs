@@ -9,6 +9,7 @@ public class ShipExporter
 	public static string PATH = "Prefabs/ShipComponents";
 	public static string saveFile = "default";
 	public static string saveLocation = "Saves";
+
 	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Transform spawnPoint)
 	{
 		string path = Path.Combine(Application.persistentDataPath, saveLocation);
@@ -31,6 +32,15 @@ public class ShipExporter
 		return shipCharacter;
 	}
 
+	internal static void SaveShip(ShipCharacterController shipCharacter)
+	{
+		ShipExportInfo shipExportInfo = ShipExporter.ExportToFile(shipCharacter);
+		string path = Path.Combine(Application.persistentDataPath, saveLocation);
+		string filePath = Path.Combine(path, saveFile);
+		Directory.CreateDirectory(path);
+		string jsoncontents = JsonUtility.ToJson(shipExportInfo);
+		File.WriteAllText(filePath, jsoncontents);
+	}
 
 	internal static List<ShipComponent> ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
 	{

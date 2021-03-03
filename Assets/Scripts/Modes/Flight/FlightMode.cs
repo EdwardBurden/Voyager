@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -50,12 +51,27 @@ public class FlightMode : BaseMode, IMode
 		}
 	}
 
+	internal void CameraZoomIn()
+	{
+		modeCamera.transform.position += new Vector3(0, 1, 0);
+	}
+
+	internal void CameraZoomout()
+	{
+		modeCamera.transform.position += new Vector3(0, -1, 0);
+	}
+
 	internal void TurnShipLeft()
 	{
 		if (Selection.isShipSelected)
 		{
 			Selection.selectedShip.Rotate(-15);
 		}
+	}
+
+	internal void CameraZoom(float amount)
+	{
+		modeCamera.transform.position -= new Vector3(0, amount, 0);
 	}
 
 	internal void TurnShipRight()

@@ -14,6 +14,7 @@ public class BuildMode : BaseMode, IMode
 	private ShipComponent buildComponent;
 	private GameObject previewObject;
 	private Vector3 placePosition;
+	private Quaternion placeRotation;
 
 	public LayerMask constructionLayer;
 
@@ -32,30 +33,39 @@ public class BuildMode : BaseMode, IMode
 
 	private void Update()
 	{
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-		//Ray ray = new Ray(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()), Camera.main.transform.forward* 1000);
-		Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
-		bool hasHit = Physics.Raycast(ray, out hit, 1000, constructionLayer);
-		if (hasHit)
+		if (Selection.isShipSelected)
 		{
-			Transform objectHit = hit.collider.transform;
-			Vector3 poition = new Vector3(Mathf.Round(objectHit.position.x), Mathf.Round(objectHit.position.y), Mathf.Round(objectHit.position.z));
-			Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
-			placePosition = poition + normal;
-			//get normal of hit , 
-			//placePosition = normal + hit positon =
-			// Do something with the object that was hit by the raycast.
-		}
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+			//Ray ray = new Ray(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()), Camera.main.transform.forward* 1000);
+			Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+			bool hasHit = Physics.Raycast(ray, out hit, 1000, constructionLayer);
 
-		if (previewObject == null)
-		{
-			previewObject = Instantiate(previewPrefab);
-		}
-		else
-		{
-			previewObject.SetActive(hasHit);
-			previewObject.transform.position = placePosition;
+			if (hasHit)
+			{
+
+				Transform objectHit = hit.collider.transform;
+				//Vector3[] vector3 = ShipConstructor.GetSurroundingComponents(objectHit.position, Selection.selectedShip.transform);
+				Vector3 poition = new Vector3(Mathf.Round(objectHit.position.x), Mathf.Round(objectHit.position.y), Mathf.Round(objectHit.position.z));
+				Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
+				placePosition = objectHit.position + hit.normal;
+				placeRotation = objectHit.rotation;
+				//get normal of hit , 
+				//placePosition = normal + hit positon =
+				// Do something with the object that was hit by the raycast.
+			}
+
+
+			if (previewObject == null)
+			{
+				previewObject = Instantiate(previewPrefab);
+			}
+			else
+			{
+				previewObject.SetActive(hasHit);
+				previewObject.transform.position = placePosition;
+				previewObject.transform.rotation = placeRotation;
+			}
 		}
 	}
 
@@ -75,12 +85,18 @@ public class BuildMode : BaseMode, IMode
 	{
 		modeUI.SetActive(false);
 		modeCamera.gameObject.SetActive(false);
-		ShipInputController.instance.selectedBuildComponent = null;
+		//SaveShip(); //can remove
 	}
 
 	internal void ResetShip()
 	{
-		throw new NotImplementedException();
+		if (Selection.isShipSelected)
+		{
+			Destroy(Selection.selectedShip.gameObject);
+
+			Selection.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
+			FocusOnShip();
+		}
 	}
 
 	internal void SwitchSelection(ShipComponent shipComponent)
@@ -92,17 +108,16 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected && buildComponent != null)
 		{
-			GameObject.Instantiate(buildComponent, placePosition, Quaternion.identity, Selection.selectedShip.transform);
+			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, placePosition, placeRotation, Selection.selectedShip.transform);
+			Selection.selectedShip.Addcomponent(shipComponent);
 		}
 	}
 
 	internal void LoadShip()
 	{
-		//will load agina //need load and replace too
 		if (Selection.isShipSelected)
 		{
-			//replace
-			Destroy(Selection.selectedShip.gameObject);
+			Selection.selectedShip.SetComponentsToFlight();
 		}
 
 		Selection.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
@@ -111,7 +126,11 @@ public class BuildMode : BaseMode, IMode
 
 	internal void SaveShip()
 	{
-		throw new NotImplementedException();
+		if (Selection.isShipSelected)
+		{
+			//Selection.selectedShip.ConstructShip();
+			ShipExporter.SaveShip(Selection.selectedShip);
+		}
 	}
 
 	internal void SwitchToFlight()

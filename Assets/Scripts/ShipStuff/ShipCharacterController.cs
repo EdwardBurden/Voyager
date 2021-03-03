@@ -25,7 +25,8 @@ public class ShipCharacterController : MonoBehaviour
 
 	private float hitDamage = 10;
 
-	public int constructionLayer;
+	public LayerMask constructionLayer;
+	public int lazyConstructionLayermask;
 	public int destructionLayer;
 	public int defaultlayer;
 
@@ -35,7 +36,7 @@ public class ShipCharacterController : MonoBehaviour
 		{
 			shipComponent.OnBuild();
 		}
-		constructor.UpdateLayers(constructionLayer);
+		constructor.UpdateLayers(lazyConstructionLayermask);
 	}
 
 	internal void SetComponentsToFlight()

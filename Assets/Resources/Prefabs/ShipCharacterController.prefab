@@ -44,7 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7837bef36a5447d40a7cc3070148dc58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constructionLayer: 8
+  constructionLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  lazyConstructionLayermask: 8
   destructionLayer: 9
   defaultlayer: 0
 --- !u!54 &1128489117
