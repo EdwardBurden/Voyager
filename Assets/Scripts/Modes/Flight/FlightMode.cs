@@ -13,10 +13,13 @@ public class FlightMode : BaseMode, IMode
 
 	public FlightModeInput flightInput => modeInput.GetComponent<FlightModeInput>();
 
+	public FlightCamera flightCamera => modeCamera.GetComponentInParent<FlightCamera>();
+
 	private void Awake()
 	{
 		flightUI.Init(this);
 		flightInput.Init(this);
+		flightCamera.Init(this);
 	}
 
 	public void BeginMode()
@@ -51,27 +54,12 @@ public class FlightMode : BaseMode, IMode
 		}
 	}
 
-	internal void CameraZoomIn()
-	{
-		modeCamera.transform.position += new Vector3(0, 1, 0);
-	}
-
-	internal void CameraZoomout()
-	{
-		modeCamera.transform.position += new Vector3(0, -1, 0);
-	}
-
 	internal void TurnShipLeft()
 	{
 		if (Selection.isShipSelected)
 		{
 			Selection.selectedShip.Rotate(-15);
 		}
-	}
-
-	internal void CameraZoom(float amount)
-	{
-		modeCamera.transform.position -= new Vector3(0, amount, 0);
 	}
 
 	internal void TurnShipRight()
@@ -98,13 +86,14 @@ public class FlightMode : BaseMode, IMode
 		}
 	}
 
+
+
 	internal void UseLaser() //temp
 	{
 		LaserSC laserSC = Selection.selectedShip.GetComponentInChildren<LaserSC>();
 		if (!laserSC.active && laserSC.CanActiveWeapon())
 		{
 			Selection.selectedShip.GetComponentInChildren<LaserSC>().ActiveWeapon();
-
 		}
 	}
 
@@ -112,6 +101,5 @@ public class FlightMode : BaseMode, IMode
 	{
 		ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
 	}
-
 
 }

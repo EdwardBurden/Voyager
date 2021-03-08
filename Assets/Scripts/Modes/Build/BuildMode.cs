@@ -33,6 +33,10 @@ public class BuildMode : BaseMode, IMode
 
 	private void Update()
 	{
+		if (!_active)
+		{
+			return;
+		}
 		if (Selection.isShipSelected)
 		{
 			RaycastHit hit;
@@ -85,6 +89,7 @@ public class BuildMode : BaseMode, IMode
 	{
 		modeUI.SetActive(false);
 		modeCamera.gameObject.SetActive(false);
+		Destroy(previewObject);
 		//SaveShip(); //can remove
 	}
 

@@ -78,7 +78,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""name"": ""Camera_ZoomAxis"",
                     ""type"": ""PassThrough"",
                     ""id"": ""5c7fa758-5f68-4052-9440-ab4ba76e01ad"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Double"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -94,9 +94,33 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""name"": ""Camera_Move"",
                     ""type"": ""PassThrough"",
                     ""id"": ""3e229eb7-86d5-4182-9ece-a4624723254c"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_RotateLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""17e03a30-40d4-4553-822e-703e78431385"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_RotateRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f7c108e-5513-467a-966f-726314ed436c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveToSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""1761b0a3-3a92-4a23-9fda-cbc52973bfc6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap""
                 }
             ],
             ""bindings"": [
@@ -253,6 +277,39 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""action"": ""TurnLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07e27262-be7c-4223-bd09-23fc66c70fad"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_RotateLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ee1da67-aa8c-4016-96fc-c4510b488090"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_RotateRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1dbeda3-bc6f-481a-a657-91ab782116e1"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveToSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -405,6 +462,9 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Flight_Camera_ZoomAxis = m_Flight.FindAction("Camera_ZoomAxis", throwIfNotFound: true);
         m_Flight_Camera_ZoomIn = m_Flight.FindAction("Camera_ZoomIn", throwIfNotFound: true);
         m_Flight_Camera_Move = m_Flight.FindAction("Camera_Move", throwIfNotFound: true);
+        m_Flight_Camera_RotateLeft = m_Flight.FindAction("Camera_RotateLeft", throwIfNotFound: true);
+        m_Flight_Camera_RotateRight = m_Flight.FindAction("Camera_RotateRight", throwIfNotFound: true);
+        m_Flight_MoveToSelection = m_Flight.FindAction("MoveToSelection", throwIfNotFound: true);
         // Build
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
         m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
@@ -471,6 +531,9 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputAction m_Flight_Camera_ZoomAxis;
     private readonly InputAction m_Flight_Camera_ZoomIn;
     private readonly InputAction m_Flight_Camera_Move;
+    private readonly InputAction m_Flight_Camera_RotateLeft;
+    private readonly InputAction m_Flight_Camera_RotateRight;
+    private readonly InputAction m_Flight_MoveToSelection;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
@@ -485,6 +548,9 @@ public class @Voyager : IInputActionCollection, IDisposable
         public InputAction @Camera_ZoomAxis => m_Wrapper.m_Flight_Camera_ZoomAxis;
         public InputAction @Camera_ZoomIn => m_Wrapper.m_Flight_Camera_ZoomIn;
         public InputAction @Camera_Move => m_Wrapper.m_Flight_Camera_Move;
+        public InputAction @Camera_RotateLeft => m_Wrapper.m_Flight_Camera_RotateLeft;
+        public InputAction @Camera_RotateRight => m_Wrapper.m_Flight_Camera_RotateRight;
+        public InputAction @MoveToSelection => m_Wrapper.m_Flight_MoveToSelection;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -524,6 +590,15 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Camera_Move.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_Move;
                 @Camera_Move.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_Move;
                 @Camera_Move.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_Move;
+                @Camera_RotateLeft.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateLeft;
+                @Camera_RotateLeft.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateLeft;
+                @Camera_RotateLeft.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateLeft;
+                @Camera_RotateRight.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateRight;
+                @Camera_RotateRight.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateRight;
+                @Camera_RotateRight.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateRight;
+                @MoveToSelection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
+                @MoveToSelection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
+                @MoveToSelection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
             }
             m_Wrapper.m_FlightActionsCallbackInterface = instance;
             if (instance != null)
@@ -558,6 +633,15 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Camera_Move.started += instance.OnCamera_Move;
                 @Camera_Move.performed += instance.OnCamera_Move;
                 @Camera_Move.canceled += instance.OnCamera_Move;
+                @Camera_RotateLeft.started += instance.OnCamera_RotateLeft;
+                @Camera_RotateLeft.performed += instance.OnCamera_RotateLeft;
+                @Camera_RotateLeft.canceled += instance.OnCamera_RotateLeft;
+                @Camera_RotateRight.started += instance.OnCamera_RotateRight;
+                @Camera_RotateRight.performed += instance.OnCamera_RotateRight;
+                @Camera_RotateRight.canceled += instance.OnCamera_RotateRight;
+                @MoveToSelection.started += instance.OnMoveToSelection;
+                @MoveToSelection.performed += instance.OnMoveToSelection;
+                @MoveToSelection.canceled += instance.OnMoveToSelection;
             }
         }
     }
@@ -693,6 +777,9 @@ public class @Voyager : IInputActionCollection, IDisposable
         void OnCamera_ZoomAxis(InputAction.CallbackContext context);
         void OnCamera_ZoomIn(InputAction.CallbackContext context);
         void OnCamera_Move(InputAction.CallbackContext context);
+        void OnCamera_RotateLeft(InputAction.CallbackContext context);
+        void OnCamera_RotateRight(InputAction.CallbackContext context);
+        void OnMoveToSelection(InputAction.CallbackContext context);
     }
     public interface IBuildActions
     {

@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-public class ShipCharacterController : MonoBehaviour
+public class ShipCharacterController : MonoBehaviour , ISelectable
 {
 	private ShipConstructor constructor;
 	private Rigidbody rigidbody => GetComponent<Rigidbody>();
