@@ -97,9 +97,9 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Destroy(Selection.selectedShip.gameObject);
+			Destroy(Selection.instance.selectedShip.gameObject);
 
-			Selection.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
+			Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
 			FocusOnShip();
 		}
 	}
@@ -113,8 +113,8 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected && buildComponent != null)
 		{
-			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, placePosition, placeRotation, Selection.selectedShip.transform);
-			Selection.selectedShip.Addcomponent(shipComponent);
+			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, placePosition, placeRotation, Selection.instance.selectedShip.transform);
+			Selection.instance.selectedShip.Addcomponent(shipComponent);
 		}
 	}
 
@@ -122,10 +122,10 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.SetComponentsToFlight();
+			Selection.instance.selectedShip.SetComponentsToFlight();
 		}
 
-		Selection.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
+		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
 		FocusOnShip();
 	}
 
@@ -134,7 +134,7 @@ public class BuildMode : BaseMode, IMode
 		if (Selection.isShipSelected)
 		{
 			//Selection.selectedShip.ConstructShip();
-			ShipExporter.SaveShip(Selection.selectedShip);
+			ShipExporter.SaveShip(Selection.instance.selectedShip);
 		}
 	}
 
@@ -147,9 +147,9 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			modeCamera.LookAt = Selection.selectedShip.transform;
-			modeCamera.Follow = Selection.selectedShip.transform;
-			Selection.selectedShip.SetComponentsToBuild();
+			modeCamera.LookAt = Selection.instance.selectedShip.transform;
+			modeCamera.Follow = Selection.instance.selectedShip.transform;
+			Selection.instance.selectedShip.SetComponentsToBuild();
 		}
 
 	}

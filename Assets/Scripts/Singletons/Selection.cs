@@ -7,11 +7,11 @@ using UnityEngine.InputSystem.UI;
 public class Selection : SingletonMonoBehaviour<Selection>
 {
 	public InputSystemUIInputModule inputSystemUIInput;
-	public static ShipCharacterController selectedShip;
+	public ShipCharacterController selectedShip;
 
 	public static bool isPointerOverSelectable => instance.GetSelectable() != null;
 
-	public static bool isShipSelected => selectedShip != null;
+	public static bool isShipSelected => instance.selectedShip != null;
 
 	public GameObject GetSelectable()
 	{
@@ -22,6 +22,10 @@ public class Selection : SingletonMonoBehaviour<Selection>
 			bool hasHit = Physics.Raycast(ray, out hit, 1000);
 			if (hasHit)
 			{
+				if (hit.rigidbody == null)
+				{
+					return null;
+				}
 				ISelectable selectable = hit.rigidbody.gameObject.GetComponent<ISelectable>();
 				if (selectable != null)
 				{

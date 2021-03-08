@@ -32,7 +32,7 @@ public class FlightMode : BaseMode, IMode
 		modeCamera.gameObject.SetActive(true);
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.SetComponentsToFlight();
+			Selection.instance.selectedShip.SetComponentsToFlight();
 		}
 	}
 
@@ -50,7 +50,7 @@ public class FlightMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.IncreaseSpeed();
+			Selection.instance.selectedShip.IncreaseSpeed();
 		}
 	}
 
@@ -58,7 +58,7 @@ public class FlightMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.Rotate(-15);
+			Selection.instance.selectedShip.Rotate(-15);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class FlightMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.Rotate(15);
+			Selection.instance.selectedShip.Rotate(15);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class FlightMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.DecreaseSpeed();
+			Selection.instance.selectedShip.DecreaseSpeed();
 		}
 	}
 
@@ -82,7 +82,7 @@ public class FlightMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.selectedShip.Rest();
+			Selection.instance.selectedShip.Rest();
 		}
 	}
 
@@ -90,10 +90,10 @@ public class FlightMode : BaseMode, IMode
 
 	internal void UseLaser() //temp
 	{
-		LaserSC laserSC = Selection.selectedShip.GetComponentInChildren<LaserSC>();
+		LaserSC laserSC = Selection.instance.selectedShip.GetComponentInChildren<LaserSC>();
 		if (!laserSC.active && laserSC.CanActiveWeapon())
 		{
-			Selection.selectedShip.GetComponentInChildren<LaserSC>().ActiveWeapon();
+			Selection.instance.selectedShip.GetComponentInChildren<LaserSC>().ActiveWeapon();
 		}
 	}
 
