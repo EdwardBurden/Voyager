@@ -13,6 +13,24 @@ public class Selection : SingletonMonoBehaviour<Selection>
 
 	public static bool isShipSelected => instance.selectedShip != null;
 
+
+	public void SetSelection()
+	{
+		GameObject gameObject = GetSelectable();
+		if (gameObject == null)
+		{
+			return;
+		}
+		ShipCharacterController shipCharacterController = gameObject.GetComponent<ShipCharacterController>();
+		if (shipCharacterController == null)
+		{
+			return;
+		}
+		selectedShip = shipCharacterController;
+	}
+
+
+
 	public GameObject GetSelectable()
 	{
 		if (!inputSystemUIInput.IsPointerOverGameObject(Mouse.current.deviceId))
@@ -31,7 +49,6 @@ public class Selection : SingletonMonoBehaviour<Selection>
 				{
 					return hit.rigidbody.gameObject;
 				}
-
 			}
 		}
 		return null;

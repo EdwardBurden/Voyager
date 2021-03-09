@@ -13,7 +13,7 @@ public class FlightCamera : MonoBehaviour
 	private float rotateInput;
 	private float zoomInput;
 
-	private float rotationAmount = 1;
+	private float rotationAmount = 1; //todo make publicv
 	public float movementTime = 1;
 
 	public float normalSpeed;

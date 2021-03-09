@@ -108,6 +108,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "MultiTap"
+                },
+                {
+                    "name": "Selection",
+                    "type": "Button",
+                    "id": "dc8048a8-3fc4-4fdf-a76b-7fab58257ac9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "MultiTap"
                 }
             ],
             "bindings": [
@@ -297,6 +305,17 @@
                     "action": "MoveToSelection",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d921cdeb-d301-4e56-9761-f87a50076ff7",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Selection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -316,6 +335,22 @@
                     "name": "Place",
                     "type": "Button",
                     "id": "e06a28ed-eeea-4343-ac03-61bb07abf26c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveUpLevel",
+                    "type": "Button",
+                    "id": "ecab820d-d6b7-4a60-b647-d965224b9b36",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MoveDownLevel",
+                    "type": "Button",
+                    "id": "8cab29bc-4744-4aba-aeb2-0d2dc4af9f77",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -341,6 +376,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c50131e3-3e99-4fe3-9df9-8f54924496e8",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveUpLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d884e17a-257c-429d-a75c-df45f6ade0cf",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveDownLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

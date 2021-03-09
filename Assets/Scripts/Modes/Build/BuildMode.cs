@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,10 +26,16 @@ public class BuildMode : BaseMode, IMode
 	public BuildModeInput buildInput => modeInput.GetComponent<BuildModeInput>();
 	public BuildModeUI buildUI => modeUI.GetComponent<BuildModeUI>();
 
+	public BuildCamera buildCamera => modeCamera.GetComponent<BuildCamera>();
+
+	private int level;
+
+
 	private void Awake()
 	{
 		buildInput.Init(this);
 		buildUI.Init(this);
+		buildCamera.Init(this);
 	}
 
 	private void Update()
@@ -37,40 +44,7 @@ public class BuildMode : BaseMode, IMode
 		{
 			return;
 		}
-		if (Selection.isShipSelected)
-		{
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-			//Ray ray = new Ray(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()), Camera.main.transform.forward* 1000);
-			Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
-			bool hasHit = Physics.Raycast(ray, out hit, 1000, constructionLayer);
-
-			if (hasHit)
-			{
-
-				Transform objectHit = hit.collider.transform;
-				//Vector3[] vector3 = ShipConstructor.GetSurroundingComponents(objectHit.position, Selection.selectedShip.transform);
-				Vector3 poition = new Vector3(Mathf.Round(objectHit.position.x), Mathf.Round(objectHit.position.y), Mathf.Round(objectHit.position.z));
-				Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
-				placePosition = objectHit.position + hit.normal;
-				placeRotation = objectHit.rotation;
-				//get normal of hit , 
-				//placePosition = normal + hit positon =
-				// Do something with the object that was hit by the raycast.
-			}
-
-
-			if (previewObject == null)
-			{
-				previewObject = Instantiate(previewPrefab);
-			}
-			else
-			{
-				previewObject.SetActive(hasHit);
-				previewObject.transform.position = placePosition;
-				previewObject.transform.rotation = placeRotation;
-			}
-		}
+		PreviewPlacement();
 	}
 
 	public void BeginMode()
@@ -80,18 +54,88 @@ public class BuildMode : BaseMode, IMode
 			GameManager.instance.playerInput.SwitchCurrentActionMap(modeMap);
 		}
 		modeUI.SetActive(true);
-		modeCamera.gameObject.SetActive(true);
+		modeCamera.transform.GetChild(0).gameObject.SetActive(true);
 
-		FocusOnShip();
+		if (Selection.isShipSelected)
+		{
+			Selection.instance.selectedShip.SetComponentsToBuild();
+			//	level = Mathf.RoundToInt(Selection.instance.selectedShip.control.gameObject.transform.position.y);
+			level = 2;
+			//Selection.instance.selectedShip.
+			ShowActiveShipLevel();
+			buildCamera.FocusOnShip(level);
+		}
 	}
 
 	public void EndMode()
 	{
 		modeUI.SetActive(false);
-		modeCamera.gameObject.SetActive(false);
-		Destroy(previewObject);
-		//SaveShip(); //can remove
+		modeCamera.transform.GetChild(0).gameObject.SetActive(false);
+		Destroy(previewObject); if (Selection.isShipSelected)
+		{
+			ShipCharacterController shipCharacter = Selection.instance.selectedShip;
+			List<ShipComponent> comps = shipCharacter.GetAllComponents().ToList();
+			comps.ForEach(x => x.gameObject.SetActive(true));
+		}
 	}
+
+	private void PreviewPlacement()
+	{
+		if (!Selection.isShipSelected)
+		{
+			return;
+		}
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+		Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+		bool hasHit = Physics.Raycast(ray, out hit, 1000, constructionLayer);
+		if (hasHit)
+		{
+			Transform objectHit = hit.collider.transform;
+			Vector3 poition = new Vector3(Mathf.Round(objectHit.position.x), Mathf.Round(objectHit.position.y), Mathf.Round(objectHit.position.z));
+			Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
+			placePosition = objectHit.position + hit.normal;
+			placeRotation = objectHit.rotation;
+		}
+		if (previewObject == null)
+		{
+			previewObject = Instantiate(previewPrefab);
+		}
+		else
+		{
+			previewObject.SetActive(hasHit);
+			previewObject.transform.position = placePosition;
+			previewObject.transform.rotation = placeRotation;
+		}
+	}
+
+	private void ShowActiveShipLevel() //can use fancy shader in future
+	{
+		ShipCharacterController shipCharacter = Selection.instance.selectedShip;
+		List<ShipComponent> comps = shipCharacter.GetAllComponents().ToList();
+		comps.ForEach(x => x.gameObject.SetActive(Mathf.RoundToInt(x.gameObject.transform.position.y) <= level));
+		//get all components
+		//use preview on all lower
+		//hide all above the level 
+
+	}
+
+
+	internal void MoveUp()
+	{
+		level++;
+		ShowActiveShipLevel();
+	}
+
+
+
+	internal void MoveDown()
+	{
+		level--;
+		ShowActiveShipLevel();
+	}
+
+
 
 	internal void ResetShip()
 	{
@@ -147,8 +191,9 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			modeCamera.LookAt = Selection.instance.selectedShip.transform;
-			modeCamera.Follow = Selection.instance.selectedShip.transform;
+			//move to camera class
+			//modeCamera.LookAt = Selection.instance.selectedShip.transform;
+			//modeCamera.Follow = Selection.instance.selectedShip.transform;
 			Selection.instance.selectedShip.SetComponentsToBuild();
 		}
 

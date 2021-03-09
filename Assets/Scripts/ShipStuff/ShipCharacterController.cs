@@ -30,6 +30,8 @@ public class ShipCharacterController : MonoBehaviour , ISelectable
 	public int destructionLayer;
 	public int defaultlayer;
 
+	public ShipComponent control => constructor.control;
+
 	internal void SetComponentsToBuild()
 	{
 		foreach (ShipComponent shipComponent in constructor.connectedComponents)
@@ -136,6 +138,7 @@ public class ShipCharacterController : MonoBehaviour , ISelectable
 
 	private void FixedUpdate()
 	{
+		rigidbody.centerOfMass = control.transform.position;
 		Fixed_HandleMovement();
 		Fixed_Accelerate();
 		Fixed_HandleRotation();

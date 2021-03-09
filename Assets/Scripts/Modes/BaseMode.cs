@@ -6,6 +6,6 @@ using UnityEngine;
 public class BaseMode : MonoBehaviour
 {
 	public GameObject modeUI;
-	public CinemachineVirtualCamera modeCamera;
+	public GameObject modeCamera;
 	public GameObject modeInput;
 }

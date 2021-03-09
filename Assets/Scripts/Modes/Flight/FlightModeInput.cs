@@ -63,8 +63,11 @@ public class FlightModeInput : MonoBehaviour
 		}
 	}
 
-	public void Select()
+	public void Select(CallbackContext value)
 	{
-
+		if (value.started)
+		{
+			Selection.instance.SetSelection();
+		}
 	}
 }

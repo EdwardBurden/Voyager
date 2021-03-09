@@ -121,6 +121,14 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""MultiTap""
+                },
+                {
+                    ""name"": ""Selection"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc8048a8-3fc4-4fdf-a76b-7fab58257ac9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap""
                 }
             ],
             ""bindings"": [
@@ -310,6 +318,17 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""action"": ""MoveToSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d921cdeb-d301-4e56-9761-f87a50076ff7"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Selection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -329,6 +348,22 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""name"": ""Place"",
                     ""type"": ""Button"",
                     ""id"": ""e06a28ed-eeea-4343-ac03-61bb07abf26c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveUpLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecab820d-d6b7-4a60-b647-d965224b9b36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MoveDownLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""8cab29bc-4744-4aba-aeb2-0d2dc4af9f77"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -354,6 +389,28 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c50131e3-3e99-4fe3-9df9-8f54924496e8"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveUpLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d884e17a-257c-429d-a75c-df45f6ade0cf"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveDownLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -465,10 +522,13 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Flight_Camera_RotateLeft = m_Flight.FindAction("Camera_RotateLeft", throwIfNotFound: true);
         m_Flight_Camera_RotateRight = m_Flight.FindAction("Camera_RotateRight", throwIfNotFound: true);
         m_Flight_MoveToSelection = m_Flight.FindAction("MoveToSelection", throwIfNotFound: true);
+        m_Flight_Selection = m_Flight.FindAction("Selection", throwIfNotFound: true);
         // Build
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
         m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
         m_Build_Place = m_Build.FindAction("Place", throwIfNotFound: true);
+        m_Build_MoveUpLevel = m_Build.FindAction("MoveUpLevel", throwIfNotFound: true);
+        m_Build_MoveDownLevel = m_Build.FindAction("MoveDownLevel", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -534,6 +594,7 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputAction m_Flight_Camera_RotateLeft;
     private readonly InputAction m_Flight_Camera_RotateRight;
     private readonly InputAction m_Flight_MoveToSelection;
+    private readonly InputAction m_Flight_Selection;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
@@ -551,6 +612,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         public InputAction @Camera_RotateLeft => m_Wrapper.m_Flight_Camera_RotateLeft;
         public InputAction @Camera_RotateRight => m_Wrapper.m_Flight_Camera_RotateRight;
         public InputAction @MoveToSelection => m_Wrapper.m_Flight_MoveToSelection;
+        public InputAction @Selection => m_Wrapper.m_Flight_Selection;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -599,6 +661,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @MoveToSelection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
                 @MoveToSelection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
                 @MoveToSelection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
+                @Selection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
+                @Selection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
+                @Selection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
             }
             m_Wrapper.m_FlightActionsCallbackInterface = instance;
             if (instance != null)
@@ -642,6 +707,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @MoveToSelection.started += instance.OnMoveToSelection;
                 @MoveToSelection.performed += instance.OnMoveToSelection;
                 @MoveToSelection.canceled += instance.OnMoveToSelection;
+                @Selection.started += instance.OnSelection;
+                @Selection.performed += instance.OnSelection;
+                @Selection.canceled += instance.OnSelection;
             }
         }
     }
@@ -652,12 +720,16 @@ public class @Voyager : IInputActionCollection, IDisposable
     private IBuildActions m_BuildActionsCallbackInterface;
     private readonly InputAction m_Build_Flight;
     private readonly InputAction m_Build_Place;
+    private readonly InputAction m_Build_MoveUpLevel;
+    private readonly InputAction m_Build_MoveDownLevel;
     public struct BuildActions
     {
         private @Voyager m_Wrapper;
         public BuildActions(@Voyager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Flight => m_Wrapper.m_Build_Flight;
         public InputAction @Place => m_Wrapper.m_Build_Place;
+        public InputAction @MoveUpLevel => m_Wrapper.m_Build_MoveUpLevel;
+        public InputAction @MoveDownLevel => m_Wrapper.m_Build_MoveDownLevel;
         public InputActionMap Get() { return m_Wrapper.m_Build; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -673,6 +745,12 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Place.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
                 @Place.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
                 @Place.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
+                @MoveUpLevel.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveUpLevel;
+                @MoveUpLevel.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveUpLevel;
+                @MoveUpLevel.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveUpLevel;
+                @MoveDownLevel.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveDownLevel;
+                @MoveDownLevel.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveDownLevel;
+                @MoveDownLevel.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveDownLevel;
             }
             m_Wrapper.m_BuildActionsCallbackInterface = instance;
             if (instance != null)
@@ -683,6 +761,12 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Place.started += instance.OnPlace;
                 @Place.performed += instance.OnPlace;
                 @Place.canceled += instance.OnPlace;
+                @MoveUpLevel.started += instance.OnMoveUpLevel;
+                @MoveUpLevel.performed += instance.OnMoveUpLevel;
+                @MoveUpLevel.canceled += instance.OnMoveUpLevel;
+                @MoveDownLevel.started += instance.OnMoveDownLevel;
+                @MoveDownLevel.performed += instance.OnMoveDownLevel;
+                @MoveDownLevel.canceled += instance.OnMoveDownLevel;
             }
         }
     }
@@ -780,11 +864,14 @@ public class @Voyager : IInputActionCollection, IDisposable
         void OnCamera_RotateLeft(InputAction.CallbackContext context);
         void OnCamera_RotateRight(InputAction.CallbackContext context);
         void OnMoveToSelection(InputAction.CallbackContext context);
+        void OnSelection(InputAction.CallbackContext context);
     }
     public interface IBuildActions
     {
         void OnFlight(InputAction.CallbackContext context);
         void OnPlace(InputAction.CallbackContext context);
+        void OnMoveUpLevel(InputAction.CallbackContext context);
+        void OnMoveDownLevel(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

@@ -29,4 +29,20 @@ public class BuildModeInput : MonoBehaviour
 			buildMode.PlaceComponent();
 		}
 	}
+
+	public void MoveUpLevel(CallbackContext value)
+	{
+		if (value.started)
+		{
+			buildMode.MoveUp();
+		}
+	}
+
+	public void MoveDownLevel(CallbackContext value)
+	{
+		if (value.started)
+		{
+			buildMode.MoveDown();
+		}
+	}
 }

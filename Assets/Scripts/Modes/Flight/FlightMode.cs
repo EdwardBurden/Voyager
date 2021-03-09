@@ -13,7 +13,7 @@ public class FlightMode : BaseMode, IMode
 
 	public FlightModeInput flightInput => modeInput.GetComponent<FlightModeInput>();
 
-	public FlightCamera flightCamera => modeCamera.GetComponentInParent<FlightCamera>();
+	public FlightCamera flightCamera => modeCamera.GetComponent<FlightCamera>();
 
 	private void Awake()
 	{
@@ -29,7 +29,7 @@ public class FlightMode : BaseMode, IMode
 			GameManager.instance.playerInput.SwitchCurrentActionMap(modeMap);
 		}
 		modeUI.SetActive(true);
-		modeCamera.gameObject.SetActive(true);
+		modeCamera.transform.GetChild(0).gameObject.SetActive(true);
 		if (Selection.isShipSelected)
 		{
 			Selection.instance.selectedShip.SetComponentsToFlight();
@@ -39,7 +39,7 @@ public class FlightMode : BaseMode, IMode
 	public void EndMode()
 	{
 		modeUI.SetActive(false);
-		modeCamera.gameObject.SetActive(false);
+		modeCamera.transform.GetChild(0).gameObject.SetActive(false);
 		if (Selection.isShipSelected)
 		{
 			RestShip();
