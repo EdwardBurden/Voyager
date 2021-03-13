@@ -49,7 +49,7 @@ public abstract class ShipComponent : MonoBehaviour
 	[ContextMenu("Remove")]
 	public void RemoveFromControl()
 	{
-		characterController.RemoveComponent(this);
+		ShipConstructor.RemoveComponent(this, characterController);
 	}
 
 	public void ChangeLayerAfterWait()

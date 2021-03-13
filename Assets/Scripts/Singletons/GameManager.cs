@@ -8,9 +8,22 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 {
 	public PlayerInput playerInput;
 
+	public ShipCharacterController tempPrefab;
+	public Transform tempSpawnPoint;
+
 	private void Start()
 	{
-		ModeSwitcher.instance.ChangeMode(typeof(BuildMode));
+		ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
+	}
+
+	public void Exit()
+	{
+		Application.Quit(0);
+	}
+
+	public void LoadShip()
+	{
+		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
 	}
 
 }

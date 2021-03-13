@@ -32,7 +32,7 @@ public class FlightMode : BaseMode, IMode
 		modeCamera.transform.GetChild(0).gameObject.SetActive(true);
 		if (Selection.isShipSelected)
 		{
-			Selection.instance.selectedShip.SetComponentsToFlight();
+			ShipConstructor.SetComponentsToFlight(Selection.instance.selectedShip);
 		}
 	}
 

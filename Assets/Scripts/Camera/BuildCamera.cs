@@ -20,9 +20,9 @@ public class BuildCamera : MonoBehaviour
 		//Transform lookAt = new Transform(Selection.instance.selectedShip.transform);
 		//lookAt.position = new Vector3(lookAt.position.x, level, lookAt.position.z);
 		camera.LookAt = Selection.instance.selectedShip.transform;
-		camera.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset = new Vector3(0, level, 0);
-		transform.position = new Vector3(Selection.instance.selectedShip.transform.position.x, level, Selection.instance.selectedShip.transform.position.z);
-		transform.rotation = Selection.instance.selectedShip.transform.rotation;
+		//camera.GetCinemachineComponent<CinemachineComposer>().m_TrackedObjectOffset = new Vector3(0, level, 0);
+		//transform.position = new Vector3(Selection.instance.selectedShip.transform.position.x, level, Selection.instance.selectedShip.transform.position.z);
+		//transform.rotation = Selection.instance.selectedShip.transform.rotation;
 	}
 }
 

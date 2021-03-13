@@ -9,8 +9,6 @@ using UnityEngine.InputSystem;
 public class BuildMode : BaseMode, IMode
 {
 	public GameObject previewPrefab;
-	public ShipCharacterController tempPrefab;
-	public Transform tempSpawnPoint;
 
 	private ShipComponent buildComponent;
 	private GameObject previewObject;
@@ -58,10 +56,8 @@ public class BuildMode : BaseMode, IMode
 
 		if (Selection.isShipSelected)
 		{
-			Selection.instance.selectedShip.SetComponentsToBuild();
-			//	level = Mathf.RoundToInt(Selection.instance.selectedShip.control.gameObject.transform.position.y);
-			level = 2;
-			//Selection.instance.selectedShip.
+			ShipConstructor.SetComponentsToBuild(Selection.instance.selectedShip);
+			level = 0;
 			ShowActiveShipLevel();
 			buildCamera.FocusOnShip(level);
 		}
@@ -74,8 +70,7 @@ public class BuildMode : BaseMode, IMode
 		Destroy(previewObject); if (Selection.isShipSelected)
 		{
 			ShipCharacterController shipCharacter = Selection.instance.selectedShip;
-			List<ShipComponent> comps = shipCharacter.GetAllComponents().ToList();
-			comps.ForEach(x => x.gameObject.SetActive(true));
+			shipCharacter.connectedComponents.ForEach(x => x.gameObject.SetActive(true));
 		}
 	}
 
@@ -112,11 +107,12 @@ public class BuildMode : BaseMode, IMode
 	private void ShowActiveShipLevel() //can use fancy shader in future
 	{
 		ShipCharacterController shipCharacter = Selection.instance.selectedShip;
-		List<ShipComponent> comps = shipCharacter.GetAllComponents().ToList();
-		comps.ForEach(x => x.gameObject.SetActive(Mathf.RoundToInt(x.gameObject.transform.position.y) <= level));
-		//get all components
-		//use preview on all lower
-		//hide all above the level 
+		List<ShipComponent> comps = shipCharacter.connectedComponents;
+		foreach (ShipComponent comp in comps)
+		{
+			int position = Mathf.RoundToInt(comp.gameObject.transform.position.y);
+			comp.gameObject.SetActive(position <= level);
+		}
 
 	}
 
@@ -125,14 +121,15 @@ public class BuildMode : BaseMode, IMode
 	{
 		level++;
 		ShowActiveShipLevel();
+		buildCamera.FocusOnShip(level);
+
+
 	}
-
-
-
 	internal void MoveDown()
 	{
 		level--;
 		ShowActiveShipLevel();
+		buildCamera.FocusOnShip(level);
 	}
 
 
@@ -142,9 +139,7 @@ public class BuildMode : BaseMode, IMode
 		if (Selection.isShipSelected)
 		{
 			Destroy(Selection.instance.selectedShip.gameObject);
-
-			Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
-			FocusOnShip();
+			GameManager.instance.LoadShip();
 		}
 	}
 
@@ -158,7 +153,7 @@ public class BuildMode : BaseMode, IMode
 		if (Selection.isShipSelected && buildComponent != null)
 		{
 			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, placePosition, placeRotation, Selection.instance.selectedShip.transform);
-			Selection.instance.selectedShip.Addcomponent(shipComponent);
+			ShipConstructor.AddComponent(shipComponent, Selection.instance.selectedShip);
 		}
 	}
 
@@ -166,11 +161,9 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			Selection.instance.selectedShip.SetComponentsToFlight();
+			ShipConstructor.SetComponentsToFlight(Selection.instance.selectedShip);
 		}
-
-		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
-		FocusOnShip();
+		GameManager.instance.LoadShip();
 	}
 
 	internal void SaveShip()
@@ -187,15 +180,4 @@ public class BuildMode : BaseMode, IMode
 		ModeSwitcher.instance.ChangeMode(typeof(FlightMode));
 	}
 
-	private void FocusOnShip()
-	{
-		if (Selection.isShipSelected)
-		{
-			//move to camera class
-			//modeCamera.LookAt = Selection.instance.selectedShip.transform;
-			//modeCamera.Follow = Selection.instance.selectedShip.transform;
-			Selection.instance.selectedShip.SetComponentsToBuild();
-		}
-
-	}
 }

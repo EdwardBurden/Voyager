@@ -9,7 +9,8 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class ShipCharacterController : MonoBehaviour , ISelectable
 {
-	private ShipConstructor constructor;
+	public ControlSC control => connectedComponents.FirstOrDefault(x => x is ControlSC) as ControlSC;
+	public List<ShipComponent> connectedComponents;
 	private Rigidbody rigidbody => GetComponent<Rigidbody>();
 
 	//Movement
@@ -25,60 +26,10 @@ public class ShipCharacterController : MonoBehaviour , ISelectable
 
 	private float hitDamage = 10;
 
-	public LayerMask constructionLayer;
-	public int lazyConstructionLayermask;
-	public int destructionLayer;
-	public int defaultlayer;
-
-	public ShipComponent control => constructor.control;
-
-	internal void SetComponentsToBuild()
-	{
-		foreach (ShipComponent shipComponent in constructor.connectedComponents)
-		{
-			shipComponent.OnBuild();
-		}
-		constructor.UpdateLayers(lazyConstructionLayermask);
-	}
-
-	internal void SetComponentsToFlight()
-	{
-		foreach (ShipComponent shipComponent in constructor.connectedComponents)
-		{
-			shipComponent.OnFlight();
-		}
-		constructor.UpdateLayers(defaultlayer);
-	}
 
 	public void Init()
 	{
-		this.constructor = new ShipConstructor(this);
 		targetDirection = rigidbody.rotation;
-	}
-
-	public void ConstructShip(List<ShipComponent> components)
-	{
-		constructor.ContrustShip(components);
-	}
-
-	public void ConstructShip()
-	{
-		constructor.ContrustShip();
-	}
-
-	public void Addcomponent(ShipComponent shipComponent)
-	{
-		constructor.AddComponent(shipComponent);
-	}
-
-	internal IEnumerable<ShipComponent> GetAllComponents()
-	{
-		return constructor.connectedComponents;
-	}
-
-	public void RemoveComponent(ShipComponent shipComponent)
-	{
-		constructor.RemoveComponent(shipComponent);
 	}
 
 	private void OnCollisionEnter(Collision collision)

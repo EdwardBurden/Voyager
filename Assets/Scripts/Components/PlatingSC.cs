@@ -34,7 +34,7 @@ public class PlatingSC : ShipComponent, IDamageable
 	{
 		if (characterController) //only for testing laser
 		{
-			characterController.RemoveComponent(this);
+			ShipConstructor.RemoveComponent(this, characterController);
 		}
 		Debug.Log(name);
 		float x = Random.Range(-1.0f, 1.0f) * explosiveForce;

@@ -44,7 +44,7 @@ public class LaserSC : ShipComponent, IWeapon
 
 	public bool CanActiveWeapon()
 	{
-		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).GetAllComponents().FirstOrDefault(x => x is IDamageable) as ShipComponent;
+		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).connectedComponents.FirstOrDefault(x => x is IDamageable) as ShipComponent;
 		if (target == null)
 		{
 			return false;
@@ -85,7 +85,7 @@ public class LaserSC : ShipComponent, IWeapon
 	public void ActiveWeapon()
 	{
 		active = true; //move to end of extend laser
-		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).GetAllComponents().FirstOrDefault(x => x is IDamageable) as ShipComponent;
+		target = FindObjectsOfType<ShipCharacterController>().FirstOrDefault(x => x != characterController).connectedComponents.FirstOrDefault(x => x is IDamageable) as ShipComponent;
 		lineRenderer.gameObject.SetActive(true);
 		//StartCoroutine(FireLaser());
 		StartCoroutine(MoveLaserHead());

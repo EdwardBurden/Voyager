@@ -17,7 +17,7 @@ public class FlightModeInput : MonoBehaviour
 
 	public void SwitchToBuild(CallbackContext value)
 	{
-		if (value.started)
+		if (value.started && Selection.isShipSelected)
 		{
 			flightMode.SwitchToBuild();
 		}

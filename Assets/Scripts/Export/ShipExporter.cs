@@ -28,7 +28,7 @@ public class ShipExporter
 		ShipCharacterController shipCharacter = GameObject.Instantiate(prefabController, spawnPoint.transform.position, spawnPoint.transform.rotation, null);
 		shipCharacter.Init();
 		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
-		shipCharacter.ConstructShip(components);
+		ShipConstructor.ContrustShip(components, shipCharacter);
 		return shipCharacter;
 	}
 
@@ -70,7 +70,7 @@ public class ShipExporter
 	internal static ShipExportInfo ExportToFile(ShipCharacterController shipCharacter)
 	{
 		ShipExportInfo shipExport = new ShipExportInfo();
-		foreach (ShipComponent shipComponent in shipCharacter.GetAllComponents())
+		foreach (ShipComponent shipComponent in shipCharacter.connectedComponents)
 		{
 			ComponentExportInfo componentExport = new ComponentExportInfo(
 				new Vector3(Mathf.RoundToInt(shipComponent.transform.localPosition.x), Mathf.RoundToInt(shipComponent.transform.localPosition.y), Mathf.RoundToInt(shipComponent.transform.localPosition.z)),
