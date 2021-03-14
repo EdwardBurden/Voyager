@@ -92,13 +92,8 @@ public class BuildMode : BaseMode, IMode
 		}
 		else
 		{
-			Vector3 pos = Selection.instance.selectedShip.transform.position;
-			pos[1] = level;
-			previewFloor.transform.position = pos;
+			previewFloor.gameObject.transform.position = buildCamera.transform.position;
 		}
-
-
-
 
 		if (previewObject == null)
 		{

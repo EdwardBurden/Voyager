@@ -62,8 +62,10 @@ public class BuildCamera : MonoBehaviour
 	public void Move(CallbackContext value)
 	{
 		moveDirectionInput = value.ReadValue<Vector2>();
-		newPosition += transform.forward * moveDirectionInput.y;
-		newPosition += transform.right * moveDirectionInput.x;
+		Vector3 vector = Vector3.zero;
+		vector += transform.forward * Mathf.RoundToInt(moveDirectionInput.y);
+		vector += transform.right * Mathf.RoundToInt(moveDirectionInput.x);
+		newPosition += vector;
 	}
 
 	public void ZoomIn(CallbackContext value)
@@ -84,7 +86,7 @@ public class BuildCamera : MonoBehaviour
 		}
 	}
 
-	
+
 
 	internal void UpdateElevation(int level)
 	{

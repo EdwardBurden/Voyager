@@ -394,7 +394,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Camera_Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""fdf17230-32ae-4fd9-9fd8-4b980cb6c3ad"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
