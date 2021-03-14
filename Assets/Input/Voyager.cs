@@ -27,7 +27,23 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SpeedUp"",
+                    ""name"": ""MoveToSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""1761b0a3-3a92-4a23-9fda-cbc52973bfc6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap""
+                },
+                {
+                    ""name"": ""Selection"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc8048a8-3fc4-4fdf-a76b-7fab58257ac9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""MultiTap""
+                },
+                {
+                    ""name"": ""Ship_SpeedUp"",
                     ""type"": ""Button"",
                     ""id"": ""5794ef30-cfc0-4ee8-8c8b-b9b3ea14f49a"",
                     ""expectedControlType"": ""Button"",
@@ -35,7 +51,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""SlowDown"",
+                    ""name"": ""Ship_SlowDown"",
                     ""type"": ""Button"",
                     ""id"": ""90dd6bb0-e24f-4937-9d38-c7104b58e4d1"",
                     ""expectedControlType"": ""Button"",
@@ -43,7 +59,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""TurnLeft"",
+                    ""name"": ""Ship_TurnLeft"",
                     ""type"": ""Button"",
                     ""id"": ""24f01dc8-cd25-467a-9ec5-cba93f0eb4b5"",
                     ""expectedControlType"": ""Button"",
@@ -51,7 +67,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""TurnRight"",
+                    ""name"": ""Ship_TurnRight"",
                     ""type"": ""Button"",
                     ""id"": ""1f1bbd3b-2d3b-4dcf-b404-8f15194d167c"",
                     ""expectedControlType"": ""Button"",
@@ -59,7 +75,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Laser"",
+                    ""name"": ""Ship_Laser"",
                     ""type"": ""Button"",
                     ""id"": ""731e646a-33c3-4c5b-846c-829001bf3265"",
                     ""expectedControlType"": ""Button"",
@@ -113,22 +129,6 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""MoveToSelection"",
-                    ""type"": ""Button"",
-                    ""id"": ""1761b0a3-3a92-4a23-9fda-cbc52973bfc6"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""MultiTap""
-                },
-                {
-                    ""name"": ""Selection"",
-                    ""type"": ""Button"",
-                    ""id"": ""dc8048a8-3fc4-4fdf-a76b-7fab58257ac9"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""MultiTap""
                 }
             ],
             ""bindings"": [
@@ -150,7 +150,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Laser"",
+                    ""action"": ""Ship_Laser"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -161,7 +161,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SpeedUp"",
+                    ""action"": ""Ship_SpeedUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -172,7 +172,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SlowDown"",
+                    ""action"": ""Ship_SlowDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -271,7 +271,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TurnRight"",
+                    ""action"": ""Ship_TurnRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -282,7 +282,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TurnLeft"",
+                    ""action"": ""Ship_TurnLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -353,7 +353,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MoveUpLevel"",
+                    ""name"": ""ElevateUp"",
                     ""type"": ""Button"",
                     ""id"": ""ecab820d-d6b7-4a60-b647-d965224b9b36"",
                     ""expectedControlType"": ""Button"",
@@ -361,9 +361,49 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""MoveDownLevel"",
+                    ""name"": ""ElevateDown"",
                     ""type"": ""Button"",
                     ""id"": ""8cab29bc-4744-4aba-aeb2-0d2dc4af9f77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_ZoomIn"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3973abf-f169-48e4-8cf4-1453ec2b3c68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_ZoomAxis"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""e8e26ec6-6549-4f75-84bd-5d6ce3e208a0"",
+                    ""expectedControlType"": ""Double"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_ZoomOut"",
+                    ""type"": ""Button"",
+                    ""id"": ""02820af1-ab20-4f0a-b90e-7679cd937c4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""fdf17230-32ae-4fd9-9fd8-4b980cb6c3ad"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Camera_Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""05de1986-09eb-41f7-b16e-ad8898d42eb0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -399,7 +439,7 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MoveUpLevel"",
+                    ""action"": ""ElevateUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -410,7 +450,106 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MoveDownLevel"",
+                    ""action"": ""ElevateDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""91efe059-ad48-4055-9253-ad6cd2ef9374"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""39063df1-0ae5-4618-a078-e39ff2a90a1d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""49194956-aa6f-4885-a940-492e0379782e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""64e6eb93-3d8e-4626-b1af-f860b68e3692"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""250d128c-3d95-40f6-9977-434fdb3f0d70"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c32b62c1-9d43-4b69-b207-459e46b64a96"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""adc53d85-f9b1-4f61-8b6d-b7dfa2c10756"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_ZoomOut"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9469c7e0-f1f7-47b9-bb96-beb1cadee4e3"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_ZoomAxis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f453db1-05ee-4288-b209-cf09f052a51e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Camera_ZoomIn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -510,25 +649,30 @@ public class @Voyager : IInputActionCollection, IDisposable
         // Flight
         m_Flight = asset.FindActionMap("Flight", throwIfNotFound: true);
         m_Flight_Build = m_Flight.FindAction("Build", throwIfNotFound: true);
-        m_Flight_SpeedUp = m_Flight.FindAction("SpeedUp", throwIfNotFound: true);
-        m_Flight_SlowDown = m_Flight.FindAction("SlowDown", throwIfNotFound: true);
-        m_Flight_TurnLeft = m_Flight.FindAction("TurnLeft", throwIfNotFound: true);
-        m_Flight_TurnRight = m_Flight.FindAction("TurnRight", throwIfNotFound: true);
-        m_Flight_Laser = m_Flight.FindAction("Laser", throwIfNotFound: true);
+        m_Flight_MoveToSelection = m_Flight.FindAction("MoveToSelection", throwIfNotFound: true);
+        m_Flight_Selection = m_Flight.FindAction("Selection", throwIfNotFound: true);
+        m_Flight_Ship_SpeedUp = m_Flight.FindAction("Ship_SpeedUp", throwIfNotFound: true);
+        m_Flight_Ship_SlowDown = m_Flight.FindAction("Ship_SlowDown", throwIfNotFound: true);
+        m_Flight_Ship_TurnLeft = m_Flight.FindAction("Ship_TurnLeft", throwIfNotFound: true);
+        m_Flight_Ship_TurnRight = m_Flight.FindAction("Ship_TurnRight", throwIfNotFound: true);
+        m_Flight_Ship_Laser = m_Flight.FindAction("Ship_Laser", throwIfNotFound: true);
         m_Flight_Camera_ZoomOut = m_Flight.FindAction("Camera_ZoomOut", throwIfNotFound: true);
         m_Flight_Camera_ZoomAxis = m_Flight.FindAction("Camera_ZoomAxis", throwIfNotFound: true);
         m_Flight_Camera_ZoomIn = m_Flight.FindAction("Camera_ZoomIn", throwIfNotFound: true);
         m_Flight_Camera_Move = m_Flight.FindAction("Camera_Move", throwIfNotFound: true);
         m_Flight_Camera_RotateLeft = m_Flight.FindAction("Camera_RotateLeft", throwIfNotFound: true);
         m_Flight_Camera_RotateRight = m_Flight.FindAction("Camera_RotateRight", throwIfNotFound: true);
-        m_Flight_MoveToSelection = m_Flight.FindAction("MoveToSelection", throwIfNotFound: true);
-        m_Flight_Selection = m_Flight.FindAction("Selection", throwIfNotFound: true);
         // Build
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
         m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
         m_Build_Place = m_Build.FindAction("Place", throwIfNotFound: true);
-        m_Build_MoveUpLevel = m_Build.FindAction("MoveUpLevel", throwIfNotFound: true);
-        m_Build_MoveDownLevel = m_Build.FindAction("MoveDownLevel", throwIfNotFound: true);
+        m_Build_ElevateUp = m_Build.FindAction("ElevateUp", throwIfNotFound: true);
+        m_Build_ElevateDown = m_Build.FindAction("ElevateDown", throwIfNotFound: true);
+        m_Build_Camera_ZoomIn = m_Build.FindAction("Camera_ZoomIn", throwIfNotFound: true);
+        m_Build_Camera_ZoomAxis = m_Build.FindAction("Camera_ZoomAxis", throwIfNotFound: true);
+        m_Build_Camera_ZoomOut = m_Build.FindAction("Camera_ZoomOut", throwIfNotFound: true);
+        m_Build_Camera_Move = m_Build.FindAction("Camera_Move", throwIfNotFound: true);
+        m_Build_Camera_Rotate = m_Build.FindAction("Camera_Rotate", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -582,37 +726,37 @@ public class @Voyager : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Flight;
     private IFlightActions m_FlightActionsCallbackInterface;
     private readonly InputAction m_Flight_Build;
-    private readonly InputAction m_Flight_SpeedUp;
-    private readonly InputAction m_Flight_SlowDown;
-    private readonly InputAction m_Flight_TurnLeft;
-    private readonly InputAction m_Flight_TurnRight;
-    private readonly InputAction m_Flight_Laser;
+    private readonly InputAction m_Flight_MoveToSelection;
+    private readonly InputAction m_Flight_Selection;
+    private readonly InputAction m_Flight_Ship_SpeedUp;
+    private readonly InputAction m_Flight_Ship_SlowDown;
+    private readonly InputAction m_Flight_Ship_TurnLeft;
+    private readonly InputAction m_Flight_Ship_TurnRight;
+    private readonly InputAction m_Flight_Ship_Laser;
     private readonly InputAction m_Flight_Camera_ZoomOut;
     private readonly InputAction m_Flight_Camera_ZoomAxis;
     private readonly InputAction m_Flight_Camera_ZoomIn;
     private readonly InputAction m_Flight_Camera_Move;
     private readonly InputAction m_Flight_Camera_RotateLeft;
     private readonly InputAction m_Flight_Camera_RotateRight;
-    private readonly InputAction m_Flight_MoveToSelection;
-    private readonly InputAction m_Flight_Selection;
     public struct FlightActions
     {
         private @Voyager m_Wrapper;
         public FlightActions(@Voyager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Build => m_Wrapper.m_Flight_Build;
-        public InputAction @SpeedUp => m_Wrapper.m_Flight_SpeedUp;
-        public InputAction @SlowDown => m_Wrapper.m_Flight_SlowDown;
-        public InputAction @TurnLeft => m_Wrapper.m_Flight_TurnLeft;
-        public InputAction @TurnRight => m_Wrapper.m_Flight_TurnRight;
-        public InputAction @Laser => m_Wrapper.m_Flight_Laser;
+        public InputAction @MoveToSelection => m_Wrapper.m_Flight_MoveToSelection;
+        public InputAction @Selection => m_Wrapper.m_Flight_Selection;
+        public InputAction @Ship_SpeedUp => m_Wrapper.m_Flight_Ship_SpeedUp;
+        public InputAction @Ship_SlowDown => m_Wrapper.m_Flight_Ship_SlowDown;
+        public InputAction @Ship_TurnLeft => m_Wrapper.m_Flight_Ship_TurnLeft;
+        public InputAction @Ship_TurnRight => m_Wrapper.m_Flight_Ship_TurnRight;
+        public InputAction @Ship_Laser => m_Wrapper.m_Flight_Ship_Laser;
         public InputAction @Camera_ZoomOut => m_Wrapper.m_Flight_Camera_ZoomOut;
         public InputAction @Camera_ZoomAxis => m_Wrapper.m_Flight_Camera_ZoomAxis;
         public InputAction @Camera_ZoomIn => m_Wrapper.m_Flight_Camera_ZoomIn;
         public InputAction @Camera_Move => m_Wrapper.m_Flight_Camera_Move;
         public InputAction @Camera_RotateLeft => m_Wrapper.m_Flight_Camera_RotateLeft;
         public InputAction @Camera_RotateRight => m_Wrapper.m_Flight_Camera_RotateRight;
-        public InputAction @MoveToSelection => m_Wrapper.m_Flight_MoveToSelection;
-        public InputAction @Selection => m_Wrapper.m_Flight_Selection;
         public InputActionMap Get() { return m_Wrapper.m_Flight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -625,21 +769,27 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Build.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnBuild;
                 @Build.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnBuild;
                 @Build.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnBuild;
-                @SpeedUp.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSpeedUp;
-                @SpeedUp.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSpeedUp;
-                @SpeedUp.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSpeedUp;
-                @SlowDown.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
-                @SlowDown.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
-                @SlowDown.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSlowDown;
-                @TurnLeft.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnLeft;
-                @TurnLeft.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnLeft;
-                @TurnLeft.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnLeft;
-                @TurnRight.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnRight;
-                @TurnRight.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnRight;
-                @TurnRight.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnTurnRight;
-                @Laser.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
-                @Laser.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
-                @Laser.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnLaser;
+                @MoveToSelection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
+                @MoveToSelection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
+                @MoveToSelection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
+                @Selection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
+                @Selection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
+                @Selection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
+                @Ship_SpeedUp.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_SpeedUp;
+                @Ship_SpeedUp.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_SpeedUp;
+                @Ship_SpeedUp.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_SpeedUp;
+                @Ship_SlowDown.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_SlowDown;
+                @Ship_SlowDown.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_SlowDown;
+                @Ship_SlowDown.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_SlowDown;
+                @Ship_TurnLeft.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_TurnLeft;
+                @Ship_TurnLeft.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_TurnLeft;
+                @Ship_TurnLeft.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_TurnLeft;
+                @Ship_TurnRight.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_TurnRight;
+                @Ship_TurnRight.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_TurnRight;
+                @Ship_TurnRight.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_TurnRight;
+                @Ship_Laser.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_Laser;
+                @Ship_Laser.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_Laser;
+                @Ship_Laser.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnShip_Laser;
                 @Camera_ZoomOut.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomOut;
                 @Camera_ZoomOut.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomOut;
                 @Camera_ZoomOut.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_ZoomOut;
@@ -658,12 +808,6 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Camera_RotateRight.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateRight;
                 @Camera_RotateRight.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateRight;
                 @Camera_RotateRight.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnCamera_RotateRight;
-                @MoveToSelection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
-                @MoveToSelection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
-                @MoveToSelection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnMoveToSelection;
-                @Selection.started -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
-                @Selection.performed -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
-                @Selection.canceled -= m_Wrapper.m_FlightActionsCallbackInterface.OnSelection;
             }
             m_Wrapper.m_FlightActionsCallbackInterface = instance;
             if (instance != null)
@@ -671,21 +815,27 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Build.started += instance.OnBuild;
                 @Build.performed += instance.OnBuild;
                 @Build.canceled += instance.OnBuild;
-                @SpeedUp.started += instance.OnSpeedUp;
-                @SpeedUp.performed += instance.OnSpeedUp;
-                @SpeedUp.canceled += instance.OnSpeedUp;
-                @SlowDown.started += instance.OnSlowDown;
-                @SlowDown.performed += instance.OnSlowDown;
-                @SlowDown.canceled += instance.OnSlowDown;
-                @TurnLeft.started += instance.OnTurnLeft;
-                @TurnLeft.performed += instance.OnTurnLeft;
-                @TurnLeft.canceled += instance.OnTurnLeft;
-                @TurnRight.started += instance.OnTurnRight;
-                @TurnRight.performed += instance.OnTurnRight;
-                @TurnRight.canceled += instance.OnTurnRight;
-                @Laser.started += instance.OnLaser;
-                @Laser.performed += instance.OnLaser;
-                @Laser.canceled += instance.OnLaser;
+                @MoveToSelection.started += instance.OnMoveToSelection;
+                @MoveToSelection.performed += instance.OnMoveToSelection;
+                @MoveToSelection.canceled += instance.OnMoveToSelection;
+                @Selection.started += instance.OnSelection;
+                @Selection.performed += instance.OnSelection;
+                @Selection.canceled += instance.OnSelection;
+                @Ship_SpeedUp.started += instance.OnShip_SpeedUp;
+                @Ship_SpeedUp.performed += instance.OnShip_SpeedUp;
+                @Ship_SpeedUp.canceled += instance.OnShip_SpeedUp;
+                @Ship_SlowDown.started += instance.OnShip_SlowDown;
+                @Ship_SlowDown.performed += instance.OnShip_SlowDown;
+                @Ship_SlowDown.canceled += instance.OnShip_SlowDown;
+                @Ship_TurnLeft.started += instance.OnShip_TurnLeft;
+                @Ship_TurnLeft.performed += instance.OnShip_TurnLeft;
+                @Ship_TurnLeft.canceled += instance.OnShip_TurnLeft;
+                @Ship_TurnRight.started += instance.OnShip_TurnRight;
+                @Ship_TurnRight.performed += instance.OnShip_TurnRight;
+                @Ship_TurnRight.canceled += instance.OnShip_TurnRight;
+                @Ship_Laser.started += instance.OnShip_Laser;
+                @Ship_Laser.performed += instance.OnShip_Laser;
+                @Ship_Laser.canceled += instance.OnShip_Laser;
                 @Camera_ZoomOut.started += instance.OnCamera_ZoomOut;
                 @Camera_ZoomOut.performed += instance.OnCamera_ZoomOut;
                 @Camera_ZoomOut.canceled += instance.OnCamera_ZoomOut;
@@ -704,12 +854,6 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Camera_RotateRight.started += instance.OnCamera_RotateRight;
                 @Camera_RotateRight.performed += instance.OnCamera_RotateRight;
                 @Camera_RotateRight.canceled += instance.OnCamera_RotateRight;
-                @MoveToSelection.started += instance.OnMoveToSelection;
-                @MoveToSelection.performed += instance.OnMoveToSelection;
-                @MoveToSelection.canceled += instance.OnMoveToSelection;
-                @Selection.started += instance.OnSelection;
-                @Selection.performed += instance.OnSelection;
-                @Selection.canceled += instance.OnSelection;
             }
         }
     }
@@ -720,16 +864,26 @@ public class @Voyager : IInputActionCollection, IDisposable
     private IBuildActions m_BuildActionsCallbackInterface;
     private readonly InputAction m_Build_Flight;
     private readonly InputAction m_Build_Place;
-    private readonly InputAction m_Build_MoveUpLevel;
-    private readonly InputAction m_Build_MoveDownLevel;
+    private readonly InputAction m_Build_ElevateUp;
+    private readonly InputAction m_Build_ElevateDown;
+    private readonly InputAction m_Build_Camera_ZoomIn;
+    private readonly InputAction m_Build_Camera_ZoomAxis;
+    private readonly InputAction m_Build_Camera_ZoomOut;
+    private readonly InputAction m_Build_Camera_Move;
+    private readonly InputAction m_Build_Camera_Rotate;
     public struct BuildActions
     {
         private @Voyager m_Wrapper;
         public BuildActions(@Voyager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Flight => m_Wrapper.m_Build_Flight;
         public InputAction @Place => m_Wrapper.m_Build_Place;
-        public InputAction @MoveUpLevel => m_Wrapper.m_Build_MoveUpLevel;
-        public InputAction @MoveDownLevel => m_Wrapper.m_Build_MoveDownLevel;
+        public InputAction @ElevateUp => m_Wrapper.m_Build_ElevateUp;
+        public InputAction @ElevateDown => m_Wrapper.m_Build_ElevateDown;
+        public InputAction @Camera_ZoomIn => m_Wrapper.m_Build_Camera_ZoomIn;
+        public InputAction @Camera_ZoomAxis => m_Wrapper.m_Build_Camera_ZoomAxis;
+        public InputAction @Camera_ZoomOut => m_Wrapper.m_Build_Camera_ZoomOut;
+        public InputAction @Camera_Move => m_Wrapper.m_Build_Camera_Move;
+        public InputAction @Camera_Rotate => m_Wrapper.m_Build_Camera_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Build; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -745,12 +899,27 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Place.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
                 @Place.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
                 @Place.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
-                @MoveUpLevel.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveUpLevel;
-                @MoveUpLevel.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveUpLevel;
-                @MoveUpLevel.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveUpLevel;
-                @MoveDownLevel.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveDownLevel;
-                @MoveDownLevel.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveDownLevel;
-                @MoveDownLevel.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnMoveDownLevel;
+                @ElevateUp.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateUp;
+                @ElevateUp.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateUp;
+                @ElevateUp.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateUp;
+                @ElevateDown.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateDown;
+                @ElevateDown.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateDown;
+                @ElevateDown.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateDown;
+                @Camera_ZoomIn.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomIn;
+                @Camera_ZoomIn.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomIn;
+                @Camera_ZoomIn.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomIn;
+                @Camera_ZoomAxis.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomAxis;
+                @Camera_ZoomOut.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomOut;
+                @Camera_ZoomOut.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomOut;
+                @Camera_ZoomOut.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_ZoomOut;
+                @Camera_Move.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_Move;
+                @Camera_Move.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_Move;
+                @Camera_Move.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_Move;
+                @Camera_Rotate.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_Rotate;
+                @Camera_Rotate.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_Rotate;
+                @Camera_Rotate.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnCamera_Rotate;
             }
             m_Wrapper.m_BuildActionsCallbackInterface = instance;
             if (instance != null)
@@ -761,12 +930,27 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Place.started += instance.OnPlace;
                 @Place.performed += instance.OnPlace;
                 @Place.canceled += instance.OnPlace;
-                @MoveUpLevel.started += instance.OnMoveUpLevel;
-                @MoveUpLevel.performed += instance.OnMoveUpLevel;
-                @MoveUpLevel.canceled += instance.OnMoveUpLevel;
-                @MoveDownLevel.started += instance.OnMoveDownLevel;
-                @MoveDownLevel.performed += instance.OnMoveDownLevel;
-                @MoveDownLevel.canceled += instance.OnMoveDownLevel;
+                @ElevateUp.started += instance.OnElevateUp;
+                @ElevateUp.performed += instance.OnElevateUp;
+                @ElevateUp.canceled += instance.OnElevateUp;
+                @ElevateDown.started += instance.OnElevateDown;
+                @ElevateDown.performed += instance.OnElevateDown;
+                @ElevateDown.canceled += instance.OnElevateDown;
+                @Camera_ZoomIn.started += instance.OnCamera_ZoomIn;
+                @Camera_ZoomIn.performed += instance.OnCamera_ZoomIn;
+                @Camera_ZoomIn.canceled += instance.OnCamera_ZoomIn;
+                @Camera_ZoomAxis.started += instance.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.performed += instance.OnCamera_ZoomAxis;
+                @Camera_ZoomAxis.canceled += instance.OnCamera_ZoomAxis;
+                @Camera_ZoomOut.started += instance.OnCamera_ZoomOut;
+                @Camera_ZoomOut.performed += instance.OnCamera_ZoomOut;
+                @Camera_ZoomOut.canceled += instance.OnCamera_ZoomOut;
+                @Camera_Move.started += instance.OnCamera_Move;
+                @Camera_Move.performed += instance.OnCamera_Move;
+                @Camera_Move.canceled += instance.OnCamera_Move;
+                @Camera_Rotate.started += instance.OnCamera_Rotate;
+                @Camera_Rotate.performed += instance.OnCamera_Rotate;
+                @Camera_Rotate.canceled += instance.OnCamera_Rotate;
             }
         }
     }
@@ -852,26 +1036,31 @@ public class @Voyager : IInputActionCollection, IDisposable
     public interface IFlightActions
     {
         void OnBuild(InputAction.CallbackContext context);
-        void OnSpeedUp(InputAction.CallbackContext context);
-        void OnSlowDown(InputAction.CallbackContext context);
-        void OnTurnLeft(InputAction.CallbackContext context);
-        void OnTurnRight(InputAction.CallbackContext context);
-        void OnLaser(InputAction.CallbackContext context);
+        void OnMoveToSelection(InputAction.CallbackContext context);
+        void OnSelection(InputAction.CallbackContext context);
+        void OnShip_SpeedUp(InputAction.CallbackContext context);
+        void OnShip_SlowDown(InputAction.CallbackContext context);
+        void OnShip_TurnLeft(InputAction.CallbackContext context);
+        void OnShip_TurnRight(InputAction.CallbackContext context);
+        void OnShip_Laser(InputAction.CallbackContext context);
         void OnCamera_ZoomOut(InputAction.CallbackContext context);
         void OnCamera_ZoomAxis(InputAction.CallbackContext context);
         void OnCamera_ZoomIn(InputAction.CallbackContext context);
         void OnCamera_Move(InputAction.CallbackContext context);
         void OnCamera_RotateLeft(InputAction.CallbackContext context);
         void OnCamera_RotateRight(InputAction.CallbackContext context);
-        void OnMoveToSelection(InputAction.CallbackContext context);
-        void OnSelection(InputAction.CallbackContext context);
     }
     public interface IBuildActions
     {
         void OnFlight(InputAction.CallbackContext context);
         void OnPlace(InputAction.CallbackContext context);
-        void OnMoveUpLevel(InputAction.CallbackContext context);
-        void OnMoveDownLevel(InputAction.CallbackContext context);
+        void OnElevateUp(InputAction.CallbackContext context);
+        void OnElevateDown(InputAction.CallbackContext context);
+        void OnCamera_ZoomIn(InputAction.CallbackContext context);
+        void OnCamera_ZoomAxis(InputAction.CallbackContext context);
+        void OnCamera_ZoomOut(InputAction.CallbackContext context);
+        void OnCamera_Move(InputAction.CallbackContext context);
+        void OnCamera_Rotate(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

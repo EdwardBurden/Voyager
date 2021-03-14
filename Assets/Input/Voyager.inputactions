@@ -14,7 +14,23 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SpeedUp",
+                    "name": "MoveToSelection",
+                    "type": "Button",
+                    "id": "1761b0a3-3a92-4a23-9fda-cbc52973bfc6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "MultiTap"
+                },
+                {
+                    "name": "Selection",
+                    "type": "Button",
+                    "id": "dc8048a8-3fc4-4fdf-a76b-7fab58257ac9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "MultiTap"
+                },
+                {
+                    "name": "Ship_SpeedUp",
                     "type": "Button",
                     "id": "5794ef30-cfc0-4ee8-8c8b-b9b3ea14f49a",
                     "expectedControlType": "Button",
@@ -22,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SlowDown",
+                    "name": "Ship_SlowDown",
                     "type": "Button",
                     "id": "90dd6bb0-e24f-4937-9d38-c7104b58e4d1",
                     "expectedControlType": "Button",
@@ -30,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TurnLeft",
+                    "name": "Ship_TurnLeft",
                     "type": "Button",
                     "id": "24f01dc8-cd25-467a-9ec5-cba93f0eb4b5",
                     "expectedControlType": "Button",
@@ -38,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TurnRight",
+                    "name": "Ship_TurnRight",
                     "type": "Button",
                     "id": "1f1bbd3b-2d3b-4dcf-b404-8f15194d167c",
                     "expectedControlType": "Button",
@@ -46,7 +62,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Laser",
+                    "name": "Ship_Laser",
                     "type": "Button",
                     "id": "731e646a-33c3-4c5b-846c-829001bf3265",
                     "expectedControlType": "Button",
@@ -100,22 +116,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "MoveToSelection",
-                    "type": "Button",
-                    "id": "1761b0a3-3a92-4a23-9fda-cbc52973bfc6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "MultiTap"
-                },
-                {
-                    "name": "Selection",
-                    "type": "Button",
-                    "id": "dc8048a8-3fc4-4fdf-a76b-7fab58257ac9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "MultiTap"
                 }
             ],
             "bindings": [
@@ -137,7 +137,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Laser",
+                    "action": "Ship_Laser",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -148,7 +148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpeedUp",
+                    "action": "Ship_SpeedUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -159,7 +159,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SlowDown",
+                    "action": "Ship_SlowDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -258,7 +258,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnRight",
+                    "action": "Ship_TurnRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -269,7 +269,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TurnLeft",
+                    "action": "Ship_TurnLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -340,7 +340,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MoveUpLevel",
+                    "name": "ElevateUp",
                     "type": "Button",
                     "id": "ecab820d-d6b7-4a60-b647-d965224b9b36",
                     "expectedControlType": "Button",
@@ -348,9 +348,49 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MoveDownLevel",
+                    "name": "ElevateDown",
                     "type": "Button",
                     "id": "8cab29bc-4744-4aba-aeb2-0d2dc4af9f77",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_ZoomIn",
+                    "type": "Button",
+                    "id": "f3973abf-f169-48e4-8cf4-1453ec2b3c68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_ZoomAxis",
+                    "type": "PassThrough",
+                    "id": "e8e26ec6-6549-4f75-84bd-5d6ce3e208a0",
+                    "expectedControlType": "Double",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_ZoomOut",
+                    "type": "Button",
+                    "id": "02820af1-ab20-4f0a-b90e-7679cd937c4f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_Move",
+                    "type": "Value",
+                    "id": "fdf17230-32ae-4fd9-9fd8-4b980cb6c3ad",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Camera_Rotate",
+                    "type": "Button",
+                    "id": "05de1986-09eb-41f7-b16e-ad8898d42eb0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -386,7 +426,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveUpLevel",
+                    "action": "ElevateUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -397,7 +437,106 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveDownLevel",
+                    "action": "ElevateDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "91efe059-ad48-4055-9253-ad6cd2ef9374",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "39063df1-0ae5-4618-a078-e39ff2a90a1d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "49194956-aa6f-4885-a940-492e0379782e",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "64e6eb93-3d8e-4626-b1af-f860b68e3692",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "250d128c-3d95-40f6-9977-434fdb3f0d70",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c32b62c1-9d43-4b69-b207-459e46b64a96",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "adc53d85-f9b1-4f61-8b6d-b7dfa2c10756",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_ZoomOut",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9469c7e0-f1f7-47b9-bb96-beb1cadee4e3",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_ZoomAxis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f453db1-05ee-4288-b209-cf09f052a51e",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera_ZoomIn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

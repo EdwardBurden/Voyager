@@ -9,13 +9,13 @@ public class FlightCamera : MonoBehaviour
 {
 	private FlightMode flightMode;
 	public Transform childTransform;
+
 	private Vector2 moveDirectionInput;
 	private float rotateInput;
 	private float zoomInput;
 
-	private float rotationAmount = 1; //todo make publicv
+	private float rotationAmount = 1;
 	public float movementTime = 1;
-
 	public float normalSpeed;
 	public float fastSpeed;
 	private float speed;
@@ -66,6 +66,7 @@ public class FlightCamera : MonoBehaviour
 			zoomInput = value.ReadValue<float>() / 120.0f; ;
 		}
 	}
+
 	public void CameraMove(CallbackContext value)
 	{
 		if (value.performed)

@@ -30,7 +30,7 @@ public class BuildModeInput : MonoBehaviour
 		}
 	}
 
-	public void MoveUpLevel(CallbackContext value)
+	public void ElevateUp(CallbackContext value)
 	{
 		if (value.started)
 		{
@@ -38,7 +38,7 @@ public class BuildModeInput : MonoBehaviour
 		}
 	}
 
-	public void MoveDownLevel(CallbackContext value)
+	public void ElevateDown(CallbackContext value)
 	{
 		if (value.started)
 		{

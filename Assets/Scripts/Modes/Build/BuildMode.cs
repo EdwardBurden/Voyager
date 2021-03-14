@@ -8,14 +8,16 @@ using UnityEngine.InputSystem;
 
 public class BuildMode : BaseMode, IMode
 {
-	public GameObject previewPrefab;
+	public GameObject objectPrefab;
+	public GameObject floorPrefab;
 
 	private ShipComponent buildComponent;
 	private GameObject previewObject;
+	private GameObject previewFloor;
 	private Vector3 placePosition;
 	private Quaternion placeRotation;
 
-	public LayerMask constructionLayer;
+	public LayerMask buildFloorLayer;
 
 	public string modeMap;
 	private bool _active;
@@ -59,7 +61,7 @@ public class BuildMode : BaseMode, IMode
 			ShipConstructor.SetComponentsToBuild(Selection.instance.selectedShip);
 			level = 0;
 			ShowActiveShipLevel();
-			buildCamera.FocusOnShip(level);
+			buildCamera.FocusOnShip(Selection.instance.selectedShip.transform.position);
 		}
 	}
 
@@ -67,7 +69,9 @@ public class BuildMode : BaseMode, IMode
 	{
 		modeUI.SetActive(false);
 		modeCamera.transform.GetChild(0).gameObject.SetActive(false);
-		Destroy(previewObject); if (Selection.isShipSelected)
+		Destroy(previewObject);
+		Destroy(previewFloor);
+		if (Selection.isShipSelected)
 		{
 			ShipCharacterController shipCharacter = Selection.instance.selectedShip;
 			shipCharacter.connectedComponents.ForEach(x => x.gameObject.SetActive(true));
@@ -80,21 +84,25 @@ public class BuildMode : BaseMode, IMode
 		{
 			return;
 		}
-		RaycastHit hit;
-		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-		Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
-		bool hasHit = Physics.Raycast(ray, out hit, 1000, constructionLayer);
-		if (hasHit)
+		bool hasHit = GetPlacementPosition();
+
+		if (previewFloor == null)
 		{
-			Transform objectHit = hit.collider.transform;
-			Vector3 poition = new Vector3(Mathf.Round(objectHit.position.x), Mathf.Round(objectHit.position.y), Mathf.Round(objectHit.position.z));
-			Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
-			placePosition = objectHit.position + hit.normal;
-			placeRotation = objectHit.rotation;
+			previewFloor = Instantiate(floorPrefab);
 		}
+		else
+		{
+			Vector3 pos = Selection.instance.selectedShip.transform.position;
+			pos[1] = level;
+			previewFloor.transform.position = pos;
+		}
+
+
+
+
 		if (previewObject == null)
 		{
-			previewObject = Instantiate(previewPrefab);
+			previewObject = Instantiate(objectPrefab);
 		}
 		else
 		{
@@ -103,6 +111,25 @@ public class BuildMode : BaseMode, IMode
 			previewObject.transform.rotation = placeRotation;
 		}
 	}
+
+	private bool GetPlacementPosition()
+	{
+		RaycastHit hit;
+		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+		Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+		bool hasHit = Physics.Raycast(ray, out hit, 1000, buildFloorLayer);
+		if (hasHit)
+		{
+			Transform objectHit = hit.collider.transform;
+			Vector3 poition = new Vector3(Mathf.Round(hit.point.x), level-1, Mathf.Round(hit.point.z));
+			Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
+			placePosition = poition + hit.normal;
+			placeRotation = objectHit.rotation;
+		}
+
+		return hasHit;
+	}
+
 
 	private void ShowActiveShipLevel() //can use fancy shader in future
 	{
@@ -116,23 +143,21 @@ public class BuildMode : BaseMode, IMode
 
 	}
 
-
 	internal void MoveUp()
 	{
 		level++;
 		ShowActiveShipLevel();
-		buildCamera.FocusOnShip(level);
+		buildCamera.UpdateElevation(level);
 
 
 	}
+
 	internal void MoveDown()
 	{
 		level--;
 		ShowActiveShipLevel();
-		buildCamera.FocusOnShip(level);
+		buildCamera.UpdateElevation(level);
 	}
-
-
 
 	internal void ResetShip()
 	{
