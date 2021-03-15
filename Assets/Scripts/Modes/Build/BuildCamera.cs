@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using static UnityEngine.InputSystem.InputAction;
 
 public class BuildCamera : MonoBehaviour
@@ -12,13 +13,16 @@ public class BuildCamera : MonoBehaviour
 	private BuildMode buildMode;
 
 
-	private Vector2 moveDirectionInput;
+	private Vector3 moveDirectionInput;
 	private float zoomInput;
-	private float rotateInput;
 
 	private float speed;
 	private float rotationAmount = 1; //todo make publicv
 	private float movementTime = 5;
+
+	private bool rotating;
+	private Vector2 startRotationPosition;
+	private Quaternion startRotationRotation;
 
 	[HideInInspector]
 	public Vector3 newPosition;
@@ -39,17 +43,23 @@ public class BuildCamera : MonoBehaviour
 	{
 		camera.LookAt = this.transform;
 
-		//newPosition += transform.forward * moveDirectionInput.y * speed;
-		//newPosition += transform.right * moveDirectionInput.x * speed;
+
 		transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
 
-		newChildPosition += camera.transform.forward * zoomInput * speed;
-		//newRotation *= Quaternion.Euler(Vector3.up * rotateInput * rotationAmount);
 
+		newChildPosition += camera.transform.forward * zoomInput * speed;
 		camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, newChildPosition, Time.deltaTime * movementTime);
 
 
-		//	transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
+
+		if (rotating)
+		{
+			Vector2 pos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+			Vector2 differnec = startRotationPosition - pos;
+
+			newRotation = Quaternion.Euler(startRotationRotation.eulerAngles + (Vector3.up * -differnec.x * 360) + (Vector3.right * differnec.y * 180));
+		}
+		transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
 	}
 
 	public void FocusOnShip(Vector3 shipPosition)
@@ -86,7 +96,25 @@ public class BuildCamera : MonoBehaviour
 		}
 	}
 
+	public void Rotate(CallbackContext value)
+	{
+		if (value.started)
+		{
+			Vector2 pos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+			startRotationPosition = pos;
+			startRotationRotation = transform.rotation;
+			Debug.Log(pos);
+			rotating = true;
+		}
 
+		if (value.canceled)
+		{
+
+			Vector2 pos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+			Debug.Log(pos);
+			rotating = false;
+		}
+	}
 
 	internal void UpdateElevation(int level)
 	{

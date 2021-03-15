@@ -97,29 +97,30 @@ public class BuildMode : BaseMode, IMode
 
 		if (previewObject == null)
 		{
-			previewObject = Instantiate(objectPrefab);
+			previewObject = Instantiate(objectPrefab, Selection.instance.selectedShip.transform);
 		}
 		else
 		{
 			previewObject.SetActive(hasHit);
-			previewObject.transform.position = placePosition;
+			previewObject.transform.localPosition = placePosition;
 			previewObject.transform.rotation = placeRotation;
 		}
 	}
 
 	private bool GetPlacementPosition()
 	{
+		ShipCharacterController ship = Selection.instance.selectedShip;
 		RaycastHit hit;
 		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 		Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
 		bool hasHit = Physics.Raycast(ray, out hit, 1000, buildFloorLayer);
 		if (hasHit)
 		{
-			Transform objectHit = hit.collider.transform;
-			Vector3 poition = new Vector3(Mathf.Round(hit.point.x), level-1, Mathf.Round(hit.point.z));
-			Vector3 normal = new Vector3(Mathf.Round(hit.normal.x), Mathf.Round(hit.normal.y), Mathf.Round(hit.normal.z));
+
+			Vector3 localHit = ship.transform.InverseTransformPoint(hit.point);
+			Vector3 poition = new Vector3(Mathf.Round(localHit.x), level - 1, Mathf.Round(localHit.z));
 			placePosition = poition + hit.normal;
-			placeRotation = objectHit.rotation;
+			placeRotation = Selection.instance.selectedShip.transform.rotation;
 		}
 
 		return hasHit;
@@ -172,7 +173,10 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected && buildComponent != null)
 		{
-			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, placePosition, placeRotation, Selection.instance.selectedShip.transform);
+		
+			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, Selection.instance.selectedShip.transform);
+			shipComponent.transform.localPosition = placePosition;
+			shipComponent.transform.rotation = placeRotation;
 			ShipConstructor.AddComponent(shipComponent, Selection.instance.selectedShip);
 		}
 	}
