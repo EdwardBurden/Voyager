@@ -117,7 +117,7 @@ public static class ShipConstructor
 		shipComponent.transform.parent = null;
 		shipComponent.shipRigidbody.isKinematic = false;
 		shipComponent.shipCollider.enabled = true;
-		shipComponent.ChangeLayerAfterWait();
+		shipComponent.ChangeLayerAfterWait(defaultlayer);
 		SetLayerRecursively(shipComponent.gameObject, destructionLayer);
 	}
 
@@ -139,18 +139,10 @@ public static class ShipConstructor
 
 	public static void SetComponentsToBuild(ShipCharacterController characterController)
 	{
-		foreach (ShipComponent shipComponent in characterController.connectedComponents)
-		{
-			shipComponent.OnBuild();
-		}
 		UpdateLayers(lazyConstructionLayermask, characterController.connectedComponents);
 	}
 	public static void SetComponentsToFlight(ShipCharacterController characterController)
 	{
-		foreach (ShipComponent shipComponent in characterController.connectedComponents)
-		{
-			shipComponent.OnFlight();
-		}
 		UpdateLayers(defaultlayer, characterController.connectedComponents);
 	}
 

@@ -10,6 +10,7 @@ public class BuildModeUI : MonoBehaviour
 {
 	BuildMode buildMode;
 	public BuildShipComponentButtonUI selectionPrefab;
+	public GameObject selectionSectionPrefab;
 
 	public Button upLevelButton;
 	public Button downLevelButton;
@@ -22,11 +23,15 @@ public class BuildModeUI : MonoBehaviour
 
 	public void Awake()
 	{
-		List<GameObject> components = Resources.LoadAll(ShipExporter.PATH).Cast<GameObject>().ToList();
-		foreach (GameObject gameobject in components)
+		List<ShipComponentDefinition> definitions = Resources.LoadAll(ShipExporter.PATH).Cast<ShipComponentDefinition>().ToList();
+		foreach (ShipComponentDefinition def in definitions)
 		{
-			BuildShipComponentButtonUI buttonUI = Instantiate(selectionPrefab, componentTransform);
-			buttonUI.Init(SelectComponent, gameobject.GetComponent<ShipComponent>());
+			GameObject gameObject = Instantiate(selectionSectionPrefab, componentTransform);
+			for (int i = 0; i < def.prefabVariants.Length; i++)
+			{
+				BuildShipComponentButtonUI buttonUI = Instantiate(selectionPrefab, gameObject.transform);
+				buttonUI.Init(SelectComponent, def,i );
+			}
 		}
 		exportButton.onClick.AddListener(Save);
 		importButton.onClick.AddListener(Load);
@@ -55,9 +60,9 @@ public class BuildModeUI : MonoBehaviour
 		buildMode.ResetShip();
 	}
 
-	public void SelectComponent(ShipComponent shipComponent)
+	public void SelectComponent(ShipComponentDefinition componentDefinition , int variant)
 	{
-		buildMode.SwitchSelection(shipComponent);
+		buildMode.SwitchSelection(componentDefinition , variant);
 	}
 
 	public void UpLevel()

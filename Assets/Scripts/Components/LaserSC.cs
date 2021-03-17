@@ -25,6 +25,8 @@ public class LaserSC : ShipComponent, IWeapon
 		lineRenderer.gameObject.SetActive(false);
 	}
 
+	//FUTURE ED!!!!!!!, PUT ALL THIS BEHAVIOUR IN THE DEFINITION, AND PASS IN ANY FACTORS LIKE CURRENT COMPONENT DAMAGE OR EFFECTS THT AFFEXCT THE BEHAVIOUR, OKAY LOVE U BYE
+
 	private void Update()
 	{
 		if (active)

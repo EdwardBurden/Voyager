@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class ShipExporter
 {
-	public static string PATH = "Prefabs/ShipComponents";
+	public static string PATH = "Data/";
 	public static string saveFile = "default";
 	public static string saveLocation = "Saves";
 
@@ -37,6 +38,11 @@ public class ShipExporter
 		return shipCharacter;
 	}
 
+	//get scriptablobject
+	//spawn
+	//apply save file info(damage, other stuff)
+
+
 	internal static void SaveShip(ShipCharacterController shipCharacter)
 	{
 		ShipExportInfo shipExportInfo = ShipExporter.ExportToFile(shipCharacter);
@@ -47,30 +53,30 @@ public class ShipExporter
 		File.WriteAllText(filePath, jsoncontents);
 	}
 
+	private static List<ShipComponentDefinition> LoadDefinitionFromResources(ShipExportInfo shipExportInfo)
+	{
+		List<ShipComponentDefinition> loadedDefinitions = new List<ShipComponentDefinition>();
+		IEnumerable<string> definitions = shipExportInfo.components.Select(x => x.definitionName).Distinct();
+		foreach (string definition in definitions)
+		{
+			ShipComponentDefinition shipComponentDefinition = Resources.Load<ShipComponentDefinition>(PATH + definition);
+			loadedDefinitions.Add(shipComponentDefinition);
+		}
+		return loadedDefinitions;
+	}
+
 	internal static List<ShipComponent> ConstructFromFile(ShipExportInfo shipExportInfo, Transform shipExportTransform)
 	{
 		List<ShipComponent> components = new List<ShipComponent>();
+		List<ShipComponentDefinition> loadedDefinitions = LoadDefinitionFromResources(shipExportInfo);
+
 		foreach (ComponentExportInfo info in shipExportInfo.components)
 		{
-			Type type = ComponentMapping.GetTypeFromInt(info.componentId);
-			string filepath = PATH;
-			if (!string.IsNullOrWhiteSpace(info.folder))
-			{
-				filepath += ("/" + info.folder);
-			}
-			filepath += "/" + type.Name;
-			if (info.versionId > 0)
-			{
-				filepath += (" " + info.versionId);
-			}
-
-			ShipComponent loadedComponent = Resources.Load<ShipComponent>(filepath) as ShipComponent;
-
-			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, shipExportTransform);
+			ShipComponentDefinition componentDefinition = loadedDefinitions.FirstOrDefault(x => x.name == info.definitionName);
+			ShipComponent shipComponent = GameObject.Instantiate(componentDefinition.prefabVariants[info.variant], shipExportTransform);
 			shipComponent.transform.localPosition = info.position;
 			shipComponent.transform.localEulerAngles = info.eulerAngles;
-
-
+			shipComponent.Init(componentDefinition , info.variant);
 			components.Add(shipComponent);
 		}
 		return components;
@@ -81,12 +87,8 @@ public class ShipExporter
 		ShipExportInfo shipExport = new ShipExportInfo();
 		foreach (ShipComponent shipComponent in shipCharacter.connectedComponents)
 		{
-			ComponentExportInfo componentExport = new ComponentExportInfo(
-				new Vector3(Mathf.RoundToInt(shipComponent.transform.localPosition.x), Mathf.RoundToInt(shipComponent.transform.localPosition.y), Mathf.RoundToInt(shipComponent.transform.localPosition.z)),
-				shipComponent.transform.localEulerAngles,
-				ComponentMapping.GetIntFromType(shipComponent.GetType()),
-				shipComponent.visualId,
-				shipComponent.folderRoot);
+			ComponentExportInfo componentExport = new ComponentExportInfo(shipComponent.transform.localPosition, shipComponent.transform.localEulerAngles, shipComponent.GetDefinitionName(), shipComponent.GetDefinitionVariant());
+
 			shipExport.components.Add(componentExport);
 		}
 		return shipExport;

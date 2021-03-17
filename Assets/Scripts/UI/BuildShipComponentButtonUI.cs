@@ -13,10 +13,10 @@ public class BuildShipComponentButtonUI : MonoBehaviour
 	public Button button;
 	public event Action onClick;
 
-	public void Init(UnityAction<ShipComponent> action , ShipComponent shipComponent)
+	public void Init(UnityAction<ShipComponentDefinition,int> action , ShipComponentDefinition definition , int variant)
 	{
-		button.onClick.AddListener(()=> action.Invoke(shipComponent));
-		GetComponentInChildren<Text>().text = shipComponent.name;
+		button.onClick.AddListener(()=> action.Invoke(definition,variant));
+		GetComponentInChildren<Text>().text = definition.displayName;
 	}
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -7,11 +8,8 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public abstract class ShipComponent : MonoBehaviour
 {
-	public int xSize;
-	public int zSize;
-
-	public GameObject interior;
-	public GameObject exterior;
+	private ShipComponentDefinition definition;
+	private int variant;
 
 	[HideInInspector]
 	public ShipCharacterController characterController; //move to new shipcomponetChil class pr something
@@ -19,49 +17,37 @@ public abstract class ShipComponent : MonoBehaviour
 	public Rigidbody shipRigidbody => GetComponent<Rigidbody>();
 	[HideInInspector]
 	public Collider shipCollider => GetComponentInChildren<Collider>();
-
 	public Renderer shipRenderer => GetComponentInChildren<Renderer>();
 
-
-
-	public int visualId;
-	public string folderRoot;
-
-	public void OnBuild()
+	public void Init(ShipComponentDefinition shipComponentDefinition , int variant)
 	{
-		if (interior != null)
-		{
-			interior.SetActive(true);
-
-			exterior.SetActive(false);
-		}
-		
+		definition = shipComponentDefinition;
+		this.variant = variant;
 	}
 
-	public void OnFlight()
+	public void ChangeLayerAfterWait(int layer)
 	{
-		if (interior != null)
-		{
-			interior.SetActive(false);
-
-			exterior.SetActive(true);
-		}
+		StartCoroutine(WaitAndChangeLayer(layer));
 	}
 
-	[ContextMenu("Remove")]
-	public void RemoveFromControl()
-	{
-		ShipConstructor.RemoveComponent(this, characterController);
-	}
-
-	public void ChangeLayerAfterWait()
-	{
-		StartCoroutine(WaitAndChangeLayer());
-	}
-
-	IEnumerator WaitAndChangeLayer()
+	IEnumerator WaitAndChangeLayer(int layer)
 	{
 		yield return new WaitForSeconds(0.2f);
-		gameObject.layer = 0;
+		gameObject.layer = layer;
+	}
+
+	internal string GetDefinitionName()
+	{
+		return definition.name;
+	}
+
+	internal int GetDefinitionVariant()
+	{
+		return variant;
+	}
+
+	internal string GetDisplayName()
+	{
+		return definition.displayName;
 	}
 }

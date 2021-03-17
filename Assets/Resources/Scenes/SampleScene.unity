@@ -2514,6 +2514,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4197791906361467374, guid: c0a82989f19df4e45934c83044f98979, type: 3}
+      propertyPath: selectionSectionPrefab
+      value: 
+      objectReference: {fileID: 3806112794796907307, guid: 518547f76a9b2254187d8a91e5013cdc, type: 3}
     - target: {fileID: 8954488753848893694, guid: c0a82989f19df4e45934c83044f98979, type: 3}
       propertyPath: m_AnchorMin.y
       value: 1

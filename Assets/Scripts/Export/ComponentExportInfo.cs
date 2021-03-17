@@ -7,16 +7,14 @@ public class ComponentExportInfo
 {
 	public Vector3 position;
 	public Vector3 eulerAngles;
-	public string folder;
-	public int componentId;
-	public int versionId;
+	public string definitionName;
+	public int variant;
 
-	public ComponentExportInfo(Vector3 position, Vector3 eulerAngles, int componentId, int visualId, string folder)
+	public ComponentExportInfo(Vector3 position, Vector3 eulerAngles, string definitionName, int variant)
 	{
 		this.position = position;
 		this.eulerAngles = eulerAngles;
-		this.componentId = componentId;
-		this.versionId = visualId;
-		this.folder = folder;
+		this.definitionName = definitionName;
+		this.variant = variant;
 	}
 }

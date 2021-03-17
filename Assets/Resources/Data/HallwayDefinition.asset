@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9136839968cee6c4081e97d51e636d8a, type: 3}
+  m_Name: HallwayDefinition
+  m_EditorClassIdentifier: 
+  prefabVariants:
+  - {fileID: 8849030057583495871, guid: 5bdf073ff6b0b564aa1c1f8242dc6486, type: 3}
+  folderRoot: 
+  displayName: Halls the way
+  description: i am a hallway, i have always been a hallway
+  powerSupply:
+    powerSupplied: 0
+  powerRequire:
+    powerRequired: 0

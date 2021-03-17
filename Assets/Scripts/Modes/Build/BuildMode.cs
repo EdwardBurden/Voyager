@@ -11,7 +11,9 @@ public class BuildMode : BaseMode, IMode
 	public GameObject objectPrefab;
 	public GameObject floorPrefab;
 
-	private ShipComponent buildComponent;
+	private ShipComponentDefinition buildDefinition;
+	private int buildvariant;
+
 	private GameObject previewObject;
 	private GameObject previewFloor;
 	private Vector3 placePosition;
@@ -164,20 +166,22 @@ public class BuildMode : BaseMode, IMode
 		}
 	}
 
-	internal void SwitchSelection(ShipComponent shipComponent)
+	internal void SwitchSelection(ShipComponentDefinition componentDefinition, int buildvariant)
 	{
-		buildComponent = shipComponent;
+		buildDefinition = componentDefinition;
+		this.buildvariant = buildvariant;
 	}
 
 	internal void PlaceComponent()
 	{
-		if (Selection.isShipSelected && buildComponent != null)
+		if (Selection.isShipSelected && buildDefinition != null)
 		{
 			if (!ShipConstructor.IsComponentAtPosition(placePosition, Selection.instance.selectedShip))
 			{
-				ShipComponent shipComponent = GameObject.Instantiate(buildComponent, Selection.instance.selectedShip.transform);
+				ShipComponent shipComponent = GameObject.Instantiate(buildDefinition.prefabVariants[buildvariant], Selection.instance.selectedShip.transform);
 				shipComponent.transform.localPosition = placePosition;
 				shipComponent.transform.rotation = placeRotation;
+				shipComponent.Init(buildDefinition, buildvariant);
 				ShipConstructor.AddComponent(shipComponent, Selection.instance.selectedShip);
 			}
 		}
