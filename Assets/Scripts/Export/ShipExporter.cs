@@ -10,7 +10,12 @@ public class ShipExporter
 	public static string saveFile = "default";
 	public static string saveLocation = "Saves";
 
-	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Transform spawnPoint)
+	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Transform spawnTransform)
+	{
+		return LoadShip(prefabController, spawnTransform.position, spawnTransform.rotation);
+	}
+
+	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Vector3 spawnPosition, Quaternion spawnRotation)
 	{
 		string path = Path.Combine(Application.persistentDataPath, saveLocation);
 		string filePath = Path.Combine(path, saveFile);
@@ -25,10 +30,10 @@ public class ShipExporter
 		}
 		string jsoncontents = File.ReadAllText(filePath);
 		ShipExportInfo shipExportInfo = JsonUtility.FromJson<ShipExportInfo>(jsoncontents);
-		ShipCharacterController shipCharacter = GameObject.Instantiate(prefabController, spawnPoint.transform.position, spawnPoint.transform.rotation, null);
-		shipCharacter.Init();
+		ShipCharacterController shipCharacter = GameObject.Instantiate(prefabController, spawnPosition, spawnRotation, null);
 		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
-		ShipConstructor.ContrustShip(components, shipCharacter);
+		shipCharacter.connectedComponents = ShipConstructor.ContrustShip(components, shipCharacter);
+		shipCharacter.Init();
 		return shipCharacter;
 	}
 
@@ -61,7 +66,11 @@ public class ShipExporter
 
 			ShipComponent loadedComponent = Resources.Load<ShipComponent>(filepath) as ShipComponent;
 
-			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, info.position + shipExportTransform.position, Quaternion.Euler(info.eulerAngles + shipExportTransform.eulerAngles), shipExportTransform);
+			ShipComponent shipComponent = GameObject.Instantiate(loadedComponent, shipExportTransform);
+			shipComponent.transform.localPosition = info.position;
+			shipComponent.transform.localEulerAngles = info.eulerAngles;
+
+
 			components.Add(shipComponent);
 		}
 		return components;

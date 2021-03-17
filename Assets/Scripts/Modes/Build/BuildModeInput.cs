@@ -30,6 +30,15 @@ public class BuildModeInput : MonoBehaviour
 		}
 	}
 
+	public void RemoveComponent(CallbackContext value)
+	{
+		if (value.started)
+		{
+			buildMode.RemoveComponent();
+		}
+	}
+
+
 	public void ElevateUp(CallbackContext value)
 	{
 		if (value.started)

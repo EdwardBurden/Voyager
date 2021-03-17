@@ -26,4 +26,9 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
 	}
 
+	public void LoadShip(Vector3 position , Quaternion rotation)
+	{
+		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, position, rotation);
+	}
+
 }

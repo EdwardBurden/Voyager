@@ -19,6 +19,8 @@ public class BuildMode : BaseMode, IMode
 
 	public LayerMask buildFloorLayer;
 
+	private int level;
+
 	public string modeMap;
 	private bool _active;
 	public bool isActive { get => _active; set => _active = value; }
@@ -27,9 +29,6 @@ public class BuildMode : BaseMode, IMode
 	public BuildModeUI buildUI => modeUI.GetComponent<BuildModeUI>();
 
 	public BuildCamera buildCamera => modeCamera.GetComponent<BuildCamera>();
-
-	private int level;
-
 
 	private void Awake()
 	{
@@ -126,7 +125,6 @@ public class BuildMode : BaseMode, IMode
 		return hasHit;
 	}
 
-
 	private void ShowActiveShipLevel() //can use fancy shader in future
 	{
 		ShipCharacterController shipCharacter = Selection.instance.selectedShip;
@@ -159,8 +157,10 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
+			Vector3 pos = Selection.instance.selectedShip.transform.position;
+			Quaternion rot = Selection.instance.selectedShip.transform.rotation;
 			Destroy(Selection.instance.selectedShip.gameObject);
-			GameManager.instance.LoadShip();
+			GameManager.instance.LoadShip(pos, rot);
 		}
 	}
 
@@ -173,11 +173,22 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected && buildComponent != null)
 		{
-		
-			ShipComponent shipComponent = GameObject.Instantiate(buildComponent, Selection.instance.selectedShip.transform);
-			shipComponent.transform.localPosition = placePosition;
-			shipComponent.transform.rotation = placeRotation;
-			ShipConstructor.AddComponent(shipComponent, Selection.instance.selectedShip);
+			if (!ShipConstructor.IsComponentAtPosition(placePosition, Selection.instance.selectedShip))
+			{
+				ShipComponent shipComponent = GameObject.Instantiate(buildComponent, Selection.instance.selectedShip.transform);
+				shipComponent.transform.localPosition = placePosition;
+				shipComponent.transform.rotation = placeRotation;
+				ShipConstructor.AddComponent(shipComponent, Selection.instance.selectedShip);
+			}
+		}
+	}
+
+	internal void RemoveComponent()
+	{
+		if (Selection.isShipSelected)
+		{
+			ShipComponent shipComponent = ShipConstructor.GetComponentAtPosition(placePosition, Selection.instance.selectedShip);
+			ShipConstructor.DestroyComponent(shipComponent, Selection.instance.selectedShip);
 		}
 	}
 

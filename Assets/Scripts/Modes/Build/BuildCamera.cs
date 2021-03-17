@@ -12,6 +12,7 @@ public class BuildCamera : MonoBehaviour
 	public CinemachineVirtualCamera camera;
 	private BuildMode buildMode;
 
+	public Transform childTransform;
 
 	private Vector3 moveDirectionInput;
 	private float zoomInput;
@@ -22,12 +23,15 @@ public class BuildCamera : MonoBehaviour
 
 	private bool rotating;
 	private Vector2 startRotationPosition;
-	private Quaternion startRotationRotation;
+	private Quaternion startverticalRotation;
+	private Quaternion startHorizontalRotation;
 
 	[HideInInspector]
 	public Vector3 newPosition;
 	[HideInInspector]
-	public Quaternion newRotation;
+	public Quaternion horizontalRotation;
+	[HideInInspector]
+	public Quaternion vertivalRotation;
 	[HideInInspector]
 	public Vector3 newChildPosition;
 
@@ -35,8 +39,9 @@ public class BuildCamera : MonoBehaviour
 	{
 		buildMode = mode;
 		newPosition = transform.position;
-		newRotation = transform.rotation;
+		horizontalRotation = transform.rotation;
 		newChildPosition = camera.transform.localPosition;
+		vertivalRotation = childTransform.localRotation;
 	}
 
 	private void Update()
@@ -57,9 +62,16 @@ public class BuildCamera : MonoBehaviour
 			Vector2 pos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
 			Vector2 differnec = startRotationPosition - pos;
 
-			newRotation = Quaternion.Euler(startRotationRotation.eulerAngles + (Vector3.up * -differnec.x * 360) + (Vector3.right * differnec.y * 180));
+			horizontalRotation = Quaternion.Euler(startHorizontalRotation.eulerAngles + (Vector3.up * -differnec.x * 360));
+			vertivalRotation = Quaternion.Euler(startverticalRotation.eulerAngles + (Vector3.right * differnec.y * 180));
 		}
-		transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
+		transform.rotation = Quaternion.Lerp(transform.rotation, horizontalRotation, Time.deltaTime * movementTime);
+		childTransform.localRotation = Quaternion.Lerp(childTransform.localRotation, vertivalRotation, Time.deltaTime * movementTime);
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawCube(transform.position, new Vector3(1, 1, 1));
 	}
 
 	public void FocusOnShip(Vector3 shipPosition)
@@ -73,9 +85,13 @@ public class BuildCamera : MonoBehaviour
 	{
 		moveDirectionInput = value.ReadValue<Vector2>();
 		Vector3 vector = Vector3.zero;
-		vector += transform.forward * Mathf.RoundToInt(moveDirectionInput.y);
-		vector += transform.right * Mathf.RoundToInt(moveDirectionInput.x);
-		newPosition += vector;
+
+		vector += transform.forward * moveDirectionInput.y;
+		vector += transform.right * moveDirectionInput.x;
+		vector.Normalize();
+		Vector3 poition = new Vector3(Mathf.Round(vector.x), 0, Mathf.Round(vector.z));
+
+		newPosition += poition;
 	}
 
 	public void ZoomIn(CallbackContext value)
@@ -102,7 +118,8 @@ public class BuildCamera : MonoBehaviour
 		{
 			Vector2 pos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
 			startRotationPosition = pos;
-			startRotationRotation = transform.rotation;
+			startverticalRotation = childTransform.localRotation;
+			startHorizontalRotation = transform.rotation;
 			Debug.Log(pos);
 			rotating = true;
 		}

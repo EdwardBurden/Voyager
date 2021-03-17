@@ -30,6 +30,7 @@ public class ShipCharacterController : MonoBehaviour , ISelectable
 	public void Init()
 	{
 		targetDirection = rigidbody.rotation;
+		rigidbody.centerOfMass = control.transform.position;
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -89,7 +90,6 @@ public class ShipCharacterController : MonoBehaviour , ISelectable
 
 	private void FixedUpdate()
 	{
-		rigidbody.centerOfMass = control.transform.position;
 		Fixed_HandleMovement();
 		Fixed_Accelerate();
 		Fixed_HandleRotation();

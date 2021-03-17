@@ -11,14 +11,13 @@ public static class ShipConstructor
 	private static int defaultlayer = 0;
 	private static int radius = 50;
 
-	public static List<ShipComponent> ContrustShip(List<ShipComponent> shipComponents, ShipCharacterController characterController)
+	public static List<ShipComponent> ContrustShip(List<ShipComponent> connectedComponents, ShipCharacterController characterController)
 	{
-		List<ShipComponent> connectedComponents = new List<ShipComponent>();
 		if (connectedComponents != null)
 		{
 			connectedComponents.RemoveAll(x => x == null);
 		}
-		connectedComponents = shipComponents;
+
 		foreach (ShipComponent component in connectedComponents)
 		{
 			AttachComponentToParent(component, characterController);
@@ -26,7 +25,7 @@ public static class ShipConstructor
 		return connectedComponents;
 	}
 
-	public static List<ShipComponent> ContrustShip(ControlSC control, ShipCharacterController characterController , LayerMask layerMask)
+	public static List<ShipComponent> ContrustShip(ControlSC control, ShipCharacterController characterController, LayerMask layerMask)
 	{
 		List<ShipComponent> connectedComponents = new List<ShipComponent>();
 		if (connectedComponents != null)
@@ -51,7 +50,6 @@ public static class ShipConstructor
 
 	private static void AttachComponentToParent(ShipComponent shipComponent, ShipCharacterController shipCharacter)
 	{
-		shipCharacter.connectedComponents.Add(shipComponent);
 		shipComponent.characterController = shipCharacter;
 		shipComponent.transform.parent = shipCharacter.transform;
 	}
@@ -121,6 +119,22 @@ public static class ShipConstructor
 		shipComponent.shipCollider.enabled = true;
 		shipComponent.ChangeLayerAfterWait();
 		SetLayerRecursively(shipComponent.gameObject, destructionLayer);
+	}
+
+	public static void DestroyComponent(ShipComponent shipComponent, ShipCharacterController shipCharacter)
+	{
+		shipCharacter.connectedComponents.Remove(shipComponent);
+		GameObject.Destroy(shipComponent.gameObject);
+	}
+
+	public static bool IsComponentAtPosition(Vector3 localPosition, ShipCharacterController shipCharacterController)
+	{
+		return shipCharacterController.connectedComponents.Any(x => Vector3.Distance(localPosition, x.transform.localPosition) < 0.001f);
+	}
+
+	public static ShipComponent GetComponentAtPosition(Vector3 localPosition, ShipCharacterController shipCharacterController)
+	{
+		return shipCharacterController.connectedComponents.FirstOrDefault(x => Vector3.Distance(localPosition, x.transform.localPosition) < 0.001f);
 	}
 
 	public static void SetComponentsToBuild(ShipCharacterController characterController)

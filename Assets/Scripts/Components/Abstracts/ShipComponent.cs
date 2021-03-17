@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
+
+[CanEditMultipleObjects]
 public abstract class ShipComponent : MonoBehaviour
 {
 	public int xSize;
@@ -44,7 +47,6 @@ public abstract class ShipComponent : MonoBehaviour
 			exterior.SetActive(true);
 		}
 	}
-
 
 	[ContextMenu("Remove")]
 	public void RemoveFromControl()

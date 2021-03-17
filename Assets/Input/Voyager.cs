@@ -353,6 +353,14 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Remove"",
+                    ""type"": ""Button"",
+                    ""id"": ""990aeda8-47cf-4a54-84e0-46ed23bdc9b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""ElevateUp"",
                     ""type"": ""Button"",
                     ""id"": ""ecab820d-d6b7-4a60-b647-d965224b9b36"",
@@ -552,6 +560,17 @@ public class @Voyager : IInputActionCollection, IDisposable
                     ""action"": ""Camera_ZoomIn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d980a59-2ee8-4c08-a789-731f2aad9c29"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Remove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -666,6 +685,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         m_Build = asset.FindActionMap("Build", throwIfNotFound: true);
         m_Build_Flight = m_Build.FindAction("Flight", throwIfNotFound: true);
         m_Build_Place = m_Build.FindAction("Place", throwIfNotFound: true);
+        m_Build_Remove = m_Build.FindAction("Remove", throwIfNotFound: true);
         m_Build_ElevateUp = m_Build.FindAction("ElevateUp", throwIfNotFound: true);
         m_Build_ElevateDown = m_Build.FindAction("ElevateDown", throwIfNotFound: true);
         m_Build_Camera_ZoomIn = m_Build.FindAction("Camera_ZoomIn", throwIfNotFound: true);
@@ -864,6 +884,7 @@ public class @Voyager : IInputActionCollection, IDisposable
     private IBuildActions m_BuildActionsCallbackInterface;
     private readonly InputAction m_Build_Flight;
     private readonly InputAction m_Build_Place;
+    private readonly InputAction m_Build_Remove;
     private readonly InputAction m_Build_ElevateUp;
     private readonly InputAction m_Build_ElevateDown;
     private readonly InputAction m_Build_Camera_ZoomIn;
@@ -877,6 +898,7 @@ public class @Voyager : IInputActionCollection, IDisposable
         public BuildActions(@Voyager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Flight => m_Wrapper.m_Build_Flight;
         public InputAction @Place => m_Wrapper.m_Build_Place;
+        public InputAction @Remove => m_Wrapper.m_Build_Remove;
         public InputAction @ElevateUp => m_Wrapper.m_Build_ElevateUp;
         public InputAction @ElevateDown => m_Wrapper.m_Build_ElevateDown;
         public InputAction @Camera_ZoomIn => m_Wrapper.m_Build_Camera_ZoomIn;
@@ -899,6 +921,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Place.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
                 @Place.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
                 @Place.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnPlace;
+                @Remove.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnRemove;
+                @Remove.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnRemove;
+                @Remove.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnRemove;
                 @ElevateUp.started -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateUp;
                 @ElevateUp.performed -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateUp;
                 @ElevateUp.canceled -= m_Wrapper.m_BuildActionsCallbackInterface.OnElevateUp;
@@ -930,6 +955,9 @@ public class @Voyager : IInputActionCollection, IDisposable
                 @Place.started += instance.OnPlace;
                 @Place.performed += instance.OnPlace;
                 @Place.canceled += instance.OnPlace;
+                @Remove.started += instance.OnRemove;
+                @Remove.performed += instance.OnRemove;
+                @Remove.canceled += instance.OnRemove;
                 @ElevateUp.started += instance.OnElevateUp;
                 @ElevateUp.performed += instance.OnElevateUp;
                 @ElevateUp.canceled += instance.OnElevateUp;
@@ -1054,6 +1082,7 @@ public class @Voyager : IInputActionCollection, IDisposable
     {
         void OnFlight(InputAction.CallbackContext context);
         void OnPlace(InputAction.CallbackContext context);
+        void OnRemove(InputAction.CallbackContext context);
         void OnElevateUp(InputAction.CallbackContext context);
         void OnElevateDown(InputAction.CallbackContext context);
         void OnCamera_ZoomIn(InputAction.CallbackContext context);
