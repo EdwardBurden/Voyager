@@ -187,8 +187,11 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			ShipComponent shipComponent = ShipConstructor.GetComponentAtPosition(placePosition, Selection.instance.selectedShip);
-			ShipConstructor.DestroyComponent(shipComponent, Selection.instance.selectedShip);
+			if (ShipConstructor.IsComponentAtPosition(placePosition, Selection.instance.selectedShip))
+			{
+				ShipComponent shipComponent = ShipConstructor.GetComponentAtPosition(placePosition, Selection.instance.selectedShip);
+				ShipConstructor.DestroyComponent(shipComponent, Selection.instance.selectedShip);
+			}
 		}
 	}
 
