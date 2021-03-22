@@ -176,7 +176,7 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected && buildDefinition != null)
 		{
-			if (!ShipConstructor.IsComponentAtPosition(placePosition, Selection.instance.selectedShip))
+			if (!Utils.IsComponentAtPosition(placePosition, Selection.instance.selectedShip.connectedComponents))
 			{
 				ShipComponent shipComponent = GameObject.Instantiate(buildDefinition.prefabVariants[buildvariant], Selection.instance.selectedShip.transform);
 				shipComponent.transform.localPosition = placePosition;
@@ -191,7 +191,7 @@ public class BuildMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			if (ShipConstructor.IsComponentAtPosition(placePosition, Selection.instance.selectedShip))
+			if (Utils.IsComponentAtPosition(placePosition, Selection.instance.selectedShip.connectedComponents))
 			{
 				ShipComponent shipComponent = ShipConstructor.GetComponentAtPosition(placePosition, Selection.instance.selectedShip);
 				ShipConstructor.DestroyComponent(shipComponent, Selection.instance.selectedShip);

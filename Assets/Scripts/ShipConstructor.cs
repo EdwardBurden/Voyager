@@ -127,11 +127,6 @@ public static class ShipConstructor
 		GameObject.Destroy(shipComponent.gameObject);
 	}
 
-	public static bool IsComponentAtPosition(Vector3 localPosition, ShipCharacterController shipCharacterController)
-	{
-		return shipCharacterController.connectedComponents.Any(x => Vector3.Distance(localPosition, x.transform.localPosition) < 0.001f);
-	}
-
 	public static ShipComponent GetComponentAtPosition(Vector3 localPosition, ShipCharacterController shipCharacterController)
 	{
 		return shipCharacterController.connectedComponents.FirstOrDefault(x => Vector3.Distance(localPosition, x.transform.localPosition) < 0.001f);

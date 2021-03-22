@@ -8,6 +8,9 @@ using UnityEngine;
 [CanEditMultipleObjects]
 public abstract class ShipComponent : MonoBehaviour
 {
+	//list/group cost (materials etc, can be used in getcostinterfacecalls)
+	//list/group  requirements(powerrequirements etc)
+
 	private ShipComponentDefinition definition;
 	private int variant;
 

@@ -69,10 +69,11 @@ public class BuildCamera : MonoBehaviour
 		childTransform.localRotation = Quaternion.Lerp(childTransform.localRotation, vertivalRotation, Time.deltaTime * movementTime);
 	}
 
-	private void OnDrawGizmos()
+/*	private void OnDrawGizmos()
 	{
 		Gizmos.DrawCube(transform.position, new Vector3(1, 1, 1));
 	}
+*/
 
 	public void FocusOnShip(Vector3 shipPosition)
 	{

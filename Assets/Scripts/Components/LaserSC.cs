@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class LaserSC : ShipComponent, IWeapon
+public class LaserSC : ShipComponent, IWeapon, IPowerRequired
 {
 	public ShipComponent target;
 
@@ -56,7 +56,9 @@ public class LaserSC : ShipComponent, IWeapon
 		return angle < weaponAngle && distance < weaponRange;
 	}
 
-	private void OnDrawGizmos()
+
+
+	/*private void OnDrawGizmos()
 	{
 		if (target != null)
 		{
@@ -83,6 +85,7 @@ public class LaserSC : ShipComponent, IWeapon
 			}
 		}
 	}
+	*/
 
 	public void ActiveWeapon()
 	{
@@ -126,5 +129,10 @@ public class LaserSC : ShipComponent, IWeapon
 		laserHead.transform.rotation = Quaternion.LookRotation(transform.forward, transform.up);
 		StopAllCoroutines();
 		lineRenderer.gameObject.SetActive(false);
+	}
+
+	public int GetPowerRequired()
+	{
+		return 10;
 	}
 }

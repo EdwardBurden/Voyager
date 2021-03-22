@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HallwaySC: ShipComponent , IPowerConduit
+public interface IPowerConduit 
 {
-   
+  
 }
