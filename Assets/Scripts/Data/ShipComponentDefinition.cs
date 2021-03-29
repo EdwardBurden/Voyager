@@ -9,6 +9,6 @@ public class ShipComponentDefinition : ScriptableObject
 	public string folderRoot;
 	public string displayName;
 	public string description;
-	public PowerSupplyDefinition powerSupply;
-	public PowerRequirementDefinition powerRequire; //be fancy later, get it working now
+	[SerializeReference]
+	public List<RequirementDefinition> requirements;
 }

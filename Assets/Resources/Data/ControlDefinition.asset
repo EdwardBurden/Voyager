@@ -17,7 +17,18 @@ MonoBehaviour:
   folderRoot: 
   displayName: Control test 1
   description: First control, testing stuff here
-  powerSupply:
-    powerSupplied: 0
-  powerRequire:
-    powerRequired: 0
+  requirements:
+  - id: 0
+  - id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: PowerRequirementDefinition, ns: , asm: Assembly-CSharp}
+      data:
+        name: d
+        powerRequired: 5
+    00000001:
+      type: {class: CrewRequirementDefinition, ns: , asm: Assembly-CSharp}
+      data:
+        name: t
+        CrewRequired: 5
