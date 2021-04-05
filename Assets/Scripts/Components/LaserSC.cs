@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class LaserSC : ShipComponent, IWeapon, IPowerRequired
+public class LaserSC : ShipComponent, IWeapon
 {
 	public ShipComponent target;
 

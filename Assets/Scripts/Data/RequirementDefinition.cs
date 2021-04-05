@@ -10,4 +10,8 @@ public abstract class RequirementDefinition
 	public string name;
 	public abstract bool IsRequirementFulfilled(GameObject ship, ShipComponent thisComponent);
 
+	public abstract bool GetIcon();
+
+	public abstract bool GetDisplayText();
+
 }

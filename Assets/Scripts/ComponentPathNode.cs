@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ComponentPathNode
 {
-	private ShipComponent component;
+	public ShipComponent component;
 	public Vector3 localPosition => component.transform.localPosition;
 
 	public int x => Mathf.RoundToInt(localPosition.x);

@@ -10,19 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9136839968cee6c4081e97d51e636d8a, type: 3}
-  m_Name: LaserDefinition
+  m_Name: generatorDefinition
   m_EditorClassIdentifier: 
   prefabVariants:
-  - {fileID: 2023721847827214928, guid: e20a40138341aeb45ace781cb64ca966, type: 3}
+  - {fileID: 276236495066211221, guid: fa4566852c928cb4aae8270516286bbb, type: 3}
   folderRoot: 
-  displayName: freeaking lasers
-  description: yes there lasers
-  requirements:
-  - id: 0
+  displayName: Power maker
+  description: makes power
+  requirements: []
   references:
     version: 1
-    00000000:
-      type: {class: PowerRequirementDefinition, ns: , asm: Assembly-CSharp}
-      data:
-        name: Power
-        powerRequired: 3

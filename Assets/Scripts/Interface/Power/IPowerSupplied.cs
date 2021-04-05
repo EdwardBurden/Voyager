@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IPowerSupplied 
 {
-	int GetPowerSupply();
-	int GetPowerRadius();
+	bool CanPowerComponent(int powerRequired);
+	void PowerComponent(int powerRequired);
 }

@@ -68,6 +68,7 @@ public class FlightModeInput : MonoBehaviour
 		if (value.started)
 		{
 			Selection.instance.SetSelection();
+			flightMode.ShipSelected();
 		}
 	}
 }

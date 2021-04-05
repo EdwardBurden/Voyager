@@ -31,6 +31,7 @@ public class ShipCharacterController : MonoBehaviour , ISelectable
 	{
 		targetDirection = rigidbody.rotation;
 		rigidbody.centerOfMass = control.transform.position;
+		GetComponent<RequirementController>().CheckRequirements();
 	}
 
 	private void OnCollisionEnter(Collision collision)

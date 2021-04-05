@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 public class FlightModeUI : MonoBehaviour
 {
 	FlightMode flightMode;
+
+	public FlightComponentListUI flightComponentListUI;
 
 	public Button increaseSpeedButton;
 	public Button decreaseSpeedButton;
@@ -25,6 +28,7 @@ public class FlightModeUI : MonoBehaviour
 	public void Init(FlightMode mode)
 	{
 		flightMode = mode;
+		flightComponentListUI.Init(Selection.instance.selectedShip);
 	}
 
 	public void InreaseSpeed()
@@ -57,5 +61,8 @@ public class FlightModeUI : MonoBehaviour
 		flightMode.SwitchToBuild();
 	}
 
-
+	internal void Refresh()
+	{
+		flightComponentListUI.Refresh();
+	}
 }

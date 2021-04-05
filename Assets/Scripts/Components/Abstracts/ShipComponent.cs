@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,16 +17,19 @@ public abstract class ShipComponent : MonoBehaviour
 
 	[HideInInspector]
 	public ShipCharacterController characterController; //move to new shipcomponetChil class pr something
+	internal bool status;
+
 	[HideInInspector]
 	public Rigidbody shipRigidbody => GetComponent<Rigidbody>();
 	[HideInInspector]
 	public Collider shipCollider => GetComponentInChildren<Collider>();
 	public Renderer shipRenderer => GetComponentInChildren<Renderer>();
 
-	public void Init(ShipComponentDefinition shipComponentDefinition , int variant)
+	public void Init(ShipComponentDefinition shipComponentDefinition, int variant)
 	{
 		definition = shipComponentDefinition;
 		this.variant = variant;
+		status = true;
 	}
 
 	public void ChangeLayerAfterWait(int layer)
@@ -37,6 +41,11 @@ public abstract class ShipComponent : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.2f);
 		gameObject.layer = layer;
+	}
+
+	internal ShipComponentDefinition GetDefinition()
+	{
+		return definition;
 	}
 
 	internal string GetDefinitionName()
@@ -52,5 +61,20 @@ public abstract class ShipComponent : MonoBehaviour
 	internal string GetDisplayName()
 	{
 		return definition.displayName;
+	}
+
+	internal List<RequirementDefinition> GetDefinitionRequirements()
+	{
+		return definition.requirements;
+	}
+	internal PowerRequirementDefinition GetPowerRequirement()
+	{
+		List<RequirementDefinition> requirements = GetDefinitionRequirements();
+		if (requirements == null || requirements.Count == 0)
+		{
+			return null;
+		}
+		return requirements.FirstOrDefault(req => req is PowerRequirementDefinition) as PowerRequirementDefinition;
+
 	}
 }

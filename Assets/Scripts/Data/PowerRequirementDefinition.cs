@@ -9,8 +9,20 @@ public class PowerRequirementDefinition : RequirementDefinition
 	[SerializeField]
 	public int powerRequired;
 
+	public override bool GetDisplayText()
+	{
+		throw new NotImplementedException();
+	}
+
+	public override bool GetIcon()
+	{
+		throw new NotImplementedException();
+	}
+
 	public override bool IsRequirementFulfilled(GameObject ship, ShipComponent thisComponent)
 	{
+		return ship.GetComponent<ShipPowerController>().CheckShipComponentPower(thisComponent ,this);
+
 		//does powercontroller have power froma  supplier to this component
 		//if poweravialble is >= powerRequired
 		//assign this componet to be using that amount
