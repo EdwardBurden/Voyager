@@ -16,19 +16,20 @@ MonoBehaviour:
   - {fileID: 4705338684659735676, guid: 37c0a4913d25a3d4aacea960d48b23bc, type: 3}
   folderRoot: 
   displayName: Control
+  displayIcon: {fileID: 0}
+  displayCategory: 3
   description: Controls Stuff
   requirements:
   - id: 0
   - id: 1
+  effects: []
   references:
     version: 1
     00000000:
       type: {class: PowerRequirementDefinition, ns: , asm: Assembly-CSharp}
       data:
-        name: Power
         powerRequired: 5
     00000001:
       type: {class: CrewRequirementDefinition, ns: , asm: Assembly-CSharp}
       data:
-        name: Crew
         CrewRequired: 5

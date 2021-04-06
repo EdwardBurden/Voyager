@@ -28,7 +28,7 @@ public class FlightModeUI : MonoBehaviour
 	public void Init(FlightMode mode)
 	{
 		flightMode = mode;
-		flightComponentListUI.Init(Selection.instance.selectedShip);
+		flightComponentListUI.Init();
 	}
 
 	public void InreaseSpeed()
@@ -61,8 +61,8 @@ public class FlightModeUI : MonoBehaviour
 		flightMode.SwitchToBuild();
 	}
 
-	internal void Refresh()
+	internal void Refresh(ShipCharacterController selectedShip)
 	{
-		flightComponentListUI.Refresh();
+		flightComponentListUI.Refresh(selectedShip);
 	}
 }

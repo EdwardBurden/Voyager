@@ -20,7 +20,10 @@ MonoBehaviour:
   - {fileID: 8678814897346055587, guid: 5c7e016db011d4a46b9d07c670056de7, type: 3}
   folderRoot: 
   displayName: Plating
+  displayIcon: {fileID: 0}
+  displayCategory: 3
   description: Protects Stuff
   requirements: []
+  effects: []
   references:
     version: 1

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 [CanEditMultipleObjects]
 public abstract class ShipComponent : MonoBehaviour
@@ -63,6 +63,11 @@ public abstract class ShipComponent : MonoBehaviour
 	internal string GetDisplayName()
 	{
 		return definition.displayName;
+	}
+
+	internal Image GetDisplayIcon()
+	{
+		return definition.displayIcon;
 	}
 
 	internal List<RequirementDefinition> GetDefinitionRequirements()

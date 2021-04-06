@@ -16,6 +16,8 @@ MonoBehaviour:
   - {fileID: 276236495066211221, guid: fa4566852c928cb4aae8270516286bbb, type: 3}
   folderRoot: 
   displayName: Generator
+  displayIcon: {fileID: 0}
+  displayCategory: 1
   description: makes power
   requirements: []
   effects:

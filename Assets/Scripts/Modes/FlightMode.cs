@@ -50,9 +50,9 @@ public class FlightMode : BaseMode, IMode
 	{
 		if (Selection.isShipSelected)
 		{
-			flightUI.Refresh();
+			flightUI.Refresh(Selection.instance.selectedShip);
 		}
-		}
+	}
 
 	internal void IncreaseShipSpeed()
 	{

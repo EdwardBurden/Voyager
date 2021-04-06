@@ -16,7 +16,10 @@ MonoBehaviour:
   - {fileID: 8849030057583495871, guid: 5bdf073ff6b0b564aa1c1f8242dc6486, type: 3}
   folderRoot: 
   displayName: Hallways
+  displayIcon: {fileID: 0}
+  displayCategory: 3
   description: Connects things
   requirements: []
+  effects: []
   references:
     version: 1
