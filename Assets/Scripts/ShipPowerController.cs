@@ -11,7 +11,7 @@ public class ShipPowerController : MonoBehaviour
 
 	private IEnumerable<ShipComponent> powerUsers => characterController.connectedComponents.Where(x => x.GetPowerRequirement() != null);
 
-	private List<ShipComponent> powerSuppliers => characterController.connectedComponents.Where(x => x is IPowerSupplied).ToList(); //to do change to effects list getter
+	private IEnumerable<ShipComponent> powerSuppliers => characterController.connectedComponents.Where(x => x.status && x.GetPowerEffect() != null);
 
 	private List<ShipComponent> powerConduits => characterController.connectedComponents.Where(x => x is IPowerConduit).ToList();
 
@@ -37,7 +37,6 @@ public class ShipPowerController : MonoBehaviour
 			}
 		}
 		return false;
-
 	}
 
 	//Get Event When changing modes

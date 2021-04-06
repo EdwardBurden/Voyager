@@ -83,7 +83,7 @@ public class ComponentPathfinding
 		ComponentPathNode currentNode = endNode.lastNode;
 		while (currentNode.lastNode != null)
 		{
-			path.Add(currentNode.lastNode);
+			path.Add(currentNode);
 			currentNode = currentNode.lastNode;
 		}
 		path.Reverse();

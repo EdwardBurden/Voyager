@@ -15,8 +15,14 @@ MonoBehaviour:
   prefabVariants:
   - {fileID: 276236495066211221, guid: fa4566852c928cb4aae8270516286bbb, type: 3}
   folderRoot: 
-  displayName: Power maker
+  displayName: Generator
   description: makes power
   requirements: []
+  effects:
+  - id: 0
   references:
     version: 1
+    00000000:
+      type: {class: PowerEffectDefinition, ns: , asm: Assembly-CSharp}
+      data:
+        powerSupplied: 20

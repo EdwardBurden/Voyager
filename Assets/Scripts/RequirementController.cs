@@ -13,12 +13,38 @@ public class RequirementController : MonoBehaviour
 
 	public void CheckRequirements()
 	{
-		foreach (ShipComponent item in characterController.connectedComponents.Where(x => x.GetDefinitionRequirements() != null && x.GetDefinitionRequirements().Count > 0))
+		CheckPowerSuppliers();
+		CheckRequirementsWithEffects();
+		CheckRequirementsWithoutEffects();
+	}
+
+	private void CheckPowerSuppliers()
+	{
+		List<ShipComponent> powerSuppliers = characterController.connectedComponents.Where(x => x.GetPowerEffect() != null && x.GetDefinitionRequirements() != null).ToList();
+		foreach (ShipComponent shipComponent in powerSuppliers)
 		{
-			bool isFulfilled = item.GetDefinitionRequirements().All(requirement => requirement.IsRequirementFulfilled(this.gameObject, item));
-			item.status = isFulfilled;
+			bool isFulfilled = shipComponent.GetDefinitionRequirements().All(requirement => requirement.IsRequirementFulfilled(this.gameObject, shipComponent));
+			shipComponent.status = isFulfilled;
 		}
 	}
 
+	public void CheckRequirementsWithEffects()
+	{
+		List<ShipComponent> noEffects = characterController.connectedComponents.Where(x => x.GetDefinitionEffects() == null && x.GetDefinitionRequirements() != null).ToList();
+		foreach (ShipComponent shipComponent in noEffects)
+		{
+			bool isFulfilled = shipComponent.GetDefinitionRequirements().All(requirement => requirement.IsRequirementFulfilled(this.gameObject, shipComponent));
+			shipComponent.status = isFulfilled;
+		}
 
+	}
+	public void CheckRequirementsWithoutEffects()
+	{
+		List<ShipComponent> noEffects = characterController.connectedComponents.Where(x => x.GetDefinitionEffects() == null && x.GetDefinitionRequirements() != null).ToList();
+		foreach (ShipComponent shipComponent in noEffects)
+		{
+			bool isFulfilled = shipComponent.GetDefinitionRequirements().All(requirement => requirement.IsRequirementFulfilled(this.gameObject, shipComponent));
+			shipComponent.status = isFulfilled;
+		}
+	}
 }

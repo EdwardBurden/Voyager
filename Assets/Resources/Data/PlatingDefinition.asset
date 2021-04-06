@@ -19,9 +19,8 @@ MonoBehaviour:
   - {fileID: 8678814897346055587, guid: e3788ed33c49cf748aadac9e34e81667, type: 3}
   - {fileID: 8678814897346055587, guid: 5c7e016db011d4a46b9d07c670056de7, type: 3}
   folderRoot: 
-  displayName: Real metal plating
-  description: plate your ship with metal to proec
-  powerSupply:
-    powerSupplied: 0
-  powerRequire:
-    powerRequired: 0
+  displayName: Plating
+  description: Protects Stuff
+  requirements: []
+  references:
+    version: 1

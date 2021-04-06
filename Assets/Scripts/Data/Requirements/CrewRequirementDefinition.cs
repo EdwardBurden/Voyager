@@ -6,9 +6,9 @@ public class CrewRequirementDefinition : RequirementDefinition
 {
 	public int CrewRequired;
 
-	public override bool GetDisplayText()
+	public override string GetDisplayText()
 	{
-		throw new System.NotImplementedException();
+		return "Crew needed";
 	}
 
 	public override bool GetIcon()

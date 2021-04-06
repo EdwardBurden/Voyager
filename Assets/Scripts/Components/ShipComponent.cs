@@ -17,6 +17,7 @@ public abstract class ShipComponent : MonoBehaviour
 
 	[HideInInspector]
 	public ShipCharacterController characterController; //move to new shipcomponetChil class pr something
+
 	internal bool status;
 
 	[HideInInspector]
@@ -25,7 +26,7 @@ public abstract class ShipComponent : MonoBehaviour
 	public Collider shipCollider => GetComponentInChildren<Collider>();
 	public Renderer shipRenderer => GetComponentInChildren<Renderer>();
 
-	public void Init(ShipComponentDefinition shipComponentDefinition, int variant)
+	public virtual void Init(ShipComponentDefinition shipComponentDefinition, int variant)
 	{
 		definition = shipComponentDefinition;
 		this.variant = variant;
@@ -43,6 +44,7 @@ public abstract class ShipComponent : MonoBehaviour
 		gameObject.layer = layer;
 	}
 
+	//TODO MOVE ALL THIS GET STUFF TO CONST CLASS OR MOVE DEFINTION AND OTHER Data to mono data class
 	internal ShipComponentDefinition GetDefinition()
 	{
 		return definition;
@@ -65,12 +67,35 @@ public abstract class ShipComponent : MonoBehaviour
 
 	internal List<RequirementDefinition> GetDefinitionRequirements()
 	{
+		if (definition.requirements == null || definition.requirements.Count == 0)
+		{
+			return null;
+		}
 		return definition.requirements;
 	}
+	internal List<EffectDefinition> GetDefinitionEffects()
+	{
+		if (definition.effects == null || definition.effects.Count == 0)
+		{
+			return null;
+		}
+		return definition.effects;
+	}
+
+	internal PowerEffectDefinition GetPowerEffect()
+	{
+		List<EffectDefinition> effects = GetDefinitionEffects();
+		if (effects == null)
+		{
+			return null;
+		}
+		return effects.FirstOrDefault(effect => effect is PowerEffectDefinition) as PowerEffectDefinition;
+	}
+
 	internal PowerRequirementDefinition GetPowerRequirement()
 	{
 		List<RequirementDefinition> requirements = GetDefinitionRequirements();
-		if (requirements == null || requirements.Count == 0)
+		if (requirements == null)
 		{
 			return null;
 		}

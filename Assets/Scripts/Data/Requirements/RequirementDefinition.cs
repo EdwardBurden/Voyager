@@ -6,12 +6,9 @@ using System;
 [Serializable]
 public abstract class RequirementDefinition
 {
-	[SerializeField]
-	public string name;
 	public abstract bool IsRequirementFulfilled(GameObject ship, ShipComponent thisComponent);
 
 	public abstract bool GetIcon();
 
-	public abstract bool GetDisplayText();
-
+	public abstract string GetDisplayText();
 }

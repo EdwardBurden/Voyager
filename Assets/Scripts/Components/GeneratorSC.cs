@@ -5,11 +5,14 @@ using UnityEngine;
 public class GeneratorSC : ShipComponent, IPowerSupplied
 {
 	private int powerTotalProduced;
-	private int powerProduced => 10;//GetPowerEffect().powerSupplied;
+	private PowerEffectDefinition powerEffect;
 
-	private void Awake()
+
+	public override void Init(ShipComponentDefinition shipComponentDefinition, int variant)
 	{
-		powerTotalProduced = powerProduced;
+		base.Init(shipComponentDefinition, variant);
+		powerEffect = GetPowerEffect();
+		powerTotalProduced = powerEffect.powerSupplied;
 	}
 
 	public bool CanPowerComponent(int powerRequired)

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class FlightComponentListUI : MonoBehaviour
 {
-	public Button buttonPrefab;
+	public FlightComponentInfoUI buttonPrefab;
 	private ShipCharacterController shipCharacterController;
 
 	public void Init(ShipCharacterController shipCharacterController)
@@ -22,8 +22,9 @@ public class FlightComponentListUI : MonoBehaviour
 
 		foreach (var item in Selection.instance.selectedShip.connectedComponents.Where(x => x.GetDefinitionRequirements() != null && x.GetDefinitionRequirements().Count > 0))
 		{
-			Button button = Instantiate(buttonPrefab, this.transform);
-			button.GetComponentInChildren<Text>().text = item.GetDisplayName() + item.status.ToString();
+			FlightComponentInfoUI button = Instantiate(buttonPrefab, this.transform);
+			button.Init(item);
+		//	button.GetComponentInChildren<Text>().text = item.GetDisplayName() + item.status.ToString();
 		}
 
 	}

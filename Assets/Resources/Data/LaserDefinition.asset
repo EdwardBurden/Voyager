@@ -15,8 +15,8 @@ MonoBehaviour:
   prefabVariants:
   - {fileID: 2023721847827214928, guid: e20a40138341aeb45ace781cb64ca966, type: 3}
   folderRoot: 
-  displayName: freeaking lasers
-  description: yes there lasers
+  displayName: Laser
+  description: Shoots Stuff
   requirements:
   - id: 0
   references:

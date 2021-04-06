@@ -11,4 +11,6 @@ public class ShipComponentDefinition : ScriptableObject
 	public string description;
 	[SerializeReference]
 	public List<RequirementDefinition> requirements;
+	[SerializeReference]
+	public List<EffectDefinition> effects;
 }
