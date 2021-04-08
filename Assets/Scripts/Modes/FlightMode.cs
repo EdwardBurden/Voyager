@@ -46,14 +46,6 @@ public class FlightMode : BaseMode, IMode
 		}
 	}
 
-	internal void ShipSelected()
-	{
-		if (Selection.isShipSelected)
-		{
-			flightUI.Refresh(Selection.instance.selectedShip);
-		}
-	}
-
 	internal void IncreaseShipSpeed()
 	{
 		if (Selection.isShipSelected)

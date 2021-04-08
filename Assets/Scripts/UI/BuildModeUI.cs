@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class BuildModeUI : MonoBehaviour
 {
-	BuildMode buildMode;
+	private BuildMode buildMode;
 	public BuildShipComponentButtonUI selectionPrefab;
 	public GameObject selectionSectionPrefab;
 

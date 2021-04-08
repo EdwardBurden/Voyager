@@ -33,5 +33,6 @@ public class ModeSwitcher : SingletonMonoBehaviour<ModeSwitcher>
 		activeMode = modes[type];
 		activeMode.BeginMode();
 		activeMode.isActive = true;
+		GameEventsManager.instance.ModeChanged(type);
 	}
 }

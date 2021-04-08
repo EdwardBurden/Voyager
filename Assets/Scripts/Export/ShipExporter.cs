@@ -11,12 +11,36 @@ public class ShipExporter
 	public static string saveFile = "default";
 	public static string saveLocation = "Saves";
 
-	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Transform spawnTransform)
+	internal static ShipCharacterController LoadShipInBuildMode(ShipCharacterController prefabController, Vector3 spawnPosition, Quaternion spawnRotation)
 	{
-		return LoadShip(prefabController, spawnTransform.position, spawnTransform.rotation);
+		ShipCharacterController shipCharacter = LoadShip(prefabController, spawnPosition, spawnRotation);
+		ShipConstructor.SetComponentsToBuild(shipCharacter);
+		return shipCharacter;
 	}
 
-	internal static ShipCharacterController LoadShip(ShipCharacterController prefabController, Vector3 spawnPosition, Quaternion spawnRotation)
+	internal static ShipCharacterController LoadShipInBuildMode(ShipCharacterController prefabController, Transform spawnTransform)
+	{
+		ShipCharacterController shipCharacter = LoadShip(prefabController, spawnTransform.position, spawnTransform.rotation);
+		ShipConstructor.SetComponentsToBuild(shipCharacter);
+		return shipCharacter;
+	}
+
+
+	internal static ShipCharacterController LoadShipInFlightMode(ShipCharacterController prefabController, Vector3 spawnPosition, Quaternion spawnRotation)
+	{
+		ShipCharacterController shipCharacter = LoadShip(prefabController, spawnPosition, spawnRotation);
+		ShipConstructor.SetComponentsToFlight(shipCharacter);
+		return shipCharacter;
+	}
+
+	internal static ShipCharacterController LoadShipInFlightMode(ShipCharacterController prefabController, Transform spawnTransform)
+	{
+		ShipCharacterController shipCharacter = LoadShip(prefabController, spawnTransform.position, spawnTransform.rotation);
+		ShipConstructor.SetComponentsToFlight(shipCharacter);
+		return shipCharacter;
+	}
+
+	private static ShipCharacterController LoadShip(ShipCharacterController prefabController, Vector3 spawnPosition, Quaternion spawnRotation)
 	{
 		string path = Path.Combine(Application.persistentDataPath, saveLocation);
 		string filePath = Path.Combine(path, saveFile);
@@ -35,13 +59,10 @@ public class ShipExporter
 		List<ShipComponent> components = ShipExporter.ConstructFromFile(shipExportInfo, shipCharacter.transform);
 		shipCharacter.connectedComponents = ShipConstructor.ContrustShip(components, shipCharacter);
 		shipCharacter.Init();
+		ShipConstructor.SetComponentsToFlight(shipCharacter);
+		GameEventsManager.instance.ShipLoaded(shipCharacter.gameObject);
 		return shipCharacter;
 	}
-
-	//get scriptablobject
-	//spawn
-	//apply save file info(damage, other stuff)
-
 
 	internal static void SaveShip(ShipCharacterController shipCharacter)
 	{
@@ -76,7 +97,7 @@ public class ShipExporter
 			ShipComponent shipComponent = GameObject.Instantiate(componentDefinition.prefabVariants[info.variant], shipExportTransform);
 			shipComponent.transform.localPosition = info.position;
 			shipComponent.transform.localEulerAngles = info.eulerAngles;
-			shipComponent.Init(componentDefinition , info.variant);
+			shipComponent.Init(componentDefinition, info.variant);
 			components.Add(shipComponent);
 		}
 		return components;

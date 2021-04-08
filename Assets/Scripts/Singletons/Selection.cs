@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,8 +14,12 @@ public class Selection : SingletonMonoBehaviour<Selection>
 
 	public static bool isShipSelected => instance.selectedShip != null;
 
+	private void Awake()
+	{
+		
+	}
 
-	public void SetSelection()
+	public void CheckSelection()
 	{
 		GameObject gameObject = GetSelectable();
 		if (gameObject == null)
@@ -27,6 +32,7 @@ public class Selection : SingletonMonoBehaviour<Selection>
 			return;
 		}
 		selectedShip = shipCharacterController;
+		GameEventsManager.instance.ShipSelected();
 	}
 
 
@@ -53,5 +59,4 @@ public class Selection : SingletonMonoBehaviour<Selection>
 		}
 		return null;
 	}
-
 }

@@ -162,7 +162,7 @@ public class BuildMode : BaseMode, IMode
 			Vector3 pos = Selection.instance.selectedShip.transform.position;
 			Quaternion rot = Selection.instance.selectedShip.transform.rotation;
 			Destroy(Selection.instance.selectedShip.gameObject);
-			GameManager.instance.LoadShip(pos, rot);
+			GameManager.instance.LoadShipInBuildMode(pos, rot);
 		}
 	}
 
@@ -183,6 +183,7 @@ public class BuildMode : BaseMode, IMode
 				shipComponent.transform.rotation = placeRotation;
 				shipComponent.Init(buildDefinition, buildvariant);
 				ShipConstructor.AddComponent(shipComponent, Selection.instance.selectedShip);
+				GameEventsManager.instance.ComponentAdded(Selection.instance.selectedShip, shipComponent);
 			}
 		}
 	}
@@ -195,6 +196,7 @@ public class BuildMode : BaseMode, IMode
 			{
 				ShipComponent shipComponent = ShipConstructor.GetComponentAtPosition(placePosition, Selection.instance.selectedShip);
 				ShipConstructor.DestroyComponent(shipComponent, Selection.instance.selectedShip);
+				GameEventsManager.instance.ComponentRemoved(Selection.instance.selectedShip, shipComponent);
 			}
 		}
 	}
@@ -205,7 +207,7 @@ public class BuildMode : BaseMode, IMode
 		{
 			ShipConstructor.SetComponentsToFlight(Selection.instance.selectedShip);
 		}
-		GameManager.instance.LoadShip();
+		GameManager.instance.LoadShipInBuildMode();
 	}
 
 	internal void SaveShip()

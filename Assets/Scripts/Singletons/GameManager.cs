@@ -21,14 +21,24 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		Application.Quit(0);
 	}
 
-	public void LoadShip()
+	public void LoadShipInBuildMode()
 	{
-		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, tempSpawnPoint);
+		Selection.instance.selectedShip = ShipExporter.LoadShipInBuildMode(tempPrefab, tempSpawnPoint);
 	}
 
-	public void LoadShip(Vector3 position , Quaternion rotation)
+	public void LoadShipInBuildMode(Vector3 position, Quaternion rotation)
 	{
-		Selection.instance.selectedShip = ShipExporter.LoadShip(tempPrefab, position, rotation);
+		Selection.instance.selectedShip = ShipExporter.LoadShipInBuildMode(tempPrefab, position ,rotation);
+	}
+
+	public void LoadShipInFlightMode(Vector3 position , Quaternion rotation)
+	{
+		Selection.instance.selectedShip = ShipExporter.LoadShipInFlightMode(tempPrefab, position, rotation);
+	}
+
+	public void LoadShipInFlightMode()
+	{
+		Selection.instance.selectedShip = ShipExporter.LoadShipInFlightMode(tempPrefab, tempSpawnPoint);
 	}
 
 }
